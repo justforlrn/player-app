@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import '../node_modules/tds-ui/assets/scss/cdk.scss';
+@import '../node_modules/tds-ui/assets/scss/scroll';
+@import '../node_modules/tds-ui/assets/scss/table.scss';
+@import '../node_modules/tds-ui/assets/scss/carousel.scss';
+
 @keyframes donut-spin {
   0% {
     transform: rotate(0deg);
@@ -8,6 +16,11 @@
     transform: rotate(360deg);
   }
 }
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
 .donut {
   display: inline-block;
   border: 4px solid rgba(0, 0, 0, 0.1);
