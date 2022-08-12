@@ -10,11 +10,11 @@ jobs:
           uses: fifsky/ssh-action@master
           with:
             command: |
-              mkdir -p ~/www/test1
+              mkdir -p ~/www/test2
             host: ${{ secrets.SSH_HOST }}
             user: ${{ secrets.SSH_USER }}
-            key: ${{ secrets.SSH_PRIVATE_KEY}}
-            pass: \@Arigatou1401Duy
+            key: ${{ secrets.SSH_PRIVATE_KEY}}SSH_PASSWORD
+            pass: ${{ secrets.SSH_PASSWORD}}
 #           - name: Configure SSH
 #             run: |
 #               mkdir -p ~/.ssh/
