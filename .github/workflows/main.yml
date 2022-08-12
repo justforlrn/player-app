@@ -6,15 +6,22 @@ jobs:
     docker:
       runs-on: ubuntu-latest
       steps:
-          - name: Install SSH Key 
-            uses: shimataro/ssh-key-action@v2
-            with:
-              key: ${{ secrets.SSH_PRIVATE_KEY }}
-              known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
-          - name: Move to WWW
-            run: cd ~/www
-          - name: Mkdir test1
-            run: mkdir test1
+          - name: Configure SSH
+            run: |
+              mkdir -p ~/.ssh/
+              echo "$SSH_KEY" > ~/.ssh/staging.key
+              chmod 600 ~/.ssh/staging.key
+              cat >>~/.ssh/config <<END
+              Host staging
+                HostName $SSH_HOST
+                User $SSH_USER
+                IdentityFile ~/.ssh/staging.key
+                StrictHostKeyChecking no
+              END
+            env:
+              SSH_USER: ${{ secrets.SSH_USER }}
+              SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+              SSH_HOST: ${{ secrets.SSH_HOST }}
             
 #         - name: Checkout
 #           uses: actions/checkout@v2
