@@ -14,7 +14,7 @@ jobs:
             host: ${{ secrets.SSH_HOST }}
             user: ${{ secrets.SSH_USER }}
             key: ${{ secrets.SSH_PRIVATE_KEY}}
-            pass: @Arigatou1401Duy
+            pass: \@Arigatou1401Duy
 #           - name: Configure SSH
 #             run: |
 #               mkdir -p ~/.ssh/
