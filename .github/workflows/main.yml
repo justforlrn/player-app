@@ -37,7 +37,7 @@ jobs:
               cd ~/www/player-app
               git checkout dev
               git pull
-              docker system prune -a
+              docker system prune -a --force
               docker-compose up -d
             host: ${{ secrets.SSH_HOST }}
             user: ${{ secrets.SSH_USER }}
