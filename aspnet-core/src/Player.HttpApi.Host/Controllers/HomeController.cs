@@ -17,12 +17,12 @@ public class HomeController : AbpController
     }
     public async Task<ActionResult> Index()
     {
-        if (_env.IsDevelopment())
-        {
-            return Redirect("~/swagger");
-        }
-        else
-        {
+        //if (_env.IsDevelopment())
+        //{
+        //    return Redirect("~/swagger");
+        //}
+        //else
+        //{
             var filePath = Path.Combine(_env.WebRootPath, "", "index.html");
             if (!System.IO.File.Exists(filePath))
             {
@@ -35,6 +35,6 @@ public class HomeController : AbpController
 
                 return Content(fileContent, "text/html", Encoding.UTF8);
             }
-        }
+        //}
     }
 }
