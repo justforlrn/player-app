@@ -21,7 +21,7 @@ jobs:
         id: docker_build
         with:
           context: ./aspnet-core
-          file: ./aspnet-core/Dockerfile
+          file: ./aspnet-core/src/Player.HttpApi.Host/Dockerfile
           push: true
           pull: true
           tags: justforlrn/player-app:lastest
