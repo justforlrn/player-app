@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CoreCommonService } from 'src/app/core';
 import { TDSMessageService } from 'tds-ui/message';
 import { LoginDto } from '../../models/login/login.model';
 import { UserData } from '../../models/users/user-data.model';
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     private _fb: FormBuilder,
     private _userService: UserService,
     private _message: TDSMessageService,
-    private _router: Router
+    private _router: Router,
+    private _coreCommonService: CoreCommonService
   ) {}
 
   createForm() {
@@ -45,9 +47,7 @@ export class LoginComponent implements OnInit {
     this.model = this.prepareModel();
     this._userService.login(this.model).subscribe(
       (res: UserData) => {
-        localStorage.setItem('accessToken', JSON.stringify(res.accessToken));
-        const { accessToken: _, ...userData } = res;
-        localStorage.setItem('userData', JSON.stringify(userData));
+        this._coreCommonService.setUserData(res);
         this._message.success(`Hello ${res.name}`);
       },
       (err: any) => {
