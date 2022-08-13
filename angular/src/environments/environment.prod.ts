@@ -1,6 +1,6 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://localhost:4200';
+const baseUrl = 'http://getsoft.vn';
 
 export const environment = {
   production: true,
@@ -10,16 +10,16 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44355',
+    issuer: 'http://getsoft.vn',
     redirectUri: baseUrl,
     clientId: 'Player_App',
     responseType: 'code',
     scope: 'offline_access Player',
-    requireHttps: true
+    requireHttps: true,
   },
   apis: {
     default: {
-      url: 'https://localhost:44355',
+      url: 'http://getsoft.vn',
       rootNamespace: 'Player',
     },
   },
