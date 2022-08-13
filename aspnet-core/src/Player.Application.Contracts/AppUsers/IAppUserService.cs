@@ -8,6 +8,6 @@ namespace Player.AppUsers
 {
     public interface IAppUserService
     {
-        Task Login(LoginDto loginDto);
+        Task<LoginResponseDto> Login(LoginDto loginDto);
     }
 }

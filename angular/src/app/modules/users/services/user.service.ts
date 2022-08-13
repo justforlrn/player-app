@@ -6,11 +6,11 @@ import { UserData } from '../models/users/user-data.model';
 
 @Injectable()
 export class UserService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apis.default.url;
   constructor(private http: CoreCommonService) {}
 
   login(body: LoginDto) {
-    const url = `${this.apiUrl}/auth/login`;
+    const url = `${this.apiUrl}/users/login`;
     return this.http.connect<UserData>(CoreApiMethodType.post, url, body);
   }
 }

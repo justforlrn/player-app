@@ -19,10 +19,10 @@ namespace Player.Controllers.AppControllers
         {
             _appUserService = appUserService;
         }
-        [HttpPost]
-        public async Task LoginAsync([FromBody] LoginDto input)
+        [HttpPost("login")]
+        public async Task<LoginResponseDto> LoginAsync([FromBody] LoginDto input)
         {
-            await _appUserService.Login(input);
+            return await _appUserService.Login(input);
         }
     }
 }

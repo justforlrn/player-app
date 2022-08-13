@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
+using Volo.Abp.Data;
+using Volo.Abp.Identity;
 
 namespace Player.AppUsers
 {
@@ -15,19 +17,24 @@ namespace Player.AppUsers
     public class AppUserService: PlayerAppService, IAppUserService
     {
         private readonly IConfiguration _configuration;
-
         private readonly IHttpClientFactory _httpClientFactory;
-        public AppUserService(IConfiguration configuration, IHttpClientFactory httpClientFactory) {
-            _configuration = configuration;
-            _httpClientFactory = httpClientFactory;
+        private readonly IIdentityUserRepository _identityUserRepository;
+        public AppUserService(
+            IConfiguration configuration, 
+            IHttpClientFactory httpClientFactory,
+            IIdentityUserRepository identityUserRepository) {
+                _configuration = configuration;
+                _httpClientFactory = httpClientFactory;
+                _identityUserRepository = identityUserRepository;
         }
-        public async Task Login(LoginDto loginDto)
+        public async Task<LoginResponseDto> Login(LoginDto loginDto)
         {
-            var bodyJson = JsonConvert.SerializeObject(loginDto);
-            var dic = JsonConvert.DeserializeObject<Dictionary<string, string>>(bodyJson);
-            dic.Add("clientId", _configuration.GetSection("AuthServer")["SwaggerClientId"]);
-            dic.Add("clientSecret", _configuration.GetSection("AuthServer")["SwaggerClientSecret"]);
-            dic.Add("scope", "");
+            //default username same as email
+            var user = await _identityUserRepository.FindByNormalizedUserNameAsync(loginDto.Email.ToUpper());
+            if (user == null)
+            {
+                throw new UserFriendlyException("Không có tài khoản này");
+            }
             var client = _httpClientFactory.CreateClient();
 
             var data = new[]
@@ -40,8 +47,17 @@ namespace Player.AppUsers
             };
             var response = await client.PostAsync($"{_configuration.GetSection("AuthServer")["Authority"]}/connect/token", new FormUrlEncodedContent(data));
 
-            var jsonResponse = await response.Content.ReadAsStringAsync();
-
+            var jsonRead = await response.Content.ReadAsStringAsync();
+            var connectTokenResponse = JsonConvert.DeserializeObject<ConnectTokenResponse>(jsonRead);
+            var resonse = new LoginResponseDto
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                Sex = user.GetProperty<string>("Sex"),
+                AccessToken = connectTokenResponse.access_token
+            };
+            return resonse;
             //if (response.IsSuccessStatusCode)
             //{
             //    result.Data = JsonConvert.DeserializeObject<Model>(jsonResponse);
