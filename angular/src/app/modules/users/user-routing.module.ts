@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    //canActivate: [LoggedIn],
+    canActivate: [LoggedIn],
     component: LoginComponent,
   },
 ];

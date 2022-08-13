@@ -8,14 +8,14 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TDSButtonMenuModule } from 'tds-ui/button-menu';
 import { TDSNotificationModule } from 'tds-ui/notification';
-import { TDSMenuModule } from 'tds-ui/menu';
 import { TDSEmptyModule } from 'tds-ui/empty';
-import { RouterModule } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import { RestaurantComponent } from './pages/group-list/restaurant.component';
+import { RestaurantRoutingModule } from './restaurant-routing.module';
+import { TDSImageModule } from 'tds-ui/image';
+import { TDSDrawerModule } from 'tds-ui/drawer';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [RestaurantComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -27,7 +27,9 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     TDSButtonMenuModule,
     TDSButtonModule,
     TDSEmptyModule,
-    DashboardRoutingModule,
+    RestaurantRoutingModule,
+    TDSImageModule,
+    TDSDrawerModule,
   ],
 })
-export class DashboardModule {}
+export class RestaurantModule {}
