@@ -27,7 +27,8 @@ jobs:
           tags: justforlrn/player-app:lastest
       - name: Verify
         run: echo ${{ steps.docker_build.outputs.digest }}
-    PullImage:
+    PullAndRunDockerInServer:
+      needs: Docker
       runs-on: ubuntu-latest
       steps:
         - name: ls -a via ssh
