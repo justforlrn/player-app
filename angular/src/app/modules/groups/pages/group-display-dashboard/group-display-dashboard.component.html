@@ -1,0 +1,34 @@
+<div class="flex h-full w-full justify-center items-center">
+    <div *ngIf="!empty" class="grid grid-cols-2 gap-6">
+        <div class="flex flex-col items-center bg-gray-100 rounded-lg">
+            <i class="text-7xl tdsi-group-fill w-full h-full border rounded-t-lg text-center"></i>
+            <div class="bg-green-600 px-16 py-1 text-lg rounded-b-lg text-white font-semibold">Name group
+            </div>
+        </div>
+        <div class="flex flex-col items-center bg-gray-100 rounded-lg">
+            <i class="text-7xl tdsi-group-fill w-full h-full border rounded-t-lg text-center"></i>
+            <div class="bg-green-600 px-16 py-1 text-lg rounded-b-lg text-white font-semibold">Name group
+            </div>
+        </div>
+        <div class="flex flex-col items-center bg-gray-100 rounded-lg">
+            <i class="text-7xl tdsi-group-fill w-full h-full border rounded-t-lg text-center"></i>
+            <div class="bg-green-600 px-16 py-1 text-lg rounded-b-lg text-white font-semibold">Name group
+            </div>
+        </div>
+        <div class="flex bg-green-100 rounded-lg border w-full h-full items-center justify-center">
+            <i class="text-7xl text-green-600 tdsi-add-fill text-center align-middle"></i>
+        </div>
+    </div>
+    <tds-empty *ngIf="empty" notFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+        [notFoundContent]="contentTpl" [notFoundFooter]="footerTpl">
+        <ng-template #contentTpl>
+            <span>Customize
+                <a href="#API">Description</a>
+            </span>
+        </ng-template>
+
+        <ng-template #footerTpl>
+            <button tds-button (click)="onClick()">Create Now</button>
+        </ng-template>
+    </tds-empty>
+</div>

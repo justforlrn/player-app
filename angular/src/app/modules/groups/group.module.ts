@@ -11,11 +11,12 @@ import { TDSNotificationModule } from 'tds-ui/notification';
 import { TDSMenuModule } from 'tds-ui/menu';
 import { TDSEmptyModule } from 'tds-ui/empty';
 import { RouterModule } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import { GroupDisplayDashboardComponent } from './pages/group-display-dashboard/group-display-dashboard.component';
+import { GroupRoutingModule } from './group-routing.module';
+import { GroupListComponent } from './pages/group-list/group-list.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [GroupDisplayDashboardComponent, GroupListComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -27,7 +28,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     TDSButtonMenuModule,
     TDSButtonModule,
     TDSEmptyModule,
-    DashboardRoutingModule,
+    GroupRoutingModule,
   ],
 })
-export class DashboardModule {}
+export class GroupModule {}

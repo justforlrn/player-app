@@ -18,13 +18,15 @@ export class CoreCommonService {
 
   public getLocalStorage<T>(name: string): T {
     var json = localStorage.getItem(name);
-    return <T>JSON.parse(json);
+    return JSON.parse(json) as T;
+  }
+
+  public getUserData(): UserData {
+    return this.getLocalStorage<UserData>('userData');
   }
 
   public setUserData(data: UserData) {
-    localStorage.setItem('access_token', data.accessToken);
-    const { accessToken: _, ...userData } = data;
-    localStorage.setItem('userData', JSON.stringify(userData));
+    localStorage.setItem('userData', JSON.stringify(data));
   }
 
   public init(): Observable<boolean> {

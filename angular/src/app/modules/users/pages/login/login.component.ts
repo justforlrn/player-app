@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
       (res: UserData) => {
         this._coreCommonService.setUserData(res);
         this._message.success(`Hello ${res.name}`);
+        this._router.navigateByUrl('/dashboard');
       },
       (err: any) => {
         this._message.error(`Lỗi`);

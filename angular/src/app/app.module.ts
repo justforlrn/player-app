@@ -12,10 +12,15 @@ import { AppComponent } from './app.component';
 import { UserModule } from './modules/users/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/lib.module';
+import { TDSMenuModule } from 'tds-ui/menu';
+import { LayoutModule } from '@angular/cdk/layout';
+import { RouterModule } from '@angular/router';
+import { LayoutComponent } from './shared/layouts/layout.component';
+import { TDSButtonModule } from 'tds-ui/button';
 // Thiết lập tiếng Việt
 registerLocaleData(localeVi);
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LayoutComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -25,6 +30,7 @@ registerLocaleData(localeVi);
     HttpClientModule,
     CoreModule,
     UserModule,
+    TDSButtonModule,
   ],
   providers: [{ provide: TDS_I18N, useValue: vi_VN }],
   bootstrap: [AppComponent],
