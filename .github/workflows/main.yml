@@ -37,7 +37,8 @@ jobs:
               cd ~/www/player-app
               git checkout dev
               git pull
-              docker-compose up
+              docker-compose up -d
+              exit 1
             host: ${{ secrets.SSH_HOST }}
             user: ${{ secrets.SSH_USER }}
             key: ${{ secrets.SSH_PRIVATE_KEY}}
