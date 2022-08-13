@@ -38,6 +38,8 @@ jobs:
               cd ~/www/player-app
               git checkout dev
               git pull
+              docker stop $(docker ps -a -q)
+              docker rm $(docker ps -a -q)
               docker system prune -a --force
               docker-compose up -d
             host: ${{ secrets.SSH_HOST }}
