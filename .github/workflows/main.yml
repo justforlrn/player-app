@@ -40,5 +40,6 @@ jobs:
               docker-compose up
             host: ${{ secrets.SSH_HOST }}
             user: ${{ secrets.SSH_USER }}
-            key: ${{ secrets.SSH_PRIVATE_KEY}}SSH_PASSWORD
+            key: ${{ secrets.SSH_PRIVATE_KEY}}
             pass: ${{ secrets.SSH_PASSWORD}}
+            args: "-tt"
