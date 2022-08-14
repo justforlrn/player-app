@@ -11,6 +11,7 @@ namespace Player.UserOrders
 {
     public class UserOder : FullAuditedAggregateRoot<string>
     {
+        public string GroupId { get; set; }
         public string UserId { get; set; }
         public string ItemId { get; set; }
         public int Count { get; set; }

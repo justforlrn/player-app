@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Player.AppUsers.DTOs
+namespace Player.Users.DTOs
 {
     public class ConnectTokenResponse
     {

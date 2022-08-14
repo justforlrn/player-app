@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Player.AppUsers;
-using Player.AppUsers.DTOs;
+using Player.Users;
+using Player.Users.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

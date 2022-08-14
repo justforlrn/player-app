@@ -1,10 +1,10 @@
-﻿using Player.AppUsers.DTOs;
+﻿using Player.Users.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Player.AppUsers
+namespace Player.Users
 {
     public interface IAppUserService
     {

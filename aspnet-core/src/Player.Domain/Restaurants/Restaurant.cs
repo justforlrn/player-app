@@ -14,6 +14,8 @@ namespace Player.Restaurants
         public int Star { get; set; }
         public string Open { get; set; }
         public string Close { get; set; }
-        public List<Item> Items { set; get; }
+        public string ImageUrl { get; set; }
+        public string WebUrl { get; set; }
+        //public List<Item> Items { set; get; }
     }
 }
