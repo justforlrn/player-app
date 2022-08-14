@@ -6,26 +6,24 @@ import { UserData } from '../../users/models/users/user-data.model';
 import { Group } from '../models/group.model';
 
 @Injectable()
-export class GroupDisplayDashboardService {
+export class GroupService {
   private apiUrl = environment.apiUrl;
   private currentUser!: UserData;
   constructor(private _coreCommonService: CoreCommonService) {
     this.currentUser = this._coreCommonService.getUserData();
   }
-  public getJoinedGroupList(): Observable<Group[]> {
-    // const url = `${this.apiUrl}/auth/login`;
-    // return this._coreCommonService.connect<Group[]>(CoreApiMethodType.get, url, null);
+  public getOrderGroupList(): Observable<Group[]> {
     const listGroup: Group[] = [];
     var g1: Group = {
       Id: "4",
-      Name: 'Lầu 4',
+      Name: 'Hồ Đắc Di',
       Members: [
         this.currentUser
       ]
     }
     var g2: Group = {
       Id: "2",
-      Name: 'Lầu 2',
+      Name: 'Cơm Gà',
       Members: [
         this.currentUser
       ]

@@ -6,13 +6,22 @@ import { Component } from '@angular/core';
 })
 export class RestaurantComponent {
   empty = false;
-  visible = false;
+  childItemVisible = false;
+  cartVisible = false
   constructor() {}
-  open(): void {
-    this.visible = true;
+  openChildItem(): void {
+    this.childItemVisible = true;
   }
 
-  close(): void {
-    this.visible = false;
+  closeChildItem(): void {
+    this.childItemVisible = false;
+  }
+
+  openCart(): void {
+    this.cartVisible = true;
+  }
+
+  closeCart(): void {
+    this.cartVisible = false;
   }
 }

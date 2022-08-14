@@ -17,6 +17,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
 import { LayoutComponent } from './shared/layouts/layout.component';
 import { TDSButtonModule } from 'tds-ui/button';
+import { TDSModalModule } from 'tds-ui/modal';
+import { TDSAutocompleteModule } from 'tds-ui/auto-complete';
 // Thiết lập tiếng Việt
 registerLocaleData(localeVi);
 @NgModule({
@@ -31,6 +33,8 @@ registerLocaleData(localeVi);
     CoreModule,
     UserModule,
     TDSButtonModule,
+    TDSModalModule,
+    TDSAutocompleteModule 
   ],
   providers: [{ provide: TDS_I18N, useValue: vi_VN }],
   bootstrap: [AppComponent],

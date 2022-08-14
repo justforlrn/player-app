@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GroupDisplayDashboardComponent } from './pages/group-display-dashboard/group-display-dashboard.component';
-import { GroupListComponent } from './pages/group-list/group-list.component';
+import { GroupListComponent } from './pages/group/group.component';
 
 const routes: Routes = [
   {
@@ -9,8 +9,19 @@ const routes: Routes = [
     component: GroupDisplayDashboardComponent,
   },
   {
-    path: 'list',
-    component: GroupListComponent,
+    path: ':id',
+    children: [
+      {
+        path: '',
+        component: GroupListComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: ':orderId',
+        loadChildren: () =>
+          import('../restaurants/restaurant.module').then(m => m.RestaurantModule),
+      },
+    ]
   },
 ];
 
