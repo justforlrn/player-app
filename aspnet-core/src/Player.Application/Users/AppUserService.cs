@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Player.AppUsers.DTOs;
+using Player.Users.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using Volo.Abp;
 using Volo.Abp.Data;
 using Volo.Abp.Identity;
 
-namespace Player.AppUsers
+namespace Player.Users
 {
     [RemoteService(IsEnabled = false)]
     public class AppUserService: PlayerAppService, IAppUserService
