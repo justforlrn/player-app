@@ -1,4 +1,5 @@
-<tds-drawer [visible]="visible" placement="right" title="Thêm món" (onClose)="close()" [footer]="footerTpl">
+<tds-drawer [visible]="childItemVisible" placement="right" title="Thêm món" (onClose)="closeChildItem()"
+    [footer]="footerTpl">
     <ng-container *tdsDrawerContent>
         <div>
             <div class="flex flex-row bg-white">
@@ -94,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <div class="restaurant-info flex flex-col bg-gray-100 h-full">
+        <div class="restaurant-items flex flex-col bg-gray-100 h-full">
             <div class="flex flex-col items-center pt-8 w-full">
                 <div class="restaurant-info flex flex-col min-w-60%">
                     <span class="font-bold text-3xl py-4">Today's Offer</span>
@@ -111,7 +112,7 @@
                                         <div class="font-semibold flex h-full px-2">Trà sữa Alooooo</div>
                                         <span class="pl-2 line-through">123123</span>
                                         <div class="flex justify-between p-1"><span class="pl-1 text-lg">15.000</span>
-                                            <button tds-button-icon color="primary" (click)="open()">
+                                            <button tds-button-icon color="primary" (click)="openChildItem()">
                                                 <i class="tdsi-plus-circle-fill"></i>
                                             </button>
                                         </div>
@@ -130,7 +131,7 @@
                                         <span class="pl-2 line-through">123123</span>
                                         <div class="flex justify-between p-1"><span
                                                 class="pl-1 text-lg">15.000</span><button tds-button-icon
-                                                color="primary" (click)="open()">
+                                                color="primary" (click)="openChildItem()">
                                                 <i class="tdsi-plus-circle-fill"></i>
                                             </button></div>
                                     </div>
@@ -141,5 +142,156 @@
                 </div>
             </div>
         </div>
+        <div class="bg-gray-100">
+            <div class="cart flex flex-row justify-center cursor-pointer" (click)="openCart()">
+                <div
+                    class="divide-x p-2 flex flex-row justify-center px-8 py-4 bg-green-500 border rounded-t-lg text-white font-semibold">
+                    <div class="px-2">
+                        Tổng món: 5
+                    </div>
+                    <div class="px-2">
+                        Tổng tiền: 100.000
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<tds-drawer [visible]="cartVisible" placement="left" title="Danh sách món" (onClose)="closeCart()"
+    [footer]="footerCart">
+    <ng-container *tdsDrawerContent>
+        <div class="divide-y">
+            <div class="p-2">
+                <div class="flex flex-row bg-white">
+                    <div class=""><img tds-image height="100px" style="width:auto; height:100px !important"
+                            tdsSrc="https://post.healthline.com/wp-content/uploads/2020/09/healthy-eating-ingredients-732x549-thumbnail.jpg"
+                            alt="" />
+                    </div>
+                    <div class="flex flex-col flex-1 h-full">
+                        <div class="font-semibold flex h-full px-2">Trà sữa Alooooo</div>
+                        <span class="pl-2 line-through">123123</span>
+                        <div class="flex justify-between p-1"><span class="pl-1 text-lg">15.000</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-info flex flex-col">
+                    <div class="flex flex-row items-center justify-between">
+                        <div>
+                            Duy
+                        </div>
+                        <div class="flex flex-row items-center space-x-2">
+                            <button tds-button-icon color="secondary" [size]="'sm'">
+                                <i class="tdsi-block-fill text-green-600"></i>
+                            </button>
+                            <span class="text-lg">1</span>
+                            <button tds-button-icon color="secondary" [size]="'sm'">
+                                <i class="tdsi-add-fill text-green-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-row items-center justify-between">
+                        <div>
+                            Duy
+                        </div>
+                        <div class="flex flex-row items-center space-x-2">
+                            <button tds-button-icon color="secondary" [size]="'sm'">
+                                <i class="tdsi-block-fill text-green-600"></i>
+                            </button>
+                            <span class="text-lg">1</span>
+                            <button tds-button-icon color="secondary" [size]="'sm'">
+                                <i class="tdsi-add-fill text-green-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-row items-center justify-between">
+                        <div>
+                            Duy
+                        </div>
+                        <div class="flex flex-row items-center space-x-2">
+                            <button tds-button-icon color="secondary" [size]="'sm'">
+                                <i class="tdsi-block-fill text-green-600"></i>
+                            </button>
+                            <span class="text-lg">1</span>
+                            <button tds-button-icon color="secondary" [size]="'sm'">
+                                <i class="tdsi-add-fill text-green-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2">
+                <div class="flex flex-row bg-white">
+                    <div class=""><img tds-image height="100px" style="width:auto; height:100px !important"
+                            tdsSrc="https://post.healthline.com/wp-content/uploads/2020/09/healthy-eating-ingredients-732x549-thumbnail.jpg"
+                            alt="" />
+                    </div>
+                    <div class="flex flex-col flex-1 h-full">
+                        <div class="font-semibold flex h-full px-2">Trà sữa Alooooo</div>
+                        <span class="pl-2 line-through">123123</span>
+                        <div class="flex justify-between p-1"><span class="pl-1 text-lg">15.000</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-info flex flex-col">
+                    <div class="flex flex-row items-center justify-between">
+                        <div>
+                            Duy
+                        </div>
+                        <div class="flex flex-row items-center space-x-2">
+                            <button tds-button-icon color="secondary" [size]="'sm'">
+                                <i class="tdsi-block-fill text-green-600"></i>
+                            </button>
+                            <span class="text-lg">1</span>
+                            <button tds-button-icon color="secondary" [size]="'sm'">
+                                <i class="tdsi-add-fill text-green-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-row items-center justify-between">
+                        <div>
+                            Duy
+                        </div>
+                        <div class="flex flex-row items-center space-x-2">
+                            <button tds-button-icon color="secondary" [size]="'sm'">
+                                <i class="tdsi-block-fill text-green-600"></i>
+                            </button>
+                            <span class="text-lg">1</span>
+                            <button tds-button-icon color="secondary" [size]="'sm'">
+                                <i class="tdsi-add-fill text-green-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-row items-center justify-between">
+                        <div>
+                            Duy
+                        </div>
+                        <div class="flex flex-row items-center space-x-2">
+                            <button tds-button-icon color="secondary" [size]="'sm'">
+                                <i class="tdsi-block-fill text-green-600"></i>
+                            </button>
+                            <span class="text-lg">1</span>
+                            <button tds-button-icon color="secondary" [size]="'sm'">
+                                <i class="tdsi-add-fill text-green-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #footerCart>
+        <div class="bg-gray-200 h-1 w-full">
+        </div>
+        <div class="flex flex-col w-full p-4 space-y-2">
+            <tds-form-field>
+                <textarea tdsInput placeholder="Ghi chú"></textarea>
+            </tds-form-field>
+            <div class="flex flex-col items-end">
+                <span>Tổng món: 5</span>
+                <span>Tổng tiền: 100.000</span>
+            </div>
+            <button tds-button [size]="'xl'" class="" (click)="close()">Submit</button>
+        </div>
+    </ng-template>
+</tds-drawer>

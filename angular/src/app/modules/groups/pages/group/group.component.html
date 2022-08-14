@@ -1,8 +1,8 @@
 <div class="flex h-full w-full justify-center items-center">
     <div class="flex flex-col">
-        <div class="pb-8"><span class="text-3xl font-bold uppercase">Các group của bạn</span></div>
-        <div *ngIf="joinedGroupList.length" class="grid grid-cols-2 gap-6">
-            <div *ngFor="let item of joinedGroupList" class="flex flex-col items-center bg-gray-100  rounded-lg cursor-pointer hover:opacity-80" (click)="onClickItem(item.Id)">
+        <div class="pb-8"><span class="text-3xl font-bold uppercase">Các order hiện tại đang có</span></div>
+        <div *ngIf="orderGroupList.length" class="grid grid-cols-2 gap-6">
+            <div *ngFor="let item of orderGroupList" class="flex flex-col items-center bg-gray-100  rounded-lg cursor-pointer hover:opacity-80" (click)="onClickItem(item.Id)">
                 <i class="text-7xl tdsi-group-fill w-full h-full border rounded-t-lg text-center"></i>
                 <div class="bg-green-600 px-16 py-1 text-lg rounded-b-lg w-full text-center text-white font-semibold">{{item.Name}}
                 </div>
@@ -13,17 +13,18 @@
                 </div>
             </div>
         </div>
-        <tds-empty *ngIf="!joinedGroupList.length" notFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+        <tds-empty *ngIf="!orderGroupList.length" notFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
             [notFoundContent]="contentTpl" [notFoundFooter]="footerTpl">
             <ng-template #contentTpl>
                 <span>Customize
                     <a href="#API">Description</a>
                 </span>
             </ng-template>
-    
+
             <ng-template #footerTpl>
-                <button tds-button (click)="onClickCreateItem()">Tạo mới</button>
+                <button tds-button (click)="onClickCreateItem()">Create Now</button>
             </ng-template>
         </tds-empty>
     </div>
+
 </div>

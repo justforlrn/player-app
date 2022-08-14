@@ -13,9 +13,10 @@ import { RestaurantComponent } from './pages/group-list/restaurant.component';
 import { RestaurantRoutingModule } from './restaurant-routing.module';
 import { TDSImageModule } from 'tds-ui/image';
 import { TDSDrawerModule } from 'tds-ui/drawer';
+import { CartComponent } from './components/carts/cart.component';
 
 @NgModule({
-  declarations: [RestaurantComponent],
+  declarations: [RestaurantComponent, CartComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
