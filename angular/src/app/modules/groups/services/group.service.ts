@@ -7,7 +7,7 @@ import { Group } from '../models/group.model';
 
 @Injectable()
 export class GroupService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apis.default.url;
   private currentUser!: UserData;
   constructor(private _coreCommonService: CoreCommonService) {
     this.currentUser = this._coreCommonService.getUserData();
@@ -15,25 +15,31 @@ export class GroupService {
   public getOrderGroupList(): Observable<Group[]> {
     const listGroup: Group[] = [];
     var g1: Group = {
-      Id: "4",
+      Id: '4',
       Name: 'Hồ Đắc Di',
-      Members: [
-        this.currentUser
-      ]
-    }
+      Members: [this.currentUser],
+    };
     var g2: Group = {
-      Id: "2",
+      Id: '2',
       Name: 'Cơm Gà',
-      Members: [
-        this.currentUser
-      ]
-    }
-    listGroup.push(g1)
-    listGroup.push(g2)
-    var ob = new Observable<Group[]>((obs) => {
+      Members: [this.currentUser],
+    };
+    listGroup.push(g1);
+    listGroup.push(g2);
+    var ob = new Observable<Group[]>(obs => {
       obs.next(listGroup);
     });
     return ob;
+  }
+
+  public onSearchRestaurant(name: any) {
+    const url = `${this.apiUrl}/restaurants/get-list-by-name?content=${name}`;
+    return this._coreCommonService.connect<any>(CoreApiMethodType.get, url, null);
+  }
+
+  public onGetRestaurant(url: string) {
+    var url = `${this.apiUrl}/restaurants/grab-crawler?url=${url}`;
+    return this._coreCommonService.connect<any>(CoreApiMethodType.get, url, null);
   }
   // login(body: LoginDto) {
   //   const url = `${this.apiUrl}/auth/login`;

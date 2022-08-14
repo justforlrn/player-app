@@ -26,22 +26,9 @@ namespace Player.Restaurants
             _httpClientFactory = httpClientFactory;
             _restaurantRepository = restaurantRepository;
         }
-        public async Task<GrabRestaurantData> GrabCrawler(string url)
+
+        public RestaurantDto GrabDataHandler(GrabRestaurantData restaurantData)
         {
-            var client = _httpClientFactory.CreateClient();
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0");
-            HttpStatusCode statusCode = HttpStatusCode.NoContent;
-            string content = "";
-            while (statusCode != HttpStatusCode.OK)
-            {
-                var get = await client.GetAsync(url);
-                statusCode = get.StatusCode;
-                content = await get.Content.ReadAsStringAsync();
-            }
-            var stringContent = content.Split("NEXT_DATA__\" type=\"application/json\">")[1].Split("</script>")[0];
-            var parseContent = JsonConvert.DeserializeObject<GrabData>(stringContent);
-            var entity = parseContent.props.initialReduxState.pageRestaurantDetail.entities;
-            var restaurantData = (((Newtonsoft.Json.Linq.JContainer)(((Newtonsoft.Json.Linq.JContainer)entity).First as object)).First).ToObject<GrabRestaurantData>();
             var listItem = new List<Item>();
 
             restaurantData.menu.categories.ForEach(grabCat =>
@@ -74,19 +61,12 @@ namespace Player.Restaurants
                                 isAvailable: childGrab.available,
                                 price: childGrab.priceInMinorUnit);
                             item_.Options.Add(child);
-                            //item.Options.Add(new OptionDto(
-                            //    id: child.ID,
-                            //    name: child.name,
-                            //    isAvailable: child.available,
-                            //    price: child.priceInMinorUnit
-                            //    ));
                         });
                         item.OptionGroups.Add(item_);
                     });
                     listItem.Add(item);
                 });
             });
-
 
             var restaurantDto = new RestaurantDto(
                     id: restaurantData.ID,
@@ -98,13 +78,38 @@ namespace Player.Restaurants
                     webUrl: ""
                 );
             restaurantDto.Items = listItem;
-            var restaurant = await CreateAsync(restaurantDto);
-            return restaurantData;
+            return restaurantDto;
+        }
+
+        public async Task<RestaurantDto> GrabCrawlerAsync(string url)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0");
+            HttpStatusCode statusCode = HttpStatusCode.NoContent;
+            string content = "";
+            while (statusCode != HttpStatusCode.OK)
+            {
+                var get = await client.GetAsync(url);
+                statusCode = get.StatusCode;
+                content = await get.Content.ReadAsStringAsync();
+            }
+            var stringContent = content.Split("NEXT_DATA__\" type=\"application/json\">")[1].Split("</script>")[0];
+            var parseContent = JsonConvert.DeserializeObject<GrabData>(stringContent);
+            var entity = parseContent.props.initialReduxState.pageRestaurantDetail.entities;
+            var restaurantData = (((Newtonsoft.Json.Linq.JContainer)(((Newtonsoft.Json.Linq.JContainer)entity).First as object)).First).ToObject<GrabRestaurantData>();
+            var handler = GrabDataHandler(restaurantData);
+            var restaurant = await CreateAsync(handler);
+            return restaurant;
+        }
+
+        public async Task<List<RestaurantDto>> GetRestaurantsByNameAsync(string content)
+        {
+            var restaurant = await _restaurantRepository.GetRestaurantsByNameAsync(content);
+            return ObjectMapper.Map<List<Restaurant>, List<RestaurantDto>>(restaurant);
         }
 
         public async Task<RestaurantDto> CreateAsync(RestaurantDto input)
         {
-
             var restaurant = await _restaurantRepository.FindAsync(input.Id);
             if (restaurant == null)
             {
