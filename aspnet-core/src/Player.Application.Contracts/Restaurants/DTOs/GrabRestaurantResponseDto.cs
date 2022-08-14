@@ -66,7 +66,7 @@ namespace Player.Restaurants.DTOs
         public string ID { get; set; }
         public string name { get; set; }
         public bool available { get; set; }
-        public List<Item> items { get; set; }
+        public List<GrabItem> items { get; set; }
         public int sortOrder { get; set; }
     }
 
@@ -113,7 +113,7 @@ namespace Player.Restaurants.DTOs
         public int seconds { get; set; }
     }
 
-    public class Item
+    public class GrabItem
     {
         public string ID { get; set; }
         public string name { get; set; }

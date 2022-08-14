@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-namespace Player.Items
-{
-    internal class ItemCreateDto
-    {
-    }
-}
+//namespace Player.Items
+//{
+//    internal class ItemCreateDto
+//    {
+//    }
+//}

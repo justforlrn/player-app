@@ -18,8 +18,8 @@ public class PlayerMongoDbContext : AbpMongoDbContext
     public IMongoCollection<AppUser> AppUsers => Collection<AppUser>();
     public IMongoCollection<Group> Groups => Collection<Group>();
     public IMongoCollection<GroupOrder> GroupOrders => Collection<GroupOrder>();
-    public IMongoCollection<Item> Items => Collection<Item>();
-    public IMongoCollection<Option> Options => Collection<Option>();
+    //public IMongoCollection<Item> Items => Collection<Item>();
+    //public IMongoCollection<Option> Options => Collection<Option>();
     public IMongoCollection<Restaurant> Restaurants => Collection<Restaurant>();
     public IMongoCollection<UserOder> UserOders => Collection<UserOder>();
 
@@ -44,14 +44,14 @@ public class PlayerMongoDbContext : AbpMongoDbContext
         {
             b.CollectionName = "GroupOrders";
         });
-        modelBuilder.Entity<Item>(b =>
-        {
-            b.CollectionName = "Items";
-        });
-        modelBuilder.Entity<Option>(b =>
-        {
-            b.CollectionName = "Options";
-        });
+        //modelBuilder.Entity<Item>(b =>
+        //{
+        //    b.CollectionName = "Items";
+        //});
+        //modelBuilder.Entity<Option>(b =>
+        //{
+        //    b.CollectionName = "Options";
+        //});
         modelBuilder.Entity<Restaurant>(b =>
         {
             b.CollectionName = "Restaurants";
