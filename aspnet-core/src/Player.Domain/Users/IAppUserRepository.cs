@@ -7,7 +7,8 @@ namespace Player.Users
 {
     public interface IAppUserRepository : IRepository<AppUser, Guid>
     {
-        Task<bool> IsUserIdsExistAsync(List<Guid> ids);
+        Task<bool> IsUserExistByMailAsync(List<string> emails);
+        Task<List<AppUser>> GetByEmailsAsync(List<string> emails);
         Task<List<AppUser>> GetByIdsAsync(List<Guid> ids);
     }
 }

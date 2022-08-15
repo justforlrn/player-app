@@ -9,7 +9,6 @@ namespace Player.Groups
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsPublic { get; set; }
-        public string SecretKey { get; set; }
-        public List<string> MemberIds { set; get; }
+        public List<string> Emails { set; get; }
     }
 }

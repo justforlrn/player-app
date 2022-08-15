@@ -30,21 +30,22 @@ namespace Player.Groups
 
         public async Task CreateAsync(GroupCreateDto input)
         {
-            input.MemberIds ??= new List<Guid> { };
-            input.MemberIds.Add((Guid)_currentUser.Id);
-            input.MemberIds.Distinct();
-            var isUserIdsExist = await _appUserRepository.IsUserIdsExistAsync(input.MemberIds);
+            input.Emails ??= new List<string> { };
+            input.Emails.Add((string)_currentUser.Email);
+            input.Emails.Distinct();
+            var isUserIdsExist = await _appUserRepository.IsUserExistByMailAsync(input.Emails);
             if(isUserIdsExist)
             {
                 throw new BusinessException("Có userId không tồn tại");
             }
-            var users = await _appUserRepository.GetByIdsAsync(input.MemberIds);
+            var users = await _appUserRepository.GetByEmailsAsync(input.Emails);
+            
             var group = new Group(
                 id: _guidGenerator.Create().ToString(),
                 name: input.Name,
                 description: input.Description,
                 isPublic: input.IsPublic,
-                secretKey: input.SecretKey,
+                secretKey: input.IsPublic ? "" : _guidGenerator.Create().ToString(),
                 members: users
                 );
             await _groupRepository.InsertAsync(group);
@@ -84,7 +85,18 @@ namespace Player.Groups
             if (input.IsPublic != group.IsPublic)
             {
                 group.IsPublic = input.IsPublic;
+                if(group.IsPublic == true)
+                {
+                    group.SecretKey = "";
+                }
+                else
+                {
+                    group.SecretKey = _guidGenerator.Create().ToString();
+                }
             }
+            var newMembers = await _appUserRepository.GetByEmailsAsync(input.Emails);
+            group.Members = newMembers;
+            await _groupRepository.UpdateAsync(group);
         }
     }
 }

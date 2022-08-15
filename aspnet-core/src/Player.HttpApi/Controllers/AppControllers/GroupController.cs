@@ -31,6 +31,12 @@ namespace Player.Controllers.AppControllers
            await _groupService.CreateAsync(input);
         }
 
+        [HttpPut("{id}")]
+        public async Task UpdateAsync([FromBody] GroupUpdateDto input, string id)
+        {
+            await _groupService.UpdateAsync(input, id);
+        }
+
         [HttpDelete("{id}")]
         public async Task DelateAsync(string id)
         {

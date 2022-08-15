@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using Player.MongoDB;
+using Player.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,7 @@ namespace Player.Groups
         public async Task<List<Group>> GetByUserAsync(Guid userId)
         {
             var collection = await GetCollectionAsync();
-
-            var filter = Builders<Group>.Filter.Eq(x => x.CreatorId, userId);
+            var filter = Builders<Group>.Filter.ElemMatch(x => x.Members, e => e.Id == userId);
             var groups = await collection.FindAsync(filter);
             return await groups.ToListAsync();
         }

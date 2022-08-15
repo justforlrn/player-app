@@ -15,7 +15,7 @@ namespace Player.Groups
         public string Description { get; set; }
         public bool IsPublic { get; set; }
         public string SecretKey { get; set; }
-        public List<GroupOrder> GroupOrders { set; get; }
+        public List<string> GroupOrderIds { set; get; }
         public List<AppUser> Members { set; get; }
 
         protected Group()
