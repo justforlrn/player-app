@@ -41,6 +41,11 @@ export class GroupService {
     var url = `${this.apiUrl}/restaurants/grab-crawler?url=${url}`;
     return this._coreCommonService.connect<any>(CoreApiMethodType.get, url, null);
   }
+
+  public createGroupOrder(data: any) {
+    var url = `${this.apiUrl}/group-orders`;
+    return this._coreCommonService.connect<any>(CoreApiMethodType.post, url, data);
+  }
   // login(body: LoginDto) {
   //   const url = `${this.apiUrl}/auth/login`;
   //   return this.http.connect<UserData>(CoreApiMethodType.post, url, body);

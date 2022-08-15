@@ -18,6 +18,7 @@ export class NewGroupOrderComponent {
 
   //options: any[] = [];
 
+  @Input() groupId!: string
   filteredOptions: any[] = [];
   selectedRestaurant: any;
   restaurantList: any[];
@@ -53,12 +54,18 @@ export class NewGroupOrderComponent {
   onSubmit() {
     if (typeof this.selectedRestaurant === 'string') {
       this._groupService.onGetRestaurant(this.selectedRestaurant).subscribe(res => {
-        if (res?.items?.length) {
-          this._router.navigateByUrl('dashboard');
-        }
+          this._router.navigate([this._router.url, res.id])
       });
     } else {
-      this._router.navigateByUrl('group');
+      const data = {
+        groupId: this.groupId,
+        restaurantId: this.selectedRestaurant.id
+      }
+      this._groupService.createGroupOrder(data).subscribe((res) => {
+        debugger
+        console.log(res)
+        this._router.navigate([this._router.url, res.id])
+      })
     }
 
     console.log(typeof this.selectedRestaurant);

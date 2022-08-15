@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Player.GroupOrders;
 using Player.Items;
 using Player.Options;
 using Player.Restaurants;
@@ -13,6 +14,7 @@ public class PlayerApplicationAutoMapperProfile : Profile
          * Alternatively, you can split your mapping configurations
          * into multiple profile classes for a better organization. */
         CreateMap<Restaurant, RestaurantDto>();
+        CreateMap<GroupOrder, GroupOrderDto>();
         //CreateMap<Item, ItemDto>();
         //CreateMap<ItemDto, Item>();
         //CreateMap<Option, OptionDto>();

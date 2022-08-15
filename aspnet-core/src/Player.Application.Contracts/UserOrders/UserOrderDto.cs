@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Player.UserOrders
 {
-    internal class UserOrderDto
+    public class UserOrderDto
     {
+
     }
 }

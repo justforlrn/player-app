@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Player.GroupOrders;
 using Player.Items;
 using Player.OptionGroups;
 using Player.Options;
@@ -15,16 +16,17 @@ using Volo.Abp;
 namespace Player.Restaurants
 {
     [RemoteService(IsEnabled = false)]
-    public class RestaurantService: PlayerAppService, IRestaurantService
+    public class RestaurantService : PlayerAppService, IRestaurantService
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IRestaurantRepository _restaurantRepository;
-        //private readonly IItemService _itemService;
+        private readonly IGroupOrderService _groupOrderService;
         public RestaurantService(
-            IHttpClientFactory httpClientFactory, IRestaurantRepository restaurantRepository)
+            IHttpClientFactory httpClientFactory, IRestaurantRepository restaurantRepository, IGroupOrderService groupOrderService)
         {
             _httpClientFactory = httpClientFactory;
             _restaurantRepository = restaurantRepository;
+            _groupOrderService = groupOrderService;
         }
 
         public RestaurantDto GrabDataHandler(GrabRestaurantData restaurantData)
@@ -81,7 +83,7 @@ namespace Player.Restaurants
             return restaurantDto;
         }
 
-        public async Task<RestaurantDto> GrabCrawlerAsync(string url)
+        public async Task<GroupOrderDto> GrabCrawlerAsync(string url, string groupId)
         {
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0");
@@ -99,7 +101,9 @@ namespace Player.Restaurants
             var restaurantData = (((Newtonsoft.Json.Linq.JContainer)(((Newtonsoft.Json.Linq.JContainer)entity).First as object)).First).ToObject<GrabRestaurantData>();
             var handler = GrabDataHandler(restaurantData);
             var restaurant = await CreateAsync(handler);
-            return restaurant;
+            var GO = new CreateGroupOrderDto(groupId, restaurant.Id);
+            var res = await _groupOrderService.CreateOrderGroupAsync(GO);
+            return res;
         }
 
         public async Task<List<RestaurantDto>> GetRestaurantsByNameAsync(string content)

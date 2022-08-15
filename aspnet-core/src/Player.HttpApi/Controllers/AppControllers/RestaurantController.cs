@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Player.GroupOrders;
 using Player.Restaurants;
 using Player.Restaurants.DTOs;
 using System;
@@ -19,9 +20,9 @@ namespace Player.Controllers.AppControllers
             _restaurantService = restaurantService;
         }
         [HttpGet("grab-crawler")]
-        public async Task<RestaurantDto> GrabCrawlerAsync(string url)
+        public async Task<GroupOrderDto> GrabCrawlerAsync(string url, string groupid)
         {
-            return await _restaurantService.GrabCrawlerAsync(url);
+            return await _restaurantService.GrabCrawlerAsync(url, groupid);
         }
         [HttpGet("get-list-by-name")]
         public async Task<List<RestaurantDto>> GetRestaurantsByNameAsync(string content)
