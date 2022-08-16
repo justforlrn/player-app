@@ -1,10 +1,10 @@
 <div class="flex h-full w-full">
     <div class="flex flex-col w-full">
         <tds-form-field class="w-full">
-            <input aria-colspan="" class="placeholder-neutral-1-400" 
-                placeholder="Search..." tdsInput [(ngModel)]="selectedRestaurant" tdsInputDebounce="300" 
-                (inputKeyup)="onSearch($event)" [tdsAutocomplete]="auto" />
-            <span tdsPrefix ><i class="text-neutral-1-500 tdsi-search-fill text-base"></i></span>
+            <input aria-colspan="" class="placeholder-neutral-1-400" placeholder="Search..." tdsInput
+                [(ngModel)]="selectedRestaurant" tdsInputDebounce="300" (inputKeyup)="onSearch($event)"
+                [tdsAutocomplete]="auto" />
+            <span tdsPrefix><i class="text-neutral-1-500 tdsi-search-fill text-base"></i></span>
             <span tdsSuffix (click)="onClearAll($event)">
                 <i class="tdsi-close-fill text-neutral-1-500 text-base"
                     *ngIf="selectedRestaurant && selectedRestaurant !== ''">
@@ -14,9 +14,8 @@
     </div>
 </div>
 
-<tds-autocomplete #auto>  
-    <tds-auto-option *ngFor="let option of filteredOptions" 
-        [label]="option.name" [value]="option.name">
+<tds-autocomplete #auto>
+    <tds-auto-option *ngFor="let option of filteredOptions" [label]="option.name" [value]="option">
         <div class="flex w-full justify-between items-center">
             {{ option.name }}
         </div>

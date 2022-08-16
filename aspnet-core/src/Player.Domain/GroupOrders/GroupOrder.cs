@@ -20,5 +20,16 @@ namespace Player.GroupOrders
         /// </summary>
         public decimal Discount { get; set; }
         public List<UserOder> UserOders { set; get; }
+        public GroupOrder(string id, string groupId, string restaurantId, GroupOrderStatus status, string fromTime, string toTime, decimal discount): base(id)
+        {
+            Id = id;
+            GroupId = groupId;
+            RestaurantId = restaurantId;
+            Status = status;
+            FromTime = fromTime;
+            ToTime = toTime;
+            Discount = discount;
+            UserOders = new List<UserOder>();
+        }
     }
 }
