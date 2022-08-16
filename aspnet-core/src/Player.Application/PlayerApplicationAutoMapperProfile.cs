@@ -3,6 +3,7 @@ using Player.GroupOrders;
 using Player.Items;
 using Player.Options;
 using Player.Restaurants;
+using Player.Groups;
 
 namespace Player;
 
@@ -15,8 +16,6 @@ public class PlayerApplicationAutoMapperProfile : Profile
          * into multiple profile classes for a better organization. */
         CreateMap<Restaurant, RestaurantDto>();
         CreateMap<GroupOrder, GroupOrderDto>();
-        //CreateMap<Item, ItemDto>();
-        //CreateMap<ItemDto, Item>();
-        //CreateMap<Option, OptionDto>();
+        CreateMap<Group, GroupDto>();
     }
 }
