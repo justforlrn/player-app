@@ -83,7 +83,7 @@ namespace Player.Restaurants
             return restaurantDto;
         }
 
-        public async Task<GroupOrderDto> GrabCrawlerAsync(string url, string groupId)
+        public async Task<RestaurantDto> GrabCrawlerAsync(string url)
         {
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0");
@@ -101,14 +101,26 @@ namespace Player.Restaurants
             var restaurantData = (((Newtonsoft.Json.Linq.JContainer)(((Newtonsoft.Json.Linq.JContainer)entity).First as object)).First).ToObject<GrabRestaurantData>();
             var handler = GrabDataHandler(restaurantData);
             var restaurant = await CreateAsync(handler);
-            var GO = new CreateGroupOrderDto(groupId, restaurant.Id);
-            var res = await _groupOrderService.CreateOrderGroupAsync(GO);
-            return res;
+            return restaurant;
+            //var GO = new CreateGroupOrderDto(groupId, restaurant.Id);
+            //var res = await _groupOrderService.CreateOrderGroupAsync(GO);
+            //return res;
         }
 
         public async Task<List<RestaurantDto>> GetRestaurantsByNameAsync(string content)
         {
-            var restaurant = await _restaurantRepository.GetRestaurantsByNameAsync(content);
+            var restaurant = new List<Restaurant>() { };
+            if (content.ToLower().Contains(".grab"))
+            {
+                var splitArr = content.Split("/");
+                var splitedId = splitArr[splitArr.Length-1];
+                restaurant = await _restaurantRepository.GetRestaurantsByNameAndIdAsync(splitedId);
+                if(restaurant.Count() == 0)
+                {
+                    return new List<RestaurantDto> { await GrabCrawlerAsync(content) };
+                }
+            }
+            restaurant = await _restaurantRepository.GetRestaurantsByNameAndIdAsync(content);
             return ObjectMapper.Map<List<Restaurant>, List<RestaurantDto>>(restaurant);
         }
 

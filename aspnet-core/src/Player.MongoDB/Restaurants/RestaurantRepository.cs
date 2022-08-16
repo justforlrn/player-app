@@ -16,10 +16,10 @@ namespace Player.Restaurants
         {
         }
 
-        public async Task<List<Restaurant>> GetRestaurantsByNameAsync(string content)
+        public async Task<List<Restaurant>> GetRestaurantsByNameAndIdAsync(string content)
         {
             var collection = await GetCollectionAsync();
-            var result = await collection.FindAsync(e => e.Name.Contains(content));
+            var result = await collection.FindAsync(e => e.Name.Contains(content) || e.Id == content);
             return await result.ToListAsync();
         }
     }

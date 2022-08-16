@@ -9,6 +9,6 @@ namespace Player.Restaurants
 {
     public interface IRestaurantRepository : IRepository<Restaurant, string>
     {
-        Task<List<Restaurant>> GetRestaurantsByNameAsync(string content);
+        Task<List<Restaurant>> GetRestaurantsByNameAndIdAsync(string content);
     }
 }

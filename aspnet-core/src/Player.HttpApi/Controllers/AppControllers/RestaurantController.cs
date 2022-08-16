@@ -20,7 +20,7 @@ namespace Player.Controllers.AppControllers
             _restaurantService = restaurantService;
         }
         [HttpGet("grab-crawler")]
-        public async Task<GroupOrderDto> GrabCrawlerAsync(string url, string groupid)
+        public async Task<RestaurantDto> GrabCrawlerAsync(string url, string groupid)
         {
             return await _restaurantService.GrabCrawlerAsync(url, groupid);
         }

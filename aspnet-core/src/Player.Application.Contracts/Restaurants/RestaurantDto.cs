@@ -26,5 +26,6 @@ namespace Player.Restaurants
             WebUrl = webUrl;
             Items = new List<Item>();
         }
+        public RestaurantDto() { }
     }
 }
