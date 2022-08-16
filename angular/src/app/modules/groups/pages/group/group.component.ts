@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TDSModalService } from 'tds-ui/modal';
 import { NewGroupOrderComponent } from '../../components/new-group-order.component';
 import { Group } from '../../models/group.model';
@@ -14,9 +14,11 @@ export class GroupListComponent {
   empty = false;
   orderGroupList: Group[] = [];
   constructor(private _groupService: GroupService, private _router: Router,
+    private _activatedRoute: ActivatedRoute,
     private modalService: TDSModalService) {}
-  
+    groupId: string;
     ngOnInit(): void {
+      this.groupId = this._activatedRoute.snapshot.params["id"]
       this.getList();
     }
     
@@ -35,6 +37,9 @@ export class GroupListComponent {
       title: 'Chọn quán order chung',
       content: NewGroupOrderComponent,
       size: 'sm',
+      componentParams: {
+        groupId: this.groupId
+    }
     });
   }
 }

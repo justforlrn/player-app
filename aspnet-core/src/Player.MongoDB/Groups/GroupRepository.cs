@@ -20,7 +20,9 @@ namespace Player.Groups
         public async Task<List<Group>> GetByUserAsync(Guid userId)
         {
             var collection = await GetCollectionAsync();
-            var filter = Builders<Group>.Filter.ElemMatch(x => x.Members, e => e.Id == userId);
+            var filter1 = Builders<Group>.Filter.ElemMatch(x => x.Members, e => e.Id == userId);
+            var filter2 = Builders<Group>.Filter.Eq(x => x.IsPublic, true);
+            var filter = Builders<Group>.Filter.Or(new List<FilterDefinition<Group>> { filter1, filter2 });
             var groups = await collection.FindAsync(filter);
             return await groups.ToListAsync();
         }

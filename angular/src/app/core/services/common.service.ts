@@ -16,6 +16,17 @@ export class CoreCommonService {
 
   constructor(private http: HttpClient, private cache: CoreCacheService) {}
 
+  get options() {
+    // eslint-disable-next-line prefer-const
+    let _options: any = {};
+    _options.headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Bearer ${this.getUserData().accessToken}`,
+    });
+    return _options;
+  }
+
+
   public getLocalStorage<T>(name: string): T {
     var json = localStorage.getItem(name);
     return JSON.parse(json) as T;
@@ -77,22 +88,22 @@ export class CoreCommonService {
     switch (pmethod) {
       case CoreApiMethodType.get:
         options.params = data;
-        result = that.http.get<T>(URL, options);
+        result = that.http.get<T>(URL, options ?? this.options);
         break;
       case CoreApiMethodType.post:
         options.params = null;
-        result = this.http.post<T>(URL, data, options);
+        result = this.http.post<T>(URL, data, options ?? this.options);
         break;
       case CoreApiMethodType.put:
-        result = this.http.put<T>(URL, data, options);
+        result = this.http.put<T>(URL, data, options ?? this.options);
         break;
       case CoreApiMethodType.delete:
         options.params = data;
         options.body = body;
-        result = this.http.delete<T>(URL, options);
+        result = this.http.delete<T>(URL, options ?? this.options);
         break;
       default:
-        result = this.http.post<T>(URL, JSON.stringify(data), options);
+        result = this.http.post<T>(URL, JSON.stringify(data), options ?? this.options);
         break;
     }
     return result;

@@ -40,7 +40,7 @@ namespace Player.Restaurants
                     var item = new Item(
                         id: grabItem.ID,
                         name: grabItem.name,
-                        imageUrl: grabItem.imgHref,
+                        imageUrl: grabItem.images[0],
                         priceOrigin: grabItem.priceInMinorUnit,
                         priceDiscount: grabItem.discountedPriceInMin
                         );
@@ -76,7 +76,7 @@ namespace Player.Restaurants
                     star: 0,
                     open: restaurantData.openingHours.displayedHours,
                     close: restaurantData.openingHours.displayedHours,
-                    imageUrl: restaurantData.photoHref,
+                    imageUrl: restaurantData.menu.categories[0].items[0].images[0],
                     webUrl: ""
                 );
             restaurantDto.Items = listItem;
@@ -119,6 +119,7 @@ namespace Player.Restaurants
                 {
                     return new List<RestaurantDto> { await GrabCrawlerAsync(content) };
                 }
+                return ObjectMapper.Map<List<Restaurant>, List<RestaurantDto>>(restaurant);
             }
             restaurant = await _restaurantRepository.GetRestaurantsByNameAndIdAsync(content);
             return ObjectMapper.Map<List<Restaurant>, List<RestaurantDto>>(restaurant);

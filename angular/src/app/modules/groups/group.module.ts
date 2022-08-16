@@ -16,6 +16,7 @@ import { TDSModalModule } from 'tds-ui/modal';
 import { TDSSelectModule } from 'tds-ui/select';
 import { NewGroupOrderComponent } from './components/new-group-order.component';
 import { TDSAutocompleteModule } from 'tds-ui/auto-complete';
+import { TDSImageModule } from 'tds-ui/image';
 
 @NgModule({
   declarations: [GroupDisplayDashboardComponent, GroupComponent, NewGroupComponent, NewGroupOrderComponent],
@@ -34,7 +35,8 @@ import { TDSAutocompleteModule } from 'tds-ui/auto-complete';
     TDSModalModule,
     TDSSelectModule,
     FormsModule,
-    TDSAutocompleteModule 
+    TDSAutocompleteModule,
+    TDSImageModule 
   ]
 })
 export class GroupModule {}
