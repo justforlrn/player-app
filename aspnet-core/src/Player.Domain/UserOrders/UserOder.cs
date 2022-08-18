@@ -13,21 +13,23 @@ namespace Player.UserOrders
 {
     public class UserOder : FullAuditedAggregateRoot<string>
     {
-        public Group Group { get; set; }
+        public string GroupOrderId { get; set; }
         public AppUser User { get; set; }
-        public List<Item> Items { get; set; }
-        public int Count { get; set; }
-        public List<Option> Options { set; get; }
+        public List<ItemAndCount> ItemAndCounts { get; set; }
+        public int TotalItem { get; set; }
         public string Note { get; set; }
-        public UserOder(Group group, AppUser user, List<Item> items, int count, List<Option> options, string note)
-        {
-            Group = group;
-            User = user;
-            Items = items;
-            Count = count;
+        public List<OptionAndCount> OptionAndCounts { get; set; }
+        public int TotalOption { get; set; }
 
-            Options = options;
+        public UserOder(string groupOrderId, AppUser user, List<ItemAndCount> itemAndCounts, int totalItem, string note, List<OptionAndCount> optionAndCounts, int totalOption)
+        {
+            GroupOrderId = groupOrderId;
+            User = user;
+            ItemAndCounts = itemAndCounts;
+            TotalItem = totalItem;
             Note = note;
+            OptionAndCounts = optionAndCounts;
+            TotalOption = totalOption;
         }
     }
 }
