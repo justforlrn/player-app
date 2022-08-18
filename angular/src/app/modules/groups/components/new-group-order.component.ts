@@ -28,6 +28,11 @@ export class NewGroupOrderComponent {
     private _groupService: GroupService,
     private _router: Router
   ) {}
+
+  checkTypeOf(data: any) {
+    return typeof data;
+  }
+
   cancel() {
     this.modal.destroy(null);
   }
@@ -52,23 +57,24 @@ export class NewGroupOrderComponent {
     this.onSubmit();
   }
   onSubmit() {
-    if (typeof this.selectedRestaurant === 'string') {
-      this._groupService.onGetRestaurant(this.selectedRestaurant).subscribe(res => {
-          this._router.navigate([this._router.url, res.id])
-      });
-    } else {
+    // if (typeof this.selectedRestaurant === 'string') {
+    //   this._groupService.onGetRestaurant(this.selectedRestaurant).subscribe(res => {
+    //       this._router.navigate([this._router.url, res.id])
+    //   });
+    // } else {
       const data = {
         groupId: this.groupId,
         restaurantId: this.selectedRestaurant.id
       }
+      debugger
       this._groupService.createGroupOrder(data).subscribe((res) => {
         debugger
         console.log(res)
         this._router.navigate([this._router.url, res.id])
       })
-    }
+    // }
 
-    console.log(typeof this.selectedRestaurant);
+    // console.log(typeof this.selectedRestaurant);
     // if (!this.form.invalid) {
     //     this.modal.destroy(this.form.value);
     // }

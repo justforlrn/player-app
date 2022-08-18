@@ -16,7 +16,7 @@ namespace Player.Controllers.AppControllers
             _groupOrderService = groupOrderService;
         }
         [HttpPost]
-        public async Task<GroupOrderDto> CreateAsync(CreateGroupOrderDto input)
+        public async Task<GroupOrderDto> CreateAsync([FromBody] CreateGroupOrderDto input)
         {
             return await _groupOrderService.CreateOrderGroupAsync(input);
         }
