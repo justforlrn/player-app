@@ -138,16 +138,10 @@ namespace Player.Restaurants
                     close: input.Close,
                     imageUrl: input.ImageUrl,
                     webUrl: input.WebUrl);
-                var items = ObjectMapper.Map<List<Item>, List<Item>>(input.Items);
-                restaurant.Items = items;
+                restaurant.Items = input.Items;
                 await _restaurantRepository.InsertAsync(restaurant);
             }
             return ObjectMapper.Map<Restaurant, RestaurantDto>(restaurant);
-        }
-
-        public Task<RestaurantDto> GrabCrawlerAsync(string url)
-        {
-            throw new NotImplementedException();
         }
     }
 }
