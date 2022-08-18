@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Player.Items;
+using Player.Options;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +12,9 @@ namespace Player.Restaurants
     public interface IRestaurantRepository : IRepository<Restaurant, string>
     {
         Task<List<Restaurant>> GetRestaurantsByNameAndIdAsync(string content);
+        //Task<bool> IsItemIdsExistAsync(List<string> itemIds);
+        //Task<List<Item>> GetItemsByIdsAsync(List<string> ids);
+        //Task<bool> IsOptionsIdsExistAsync(List<string> itemIds);
+        //Task<List<Option>> GetOptionsByIdsAsync(List<string> ids);
     }
 }

@@ -144,5 +144,10 @@ namespace Player.Restaurants
             }
             return ObjectMapper.Map<Restaurant, RestaurantDto>(restaurant);
         }
+
+        public Task<RestaurantDto> GrabCrawlerAsync(string url)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
