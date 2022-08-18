@@ -10,7 +10,7 @@ namespace Player.Restaurants
 {
     public interface IRestaurantService
     {
-        Task<RestaurantDto> GrabCrawlerAsync(string url, string groupId);
+        Task<RestaurantDto> GrabCrawlerAsync(string url);
         Task<RestaurantDto> CreateAsync(RestaurantDto input);
         Task<List<RestaurantDto>> GetRestaurantsByNameAsync(string content);
     }

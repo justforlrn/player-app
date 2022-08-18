@@ -1,9 +1,8 @@
-﻿using Player.Options;
-using Player.Restaurants;
+﻿using Player.Restaurants;
+using Player.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Users;
@@ -15,13 +14,20 @@ namespace Player.UserOrders
     {
         private readonly IRestaurantRepository _restaurantRepository;
         private readonly ICurrentUser _currentUser;
+        private readonly IAppUserRepository _appUserRepository;
+        private readonly IUserOderRepository _userOrderRepository;
+
         public UserOrderService(
             IRestaurantRepository restaurantRepository,
-            ICurrentUser currentUser
+            ICurrentUser currentUser,
+            IAppUserRepository appUserRepository,
+            IUserOderRepository userOrderRepository
             )
         {
             _restaurantRepository = restaurantRepository;
             _currentUser = currentUser;
+            _appUserRepository = appUserRepository;
+            _userOrderRepository = userOrderRepository;
         }
         public async Task CreateAsync(UserOrderCreateDto input)
         {
@@ -33,34 +39,55 @@ namespace Player.UserOrders
             var restaurant = restaurants[0];
             
             var itemIdsByRestaurant = restaurant.Items.Select(x => x.Id).ToList();
-            var itemIdsNotExist = input.ItemIds.Except(itemIdsByRestaurant).ToList();
+            var itemIdInput = input.ItemCountAndIds.Select(x => x.Id).ToList();
+            var itemIdsNotExist = itemIdInput.Except(itemIdsByRestaurant).ToList();
             if(itemIdsNotExist.Count != 0)
             {
                 throw new BusinessException("Danh sách có chứa món ăn không tồn tại");
             }
-            var itemBooks = restaurant.Items.Where(x => input.ItemIds.Contains(x.Id)).ToList();
-            foreach(var itemBook in itemBooks)
+            var itemBooks = restaurant.Items.Where(x => itemIdInput.Contains(x.Id)).ToList();
+
+            var itemAndCounts = new List<ItemAndCount>();
+            var optionAndCounts = new List<OptionAndCount>();
+
+            var optionIds = input.OptionCountAndIds.Select(x => x.Id).ToList();
+            foreach (var itemBook in itemBooks)
             {
-                itemBook.OptionGroups = null;
+                var itemAndCount = new ItemAndCount
+                {
+                    Item = itemBook,
+                    Count = input.ItemCountAndIds.FirstOrDefault(x => x.Id == itemBook.Id).Count
+                };
+                itemAndCount.Item.OptionGroups = null;
+
+                itemAndCounts.Add(itemAndCount);
+
                 foreach(var optionGroup in itemBook.OptionGroups)
                 {
-                    optionGroup.Options = null;
-                    var options = optionGroup.Options.Where(x => input.OptionIds.Contains(x.Id)).ToList();
-                    if(options.Count != 0)
+                    var options = optionGroup.Options.Where(x => optionIds.Contains(x.Id)).ToList();
+                    foreach(var option in options)
                     {
-                        itemBook.OptionGroups.Add(optionGroup);
-                        optionGroup.Options.AddRange(options);
+                        var optionAndCount = new OptionAndCount
+                        {
+                            Option = option,
+                            Count = input.OptionCountAndIds.FirstOrDefault(x => x.Id == option.Id).Count
+                        };
+                        optionAndCounts.Add(optionAndCount);
                     }
                 }
             }
+            var user = await _appUserRepository.FindAsync((Guid)_currentUser.Id);
             var userOrder = new UserOder(
                 groupOrderId : input.GroupOrderId,
-                user : _currentUser,
-                items : itemBooks,
-
+                user : user,
+                itemAndCounts : itemAndCounts,
+                totalItem : input.ItemCountAndIds.Sum(x => x.Count),
+                note : input.Note,
+                optionAndCounts : optionAndCounts,
+                totalOption : input.OptionCountAndIds.Sum(x => x.Count)
                 );
             
-
+            await _userOrderRepository.InsertAsync(userOrder);
         }
 
         public Task DeleteAsync(string id)
