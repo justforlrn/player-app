@@ -12,25 +12,9 @@ export class GroupService {
   constructor(private _coreCommonService: CoreCommonService) {
     this.currentUser = this._coreCommonService.getUserData();
   }
-  public getOrderGroupList(): Observable<Group[]> {
-    const listGroup: Group[] = [];
-    var g1: Group = {
-      Id: '4',
-      Name: 'Hồ Đắc Di',
-      Members: [this.currentUser],
-    };
-    var g2: Group = {
-      Id: '2',
-      Name: 'Cơm Gà',
-      Members: [this.currentUser],
-    };
-    listGroup.push(g1);
-    listGroup.push(g2);
-    var ob = new Observable<Group[]>(obs => {
-      obs.next(listGroup);
-    });
-    return ob;
-  }
+  // public getGroupOrderList(groupId: string): Observable<Group[]> {
+  //   const listOrderGroup: Group[] = [];
+  // }
 
   public onSearchRestaurant(name: any) {
     const url = `${this.apiUrl}/restaurants/get-list-by-name?content=${name}`;

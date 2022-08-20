@@ -63,7 +63,7 @@ namespace Player.Groups
 
         public async Task<List<GroupDto>> GetByCurrentAsync()
         {
-            var groups = await _groupRepository.GetByUserAsync((Guid)_currentUser.Id);
+            var groups = await _groupRepository.GetByUserAsync(_currentUser.Id);
             return ObjectMapper.Map<List<Group>, List<GroupDto>>(groups);
         }
 

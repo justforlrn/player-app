@@ -1,4 +1,5 @@
-﻿using Player.MongoDB;
+﻿using MongoDB.Driver;
+using Player.MongoDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,14 @@ namespace Player.GroupOrders
     {
         public GroupOrderRepository(IMongoDbContextProvider<PlayerMongoDbContext> dbContextProvider) : base(dbContextProvider)
         {
+        }
+
+        public async Task<List<GroupOrder>> GetListGroupOrderByGroupId(string groupId)
+		{
+            var collection = await GetCollectionAsync();
+            var filter = Builders<GroupOrder>.Filter.Eq(go => go.GroupId, groupId);
+            var groupOrders = await collection.FindAsync(filter);
+            return await groupOrders.ToListAsync();
         }
     }
 }

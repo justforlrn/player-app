@@ -12,7 +12,7 @@ import { GroupDisplayDashboardService } from '../../services/group-display-dashb
 })
 export class GroupDisplayDashboardComponent {
   //empty = false;
-  joinedGroupList: Group[]
+  joinedGroupList: Group[] = []
   constructor(private _groupDisplayDashboardService: GroupDisplayDashboardService, private _router: Router,
     private modalService: TDSModalService) {
   }
@@ -24,6 +24,7 @@ export class GroupDisplayDashboardComponent {
   }
   getList(): void {
     this._groupDisplayDashboardService.getJoinedGroupList().subscribe((res: Group[]) => {
+      debugger
       this.joinedGroupList = res;
     })
   }

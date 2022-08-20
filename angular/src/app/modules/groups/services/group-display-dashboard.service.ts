@@ -7,7 +7,7 @@ import { Group } from '../models/group.model';
 
 @Injectable()
 export class GroupDisplayDashboardService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apis.default.url;
   private currentUser!: UserData;
   constructor(private _coreCommonService: CoreCommonService) {
     this.currentUser = this._coreCommonService.getUserData();

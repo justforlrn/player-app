@@ -24,10 +24,10 @@ namespace Player.Controllers.AppControllers
         {
             return await _restaurantService.GrabCrawlerAsync(url);
         }
-        [HttpGet("get-list-by-name")]
-        public async Task<List<RestaurantDto>> GetRestaurantsByNameAsync(string content)
-        {
-            return await _restaurantService.GetRestaurantsByNameAsync(content);
-        }
-    }
+		[HttpGet("get-list-by-name")]
+		public async Task<List<RestaurantDto>> GetRestaurantsByNameAsync(string content)
+		{
+			return await _restaurantService.GetRestaurantsAsync(content);
+		}
+	}
 }

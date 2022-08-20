@@ -28,5 +28,10 @@ namespace Player.GroupOrders
             await _groupOrderRepository.InsertAsync(groupOrder);
             return ObjectMapper.Map<GroupOrder, GroupOrderDto>(groupOrder);
         }
+        public async Task<List<GroupOrderDto>> GetListGroupOrderByGroupId(string groupId)
+		{
+            var groupOrders = await _groupOrderRepository.GetListGroupOrderByGroupId(groupId);
+            return ObjectMapper.Map<List<GroupOrder>, List<GroupOrderDto>>(groupOrders);
+        }
     }
 }

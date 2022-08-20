@@ -21,11 +21,12 @@ export class GroupListComponent {
       this.groupId = this._activatedRoute.snapshot.params["id"]
       this.getList();
     }
-    
+
   getList(): void {
-    this._groupService.getOrderGroupList().subscribe((res: Group[]) => {
-      this.orderGroupList = res;
-    })
+    // this._groupService.getGroupOrderList().subscribe((res: Group[]) => {
+    //   debugger
+    //   this.orderGroupList = res;
+    // })
   }
 
   onClickItem(id: string) {
