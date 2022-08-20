@@ -7,7 +7,8 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Player.UserOrders
 {
-    public interface IUserOderRepository : IRepository<UserOder, string>
+    public interface IUserOderRepository : IRepository<UserOrder, string>
     {
+        Task<List<UserOrder>> GetByGroupOrderAsync(string groupOrderId);
     }
 }

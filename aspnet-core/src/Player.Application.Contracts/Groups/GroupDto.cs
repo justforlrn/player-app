@@ -14,6 +14,6 @@ namespace Player.Groups
         public bool IsPublic { get; set; }
         public string SecretKey { get; set; }
         public List<GroupOrderDto> GroupOrders { set; get; }
-        public List<AppUserDto> Members { set; get; }
+        public List<IdentityUserDto> Members { set; get; }
     }
 }
