@@ -5,6 +5,12 @@
                 <input tdsInput autocomplete="off" placeholder="Tên nhóm" formControlName="name" [required]='true' />
             </tds-form-field>
             <tds-checkbox formControlName="isPublic">Công khai</tds-checkbox>
+            <tds-form-field>
+                <tds-select valueField="email" textField="combineName" placeholder='Thêm thành viên'
+                    formControlName="emails" [data]="userList" mode="multiple" [allowSearch]="true">
+                </tds-select>
+                <tds-error>Validation message text</tds-error>
+            </tds-form-field>
         </form>
     </div>
 </div>

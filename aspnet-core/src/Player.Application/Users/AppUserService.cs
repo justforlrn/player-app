@@ -70,9 +70,10 @@ namespace Player.Users
             //return result;
         }
 
-        public async Task GetUserMinimizedList()
+        public async Task<List<UserMinimizedDto>> GetUserMinimizedList()
         {
-
+            var users = await _identityUserRepository.GetListAsync();
+            return ObjectMapper.Map<List<IdentityUser>, List<UserMinimizedDto>>(users);
         }
     }
 }

@@ -86,7 +86,7 @@ namespace Player.UserOrders
                     Count = itemCountAndIds.FirstOrDefault(x => x.Id == itemBook.Id).Count
                 };
                 itemAndCounts.Add(itemAndCount);
-                if(optionCountAndIds != null && optionCountAndIds?.Count != 0)
+                if(optionCountAndIds?.Count != 0)
                 {
                     var optionInputIds = optionCountAndIds.Select(x => x.Id).ToList();
                     optionInputIds.Distinct();

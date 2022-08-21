@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TDSMessageService } from 'tds-ui/message';
 import { TDSModalService } from 'tds-ui/modal';
 import { NewGroupComponent } from '../../components/new-group.component';
 import { CreateGroup } from '../../models/create-group.model';
@@ -17,7 +18,8 @@ export class GroupDisplayDashboardComponent {
   constructor(
     private _groupDisplayDashboardService: GroupDisplayDashboardService,
     private _router: Router,
-    private modalService: TDSModalService
+    private modalService: TDSModalService,
+    private _messageService: TDSMessageService
   ) {}
   ngOnInit(): void {
     this.getList();
@@ -42,9 +44,12 @@ export class GroupDisplayDashboardComponent {
         name: result.name,
         description: '',
         isPublic: false,
-        emails: [],
+        emails: result.emails,
       };
-      this._groupDisplayDashboardService.createGroup(subData).subscribe();
+      debugger;
+      this._groupDisplayDashboardService.createGroup(subData).subscribe(() => {
+        this._messageService.success('Tạo group thành công');
+      });
       // this.getCustomer();
     });
   }

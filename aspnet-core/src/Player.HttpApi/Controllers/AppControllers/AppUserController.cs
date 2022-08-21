@@ -24,5 +24,10 @@ namespace Player.Controllers.AppControllers
         {
             return await _appUserService.Login(input);
         }
+        [HttpGet("get-user-minimized-list")]
+        public async Task<List<UserMinimizedDto>> GetUserMinimizedList()
+        {
+            return await _appUserService.GetUserMinimizedList();
+        }
     }
 }
