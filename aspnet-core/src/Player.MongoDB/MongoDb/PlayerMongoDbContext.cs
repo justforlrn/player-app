@@ -22,7 +22,7 @@ public class PlayerMongoDbContext : AbpMongoDbContext
     //public IMongoCollection<Item> Items => Collection<Item>();
     //public IMongoCollection<Option> Options => Collection<Option>();
     public IMongoCollection<Restaurant> Restaurants => Collection<Restaurant>();
-    public IMongoCollection<UserOder> UserOders => Collection<UserOder>();
+    public IMongoCollection<UserOrder> UserOders => Collection<UserOrder>();
 
 
     /* Add mongo collections here. Example:
@@ -57,7 +57,7 @@ public class PlayerMongoDbContext : AbpMongoDbContext
         {
             b.CollectionName = "Restaurants";
         });
-        modelBuilder.Entity<UserOder>(b =>
+        modelBuilder.Entity<UserOrder>(b =>
         {
             b.CollectionName = "UserOders";
         });

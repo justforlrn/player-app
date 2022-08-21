@@ -12,10 +12,13 @@ namespace Player.UserOrders
 {
     public class UserOrderDto
     {
-        public string GroupOrderId{ get; set; }
-        public IdentityUserDto IdentityUser { get; set; }
-        public List<Item> Items { get; set; }
-        public int Count { get; set; }
+        public string Id { get; set; }
+        public string GroupOrderId { get; set; }
+        public IdentityUserDto UserDto { get; set; }
+        public List<ItemAndCount> ItemAndCounts { get; set; }
+        public int TotalItem { get; set; }
         public string Note { get; set; }
+        public List<OptionAndCount> OptionAndCounts { get; set; }
+        public int TotalOption { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace Player.GroupOrders
             FromTime = fromTime;
             ToTime = toTime;
             Discount = discount;
-            UserOders = new List<UserOder>();
+            UserOders = new List<UserOrder>();
         }
     }
 }

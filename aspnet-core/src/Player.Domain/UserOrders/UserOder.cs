@@ -12,7 +12,7 @@ using Volo.Abp.Identity;
 
 namespace Player.UserOrders
 {
-    public class UserOder : FullAuditedAggregateRoot<string>
+    public class UserOrder : FullAuditedAggregateRoot<string>
     {
         public string GroupOrderId { get; set; }
         public IdentityUser User { get; set; }
@@ -22,8 +22,9 @@ namespace Player.UserOrders
         public List<OptionAndCount> OptionAndCounts { get; set; }
         public int TotalOption { get; set; }
 
-        public UserOder(string groupOrderId, IdentityUser user, List<ItemAndCount> itemAndCounts, int totalItem, string note, List<OptionAndCount> optionAndCounts, int totalOption)
+        public UserOrder(string id, string groupOrderId, IdentityUser user, List<ItemAndCount> itemAndCounts, int totalItem, string note, List<OptionAndCount> optionAndCounts, int totalOption)
         {
+            Id = id;
             GroupOrderId = groupOrderId;
             User = user;
             ItemAndCounts = itemAndCounts;
