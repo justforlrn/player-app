@@ -7,6 +7,7 @@ using Player.Options;
 using Player.Restaurants;
 using Player.Users;
 using Volo.Abp.Identity;
+using IdentityUserDto = Player.Users.IdentityUserDto;
 
 namespace Player.UserOrders
 {

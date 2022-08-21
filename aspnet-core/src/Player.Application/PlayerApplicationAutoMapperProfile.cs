@@ -7,6 +7,7 @@ using Player.Groups;
 using Player.Users;
 using Player.UserOrders;
 using Volo.Abp.Identity;
+using IdentityUserDto = Player.Users.IdentityUserDto;
 
 namespace Player;
 
@@ -21,9 +22,8 @@ public class PlayerApplicationAutoMapperProfile : Profile
         CreateMap<RestaurantDto, Restaurant>();
         CreateMap<GroupOrder, GroupOrderDto>();
         CreateMap<Group, GroupDto>();
-        CreateMap<IdentityUser, Users.IdentityUserDto>();   
+        CreateMap<IdentityUser, IdentityUserDto>();   
         CreateMap<RestaurantDto, RestaurantMinimizeDto>();
         CreateMap<Restaurant, RestaurantMinimizeDto>();
-        CreateMap<IdentityUser, IdentityUserDto>();
     }
 }

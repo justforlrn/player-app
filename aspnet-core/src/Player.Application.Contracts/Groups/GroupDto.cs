@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Identity;
+using IdentityUserDto = Player.Users.IdentityUserDto;
 
 namespace Player.Groups
 {
