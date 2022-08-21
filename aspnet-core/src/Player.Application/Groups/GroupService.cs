@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Guids;
+using Volo.Abp.Identity;
 using Volo.Abp.Users;
 
 namespace Player.Groups
@@ -13,16 +14,16 @@ namespace Player.Groups
     [RemoteService(IsEnabled = false)]
     public class GroupService : PlayerAppService, IGroupService
     {
-        private readonly IAppUserRepository _appUserRepository;
+        private readonly IIdentityUserRepository _identityUserRepository;
         private readonly IGuidGenerator _guidGenerator;
         private readonly IGroupRepository _groupRepository;
         private readonly ICurrentUser _currentUser;
-        public GroupService(IAppUserRepository appUserRepository,
+        public GroupService(IIdentityUserRepository identityUserRepository,
             IGuidGenerator guidGenerator,
             IGroupRepository groupRepository,
             ICurrentUser currentUser)
         {
-            _appUserRepository = appUserRepository;
+            _identityUserRepository = identityUserRepository;
             _guidGenerator = guidGenerator;
             _groupRepository = groupRepository;
             _currentUser = currentUser;
@@ -33,12 +34,20 @@ namespace Player.Groups
             input.Emails ??= new List<string> { };
             input.Emails.Add((string)_currentUser.Email);
             input.Emails.Distinct();
-            var isUserIdsExist = await _appUserRepository.IsUserExistByMailAsync(input.Emails);
-            if(isUserIdsExist)
+
+            var userList = new List<IdentityUser>();
+            foreach (var email in input.Emails)
             {
-                throw new BusinessException("Có userId không tồn tại");
+                //var filter = Builders<IdentityUser>.Filter.Eq(x => x.Email, email);
+                var user = await _identityUserRepository.FindByNormalizedEmailAsync(email.ToUpper());
+                if (user == null)
+                {
+                    throw new BusinessException("Có userId không tồn tại");
+                }
+                userList.Add(user);
             }
-            var users = await _appUserRepository.GetByEmailsAsync(input.Emails);
+
+            //var users = await _identityUserRepository.GetByEmailsAsync(input.Emails);
             
             var group = new Group(
                 id: _guidGenerator.Create().ToString(),
@@ -46,7 +55,7 @@ namespace Player.Groups
                 description: input.Description,
                 isPublic: input.IsPublic,
                 secretKey: input.IsPublic ? "" : _guidGenerator.Create().ToString(),
-                members: users
+                members: userList
                 );
             await _groupRepository.InsertAsync(group);
         }
@@ -63,7 +72,7 @@ namespace Player.Groups
 
         public async Task<List<GroupDto>> GetByCurrentAsync()
         {
-            var groups = await _groupRepository.GetByUserAsync((Guid)_currentUser.Id);
+            var groups = await _groupRepository.GetByUserAsync(_currentUser.Id);
             return ObjectMapper.Map<List<Group>, List<GroupDto>>(groups);
         }
 
@@ -94,8 +103,19 @@ namespace Player.Groups
                     group.SecretKey = _guidGenerator.Create().ToString();
                 }
             }
-            var newMembers = await _appUserRepository.GetByEmailsAsync(input.Emails);
-            group.Members = newMembers;
+            var userList = new List<IdentityUser>();
+            foreach (var email in input.Emails)
+            {
+                //var filter = Builders<IdentityUser>.Filter.Eq(x => x.Email, email);
+                var user = await _identityUserRepository.FindByNormalizedEmailAsync(email.ToUpper());
+                if (user == null)
+                {
+                    throw new BusinessException("Có userId không tồn tại");
+                }
+                userList.Add(user);
+            }
+            //var newMembers = await _identityUserRepository.GetByEmailsAsync(input.Emails);
+            group.Members = userList;
             await _groupRepository.UpdateAsync(group);
         }
     }

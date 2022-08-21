@@ -9,5 +9,6 @@ namespace Player.GroupOrders
 {
     public interface IGroupOrderRepository : IRepository<GroupOrder, string>
     {
+        Task<List<GroupOrder>> GetListGroupOrderByGroupId(string groupId);
     }
 }

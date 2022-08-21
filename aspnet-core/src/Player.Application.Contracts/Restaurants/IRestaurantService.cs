@@ -12,6 +12,7 @@ namespace Player.Restaurants
     {
         Task<RestaurantDto> GrabCrawlerAsync(string url);
         Task<RestaurantDto> CreateAsync(RestaurantDto input);
-        Task<List<RestaurantDto>> GetRestaurantsByNameAsync(string content);
+        Task<List<RestaurantMinimizeDto>> GetMinimizedListAsync(string content);
+        Task<RestaurantDto> Cache_Get(string Id);
     }
 }

@@ -16,17 +16,6 @@ export class CoreCommonService {
 
   constructor(private http: HttpClient, private cache: CoreCacheService) {}
 
-  get options() {
-    // eslint-disable-next-line prefer-const
-    let _options: any = {};
-    _options.headers = new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8',
-      Authorization: `Bearer ${this.getUserData().accessToken}`,
-    });
-    return _options;
-  }
-
-
   public getLocalStorage<T>(name: string): T {
     var json = localStorage.getItem(name);
     return JSON.parse(json) as T;
@@ -59,7 +48,7 @@ export class CoreCommonService {
     pmethod: CoreApiMethodType,
     URL: string,
     data: unknown,
-    headers?: HttpHeaders,
+    //headers?: HttpHeaders,
     body: TDSSafeAny = null,
     withCredent: boolean = false,
     observe: any = 'body',
@@ -67,7 +56,7 @@ export class CoreCommonService {
   ): Observable<T> {
     let that = this;
 
-    if (!TDSHelperObject.hasValue(headers)) headers = that.getHeaderJSon();
+    //if (!TDSHelperObject.hasValue(headers)) headers = that.getHeaderJSon();
 
     let options: {
       headers?: HttpHeaders;
@@ -78,32 +67,36 @@ export class CoreCommonService {
       responseType?: TDSSafeAny;
       withCredentials?: boolean;
     } = {
-      headers: headers,
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        Authorization: `Bearer ${this.getUserData()?.accessToken}`,
+      }),
       withCredentials: withCredent,
       observe: observe,
       responseType: responseType,
       body: body,
     };
+    console.log(options);
     let result: Observable<T>;
     switch (pmethod) {
       case CoreApiMethodType.get:
         options.params = data;
-        result = that.http.get<T>(URL, options ?? this.options);
+        result = that.http.get<T>(URL, options);
         break;
       case CoreApiMethodType.post:
         options.params = null;
-        result = this.http.post<T>(URL, data, options ?? this.options);
+        result = this.http.post<T>(URL, data, options);
         break;
       case CoreApiMethodType.put:
-        result = this.http.put<T>(URL, data, options ?? this.options);
+        result = this.http.put<T>(URL, data, options);
         break;
       case CoreApiMethodType.delete:
         options.params = data;
         options.body = body;
-        result = this.http.delete<T>(URL, options ?? this.options);
+        result = this.http.delete<T>(URL, options);
         break;
       default:
-        result = this.http.post<T>(URL, JSON.stringify(data), options ?? this.options);
+        result = this.http.post<T>(URL, JSON.stringify(data), options);
         break;
     }
     return result;

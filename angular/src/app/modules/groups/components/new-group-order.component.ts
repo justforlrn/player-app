@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { TDSAutocompleteTriggerDirective, TDSAutocompleteComponent } from 'tds-ui/auto-complete';
 import { TDSModalRef } from 'tds-ui/modal';
+import { RestaurantMinimized } from '../../restaurants/models/restaurant-minimized.model';
 import { GroupService } from '../services/group.service';
 
 @Component({
@@ -18,8 +19,8 @@ export class NewGroupOrderComponent {
 
   //options: any[] = [];
 
-  @Input() groupId!: string
-  filteredOptions: any[] = [];
+  @Input() groupId!: string;
+  restaurantMinimizedList: RestaurantMinimized[] = [];
   selectedRestaurant: any;
   restaurantList: any[];
   constructor(
@@ -39,10 +40,12 @@ export class NewGroupOrderComponent {
 
   onSearch(event: any) {
     console.log(event);
-    this._groupService.onSearchRestaurant(event.value).subscribe(res => {
-      console.log(res);
-      this.filteredOptions = res;
-    });
+    if (event.value != null && event.value != '') {
+      this._groupService.onSearchRestaurant(event.value).subscribe((res: RestaurantMinimized[]) => {
+        console.log(res);
+        this.restaurantMinimizedList = res;
+      });
+    }
   }
 
   onClearAll(event: MouseEvent) {
@@ -57,26 +60,14 @@ export class NewGroupOrderComponent {
     this.onSubmit();
   }
   onSubmit() {
-    // if (typeof this.selectedRestaurant === 'string') {
-    //   this._groupService.onGetRestaurant(this.selectedRestaurant).subscribe(res => {
-    //       this._router.navigate([this._router.url, res.id])
-    //   });
-    // } else {
-      const data = {
-        groupId: this.groupId,
-        restaurantId: this.selectedRestaurant.id
-      }
-      debugger
-      this._groupService.createGroupOrder(data).subscribe((res) => {
-        debugger
-        console.log(res)
-        this._router.navigate([this._router.url, res.id])
-      })
-    // }
-
-    // console.log(typeof this.selectedRestaurant);
-    // if (!this.form.invalid) {
-    //     this.modal.destroy(this.form.value);
-    // }
+    const data = {
+      groupId: this.groupId,
+      restaurantId: this.selectedRestaurant.id,
+    };
+    this._groupService.createGroupOrder(data).subscribe(res => {
+      debugger;
+      console.log(res);
+      this.modal.destroy(res.id);
+    });
   }
 }

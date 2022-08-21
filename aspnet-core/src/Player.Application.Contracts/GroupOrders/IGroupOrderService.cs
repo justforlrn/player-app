@@ -8,5 +8,6 @@ namespace Player.GroupOrders
     public interface IGroupOrderService
     {
         Task<GroupOrderDto> CreateOrderGroupAsync(CreateGroupOrderDto input);
+        Task<List<GroupOrderDto>> GetListGroupOrderByGroupId(string groupId);
     }
 }

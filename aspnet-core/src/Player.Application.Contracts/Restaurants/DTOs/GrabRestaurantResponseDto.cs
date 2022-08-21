@@ -206,6 +206,7 @@ namespace Player.Restaurants.DTOs
 
     public class GrabRestaurantData
     {
+        public string url { get; set; }
         public string ID { get; set; }
         public string name { get; set; }
         public string cuisine { get; set; }

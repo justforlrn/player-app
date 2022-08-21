@@ -17,9 +17,15 @@ import { TDSSelectModule } from 'tds-ui/select';
 import { NewGroupOrderComponent } from './components/new-group-order.component';
 import { TDSAutocompleteModule } from 'tds-ui/auto-complete';
 import { TDSImageModule } from 'tds-ui/image';
+import { TDSCheckBoxModule } from 'tds-ui/tds-checkbox';
 
 @NgModule({
-  declarations: [GroupDisplayDashboardComponent, GroupComponent, NewGroupComponent, NewGroupOrderComponent],
+  declarations: [
+    GroupDisplayDashboardComponent,
+    GroupComponent,
+    NewGroupComponent,
+    NewGroupOrderComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -36,7 +42,8 @@ import { TDSImageModule } from 'tds-ui/image';
     TDSSelectModule,
     FormsModule,
     TDSAutocompleteModule,
-    TDSImageModule 
-  ]
+    TDSImageModule,
+    TDSCheckBoxModule,
+  ],
 })
 export class GroupModule {}

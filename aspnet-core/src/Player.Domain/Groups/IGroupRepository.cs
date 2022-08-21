@@ -9,6 +9,6 @@ namespace Player.Groups
 {
     public interface IGroupRepository : IRepository<Group, string>
     {
-        Task<List<Group>> GetByUserAsync(Guid userId);
+        Task<List<Group>> GetByUserAsync(Guid? userId);
     }
 }

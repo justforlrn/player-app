@@ -29,6 +29,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.Caching.StackExchangeRedis;
 
 namespace Player;
 
@@ -44,7 +45,8 @@ namespace Player;
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpSwashbuckleModule)
 )]
-public class PlayerHttpApiHostModule : AbpModule
+[DependsOn(typeof(AbpCachingStackExchangeRedisModule))]
+    public class PlayerHttpApiHostModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

@@ -12,6 +12,7 @@ namespace Player.Restaurants
     public interface IRestaurantRepository : IRepository<Restaurant, string>
     {
         Task<List<Restaurant>> GetRestaurantsByNameAndIdAsync(string content);
+        Task<Restaurant> GetByIdAsync(string id);
         //Task<bool> IsItemIdsExistAsync(List<string> itemIds);
         //Task<List<Item>> GetItemsByIdsAsync(List<string> ids);
         //Task<bool> IsOptionsIdsExistAsync(List<string> itemIds);

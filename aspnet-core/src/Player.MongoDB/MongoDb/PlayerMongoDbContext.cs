@@ -7,6 +7,7 @@ using Player.Restaurants;
 using Player.UserOrders;
 using Player.Users;
 using Volo.Abp.Data;
+using Volo.Abp.Identity;
 using Volo.Abp.MongoDB;
 
 namespace Player.MongoDB;
@@ -15,7 +16,7 @@ namespace Player.MongoDB;
 public class PlayerMongoDbContext : AbpMongoDbContext
 {
 
-    public IMongoCollection<AppUser> AppUsers => Collection<AppUser>();
+    public IMongoCollection<IdentityUser> IdentityUsers => Collection<IdentityUser>();
     public IMongoCollection<Group> Groups => Collection<Group>();
     public IMongoCollection<GroupOrder> GroupOrders => Collection<GroupOrder>();
     //public IMongoCollection<Item> Items => Collection<Item>();
@@ -31,10 +32,10 @@ public class PlayerMongoDbContext : AbpMongoDbContext
     protected override void CreateModel(IMongoModelBuilder modelBuilder)
     {
         base.CreateModel(modelBuilder);
-        modelBuilder.Entity<AppUser>(b =>
-        {
-            b.CollectionName = "AbpUsers"; //Sets the collection name
-        });
+        //modelBuilder.Entity<AppUser>(b =>
+        //{
+        //    b.CollectionName = "AbpUsers"; //Sets the collection name
+        //});
 
         modelBuilder.Entity<Group>(b =>
         {

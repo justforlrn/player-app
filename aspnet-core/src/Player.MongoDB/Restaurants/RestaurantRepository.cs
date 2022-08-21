@@ -22,6 +22,13 @@ namespace Player.Restaurants
             var collection = await GetCollectionAsync();
             var result = await collection.FindAsync(e => e.Name.Contains(content) || e.Id == content);
             return await result.ToListAsync();
-        }  
-    }
+        }
+
+        public async Task<Restaurant> GetByIdAsync(string id)
+        {
+            var collection = await GetCollectionAsync();
+            var result = await collection.FindAsync(e => e.Id == id);
+			return await result.FirstOrDefaultAsync();
+		}
+	}
 }

@@ -69,5 +69,10 @@ namespace Player.Users
             //}
             //return result;
         }
+
+        public async Task GetUserMinimizedList()
+        {
+
+        }
     }
 }

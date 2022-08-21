@@ -17,7 +17,7 @@ namespace Player.Groups
         {
         }
 
-        public async Task<List<Group>> GetByUserAsync(Guid userId)
+        public async Task<List<Group>> GetByUserAsync(Guid? userId)
         {
             var collection = await GetCollectionAsync();
             var filter1 = Builders<Group>.Filter.ElemMatch(x => x.Members, e => e.Id == userId);

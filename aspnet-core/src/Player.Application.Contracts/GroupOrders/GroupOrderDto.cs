@@ -1,4 +1,5 @@
-﻿using Player.UserOrders;
+﻿using Player.Restaurants;
+using Player.UserOrders;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +11,7 @@ namespace Player.GroupOrders
         public string Id { get; set; }
         public string GroupId { get; set; }
         public string RestaurantId { get; set; }
+        public RestaurantDto Restaurant { get; set; }
         public GroupOrderStatus Status { set; get; }
         public string FromTime { get; set; }
         public string ToTime { get; set; }
