@@ -16,7 +16,6 @@ export class CoreCommonService {
 
   constructor(private http: HttpClient, private cache: CoreCacheService) {}
 
-
   public getLocalStorage<T>(name: string): T {
     var json = localStorage.getItem(name);
     return JSON.parse(json) as T;
@@ -49,7 +48,7 @@ export class CoreCommonService {
     pmethod: CoreApiMethodType,
     URL: string,
     data: unknown,
-    headers?: HttpHeaders,
+    //headers?: HttpHeaders,
     body: TDSSafeAny = null,
     withCredent: boolean = false,
     observe: any = 'body',
@@ -57,7 +56,7 @@ export class CoreCommonService {
   ): Observable<T> {
     let that = this;
 
-    if (!TDSHelperObject.hasValue(headers)) headers = that.getHeaderJSon();
+    //if (!TDSHelperObject.hasValue(headers)) headers = that.getHeaderJSon();
 
     let options: {
       headers?: HttpHeaders;
@@ -68,15 +67,16 @@ export class CoreCommonService {
       responseType?: TDSSafeAny;
       withCredentials?: boolean;
     } = {
-      headers: headers ?? new HttpHeaders({
+      headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',
-        Authorization: `Bearer ${this.getUserData().accessToken}`,
+        Authorization: `Bearer ${this.getUserData()?.accessToken}`,
       }),
       withCredentials: withCredent,
       observe: observe,
       responseType: responseType,
       body: body,
     };
+    console.log(options);
     let result: Observable<T>;
     switch (pmethod) {
       case CoreApiMethodType.get:

@@ -3,6 +3,7 @@ using Player.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Volo.Abp.Identity;
 
 namespace Player.Groups
 {
@@ -14,6 +15,6 @@ namespace Player.Groups
         public bool IsPublic { get; set; }
         public string SecretKey { get; set; }
         public List<GroupOrderDto> GroupOrders { set; get; }
-        public List<AppUserDto> Members { set; get; }
+        public List<IdentityUserDto> Members { set; get; }
     }
 }

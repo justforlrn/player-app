@@ -26,9 +26,9 @@ namespace Player.Controllers.AppControllers
         }
 
         [HttpPost]
-        public async Task CreateAsync([FromBody]GroupCreateDto input)
+        public async Task CreateAsync([FromBody] GroupCreateDto input)
         {
-           await _groupService.CreateAsync(input);
+            await _groupService.CreateAsync(input);
         }
 
         [HttpPut("{id}")]
@@ -42,8 +42,6 @@ namespace Player.Controllers.AppControllers
         {
             await _groupService.DeleteAsync(id);
         }
-
-
     }
    
 }

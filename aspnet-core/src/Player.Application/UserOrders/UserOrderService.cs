@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp;
+using Volo.Abp.Identity;
 using Volo.Abp.Users;
 
 namespace Player.UserOrders
@@ -14,13 +15,13 @@ namespace Player.UserOrders
     {
         private readonly IRestaurantRepository _restaurantRepository;
         private readonly ICurrentUser _currentUser;
-        private readonly IAppUserRepository _appUserRepository;
+        private readonly IIdentityUserRepository _appUserRepository;
         private readonly IUserOderRepository _userOrderRepository;
 
         public UserOrderService(
             IRestaurantRepository restaurantRepository,
             ICurrentUser currentUser,
-            IAppUserRepository appUserRepository,
+            IIdentityUserRepository appUserRepository,
             IUserOderRepository userOrderRepository
             )
         {

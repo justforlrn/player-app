@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-namespace Player.Users
-{
-    public class AppUserDto
-    {
-    }
-}
+//namespace Player.Users
+//{
+//    public class AppUserDto
+//    {
+//        public string Name { get; set; }
+//        public string Email { get; set; }
+//    }
+//}

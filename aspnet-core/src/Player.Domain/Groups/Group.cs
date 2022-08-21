@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.Identity;
 
 namespace Player.Groups
 {
@@ -16,13 +17,13 @@ namespace Player.Groups
         public bool IsPublic { get; set; }
         public string SecretKey { get; set; }
         public List<string> GroupOrderIds { set; get; }
-        public List<AppUser> Members { set; get; }
+        public List<IdentityUser> Members { set; get; }
 
         protected Group()
         {
 
         }
-        public Group(string id, string name, string description, bool isPublic, string secretKey, List<AppUser> members) : base(id)
+        public Group(string id, string name, string description, bool isPublic, string secretKey, List<IdentityUser> members) : base(id)
         {
             Name = name;
             Description = description;

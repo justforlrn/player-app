@@ -20,5 +20,10 @@ namespace Player.Controllers.AppControllers
         {
             return await _groupOrderService.CreateOrderGroupAsync(input);
         }
+        [HttpGet]
+        public async Task<List<GroupOrderDto>> GetListGroupOrderByGroupId(string groupId)
+        {
+            return await _groupOrderService.GetListGroupOrderByGroupId(groupId);
+        }
     }
 }

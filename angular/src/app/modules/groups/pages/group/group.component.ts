@@ -2,35 +2,39 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TDSModalService } from 'tds-ui/modal';
 import { NewGroupOrderComponent } from '../../components/new-group-order.component';
+import { GroupOrder } from '../../models/group-order.model';
 import { Group } from '../../models/group.model';
 import { GroupService } from '../../services/group.service';
 
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
-  providers: [GroupService]
+  providers: [GroupService],
 })
 export class GroupListComponent {
   empty = false;
-  orderGroupList: Group[] = [];
-  constructor(private _groupService: GroupService, private _router: Router,
+  orderGroupList: GroupOrder[] = [];
+  constructor(
+    private _groupService: GroupService,
+    private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    private modalService: TDSModalService) {}
-    groupId: string;
-    ngOnInit(): void {
-      this.groupId = this._activatedRoute.snapshot.params["id"]
-      this.getList();
-    }
+    private modalService: TDSModalService
+  ) {}
+  groupId: string;
+  ngOnInit(): void {
+    this.groupId = this._activatedRoute.snapshot.params['id'];
+    this.getList();
+  }
 
   getList(): void {
-    // this._groupService.getGroupOrderList().subscribe((res: Group[]) => {
-    //   debugger
-    //   this.orderGroupList = res;
-    // })
+    this._groupService.getGroupOrderList(this.groupId).subscribe((res: GroupOrder[]) => {
+      debugger;
+      this.orderGroupList = res;
+    });
   }
 
   onClickItem(id: string) {
-    this._router.navigate([this._router.url, id])
+    this._router.navigate([this._router.url, id]);
   }
 
   onClickCreateItem() {
@@ -39,8 +43,11 @@ export class GroupListComponent {
       content: NewGroupOrderComponent,
       size: 'sm',
       componentParams: {
-        groupId: this.groupId
-    }
+        groupId: this.groupId,
+      },
+    });
+    modal.afterClose.subscribe((groupOrderId: string) => {
+      this._router.navigate([this._router.url, groupOrderId]);
     });
   }
 }

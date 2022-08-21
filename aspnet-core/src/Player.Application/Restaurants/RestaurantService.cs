@@ -85,7 +85,7 @@ namespace Player.Restaurants
                     open: restaurantData.openingHours.displayedHours,
                     close: restaurantData.openingHours.displayedHours,
                     imageUrl: restaurantData.menu.categories[0].items[0].images[0],
-                    webUrl: ""
+                    webUrl: restaurantData.url
                 );
             restaurantDto.Items = listItem;
             return restaurantDto;
@@ -131,13 +131,19 @@ namespace Player.Restaurants
             while (statusCode != HttpStatusCode.OK)
             {
                 var get = await client.GetAsync(url);
+                var uri = get.RequestMessage.RequestUri.ToString();
                 statusCode = get.StatusCode;
-                content = await get.Content.ReadAsStringAsync();
+                if(statusCode == HttpStatusCode.OK)
+                {
+                    content = await get.Content.ReadAsStringAsync();
+                    url = uri;
+                }
             }
             var stringContent = content.Split("NEXT_DATA__\" type=\"application/json\">")[1].Split("</script>")[0];
             var parseContent = JsonConvert.DeserializeObject<GrabData>(stringContent);
             var entity = parseContent.props.initialReduxState.pageRestaurantDetail.entities;
             var restaurantData = (((Newtonsoft.Json.Linq.JContainer)(((Newtonsoft.Json.Linq.JContainer)entity).First as object)).First).ToObject<GrabRestaurantData>();
+            restaurantData.url = url;
             var handler = GrabDataHandler(restaurantData);
             restaurant = await CreateAsync(handler);
             await Cache_Set(restaurant);
@@ -149,57 +155,28 @@ namespace Player.Restaurants
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
-		public async Task<List<RestaurantDto>> GetRestaurantsAsync(string content)
+		public async Task<List<RestaurantMinimizeDto>> GetMinimizedListAsync(string content)
 		{
+            if(content == null)
+            {
+                throw new UserFriendlyException("Tìm kiếm bị rỗng");
+            }
 			var restaurant = new List<Restaurant>() { };
 			if (content.ToLower().Contains(".grab"))
 			{
 				var splitArr = content.Split("/");
 				var splitedId = splitArr[splitArr.Length - 1];
-                var restaurantDb = await _restaurantRepository.GetByIdAsync(splitedId);
-                var map = ObjectMapper.Map<Restaurant, RestaurantDto>(restaurantDb);
-                await Cache_Set(map);
-                restaurant.Add(restaurantDb);
-				if (restaurant.Count() == 0)
+                var restaurantDb = await Cache_Get(splitedId);
+				if (restaurantDb != null)
 				{
-					return new List<RestaurantDto> { await GrabCrawlerAsync(content) };
+                    return new List<RestaurantMinimizeDto> { ObjectMapper.Map<RestaurantDto, RestaurantMinimizeDto>(restaurantDb) };
 				}
+                var grabData = await GrabCrawlerAsync(content);
+                return new List<RestaurantMinimizeDto> { ObjectMapper.Map<RestaurantDto, RestaurantMinimizeDto>(grabData) };
+            }
 
-				return ObjectMapper.Map<List<Restaurant>, List<RestaurantDto>>(restaurant);
-			}
-
-            var t1 = await _restaurantRepository.GetListAsync();
-            await _cache.SetAsync("restaurant-2", ObjectMapper.Map<Restaurant, RestaurantDto>(t1[0]));
-
-            var redis = ConnectionMultiplexer.Connect(_configuration["Redis:Configuration"]);
-                var host = _configuration["Redis:Configuration"];
-                var port = _configuration["Redis:Port"];
-                var server = redis.GetServer($"{host}:{port}");
-
-			var db = redis.GetDatabase(0);
-
-            var keyList = server.Keys(pattern: "*restaurant*").ToArray();
-            var listTemp = new List<RestaurantDto>();
-            var value = await db.HashGetAsync(keyList[1], "data");
-            var v1 = JsonConvert.DeserializeObject<RestaurantDto>(value);
-            //var y = await xx.StringGetAsync();
-            //var ok = y[0].ToString();
-            //var z = JsonConvert.DeserializeObject<RestaurantDto>(y[0]);
-			//            foreach(var key in x)
-			//{
-			//                var u = await xx.StringGetAsync(key);
-			//            }
-			//            server.
-			//            result.ForEach(async r =>
-			//{
-
-			//            });
-
-			//}
-			restaurant = await _restaurantRepository.GetRestaurantsByNameAndIdAsync(content);
-
-			var result = ObjectMapper.Map<List<Restaurant>, List<RestaurantDto>>(restaurant);
-			return result;
+            restaurant = await _restaurantRepository.GetRestaurantsByNameAndIdAsync(content);
+            return restaurant.Select(e => new RestaurantMinimizeDto { Id = e.Id, Name = e.Name, ImageUrl = e.ImageUrl }).ToList();
         }
 
 		public async Task<RestaurantDto> CreateAsync(RestaurantDto input)

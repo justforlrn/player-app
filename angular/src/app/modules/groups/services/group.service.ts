@@ -17,7 +17,7 @@ export class GroupService {
   // }
 
   public onSearchRestaurant(name: any) {
-    const url = `${this.apiUrl}/restaurants/get-list-by-name?content=${name}`;
+    const url = `${this.apiUrl}/restaurants/get-minimized-list?content=${name}`;
     return this._coreCommonService.connect<any>(CoreApiMethodType.get, url, null);
   }
 
@@ -29,6 +29,11 @@ export class GroupService {
   public createGroupOrder(data: any) {
     var url = `${this.apiUrl}/group-orders`;
     return this._coreCommonService.connect<any>(CoreApiMethodType.post, url, data);
+  }
+
+  public getGroupOrderList(groupId: string) {
+    const url = `${this.apiUrl}/group-orders?groupId=${groupId}`;
+    return this._coreCommonService.connect<any>(CoreApiMethodType.get, url, null);
   }
   // login(body: LoginDto) {
   //   const url = `${this.apiUrl}/auth/login`;
