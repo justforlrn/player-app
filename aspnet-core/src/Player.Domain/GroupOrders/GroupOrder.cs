@@ -19,7 +19,7 @@ namespace Player.GroupOrders
         /// số tiền được giảm từ việc add mã giảm giá
         /// </summary>
         public decimal Discount { get; set; }
-        public List<UserOder> UserOders { set; get; }
+        public List<UserOrder> UserOders { set; get; }
         public GroupOrder(string id, string groupId, string restaurantId, GroupOrderStatus status, string fromTime, string toTime, decimal discount): base(id)
         {
             Id = id;
@@ -29,7 +29,7 @@ namespace Player.GroupOrders
             FromTime = fromTime;
             ToTime = toTime;
             Discount = discount;
-            UserOders = new List<UserOder>();
+            UserOders = new List<UserOrder>();
         }
     }
 }

@@ -19,10 +19,34 @@ namespace Player.Controllers.AppControllers
             _userOrderService = userOrderService;
         }
 
+        [HttpGet("{id}")]
+        public async Task<UserOrderDto> GetAsync(string id)
+        {
+            return await _userOrderService.GetAsync(id);
+        }
+
+        [HttpGet("group-order/{groupOrderId}")]
+        public async Task<List<UserOrderDto>> GetByGroupOrderAsync(string groupOrderId)
+        {
+            return await _userOrderService.GetByGroupOrderAsync(groupOrderId);
+        }
+
         [HttpPost]
         public async Task CreateAsync([FromBody] UserOrderCreateDto input)
         {
             await _userOrderService.CreateAsync(input);
+        }
+
+        [HttpPut("{id}")]
+        public async Task UpdateAsync([FromBody] UserOrderUpdateDto input, string id)
+        {
+            await _userOrderService.UpdateAsync(input, id);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteAsync(string id)
+        {
+            await _userOrderService.DeleteAsync(id);
         }
     }
 }
