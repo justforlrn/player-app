@@ -9,5 +9,6 @@ namespace Player.Users
     public interface IAppUserService
     {
         Task<LoginResponseDto> Login(LoginDto loginDto);
+        Task<List<UserMinimizedDto>> GetUserMinimizedList();
     }
 }

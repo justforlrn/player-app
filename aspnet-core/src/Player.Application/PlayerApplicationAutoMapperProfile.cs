@@ -25,5 +25,6 @@ public class PlayerApplicationAutoMapperProfile : Profile
         CreateMap<IdentityUser, IdentityUserDto>();   
         CreateMap<RestaurantDto, RestaurantMinimizeDto>();
         CreateMap<Restaurant, RestaurantMinimizeDto>();
+        CreateMap<IdentityUser, UserMinimizedDto>();
     }
 }

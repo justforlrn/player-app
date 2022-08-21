@@ -11,7 +11,7 @@ namespace Player.UserOrders
         public string RestaurantId { get; set; }
         [Required]
         public List<UserOrderIdAndCountDto> ItemCountAndIds { set; get; }
-        public List<UserOrderIdAndCountDto> OptionCountAndIds { set; get; }
+        public List<UserOrderIdAndCountDto> OptionCountAndIds { set; get; } = new List<UserOrderIdAndCountDto>();
         public string Note { get; set; }
     }
 }
