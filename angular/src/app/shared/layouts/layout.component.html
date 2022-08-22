@@ -1,19 +1,40 @@
 <div class="flex h-full w-full flex-col">
-    <div class="flex justify-center items-center border-b-2 border-gray-200">
-        <div class="w-60% {{currentUser ? 'p-2' : 'p-4'}} flex justify-between items-center">
-            <div class="divide-x">
-                <a class="font-bold text-green-600 px-2" [routerLink]="'dashboard'">Home</a>
-                <a class="font-bold text-green-600 px-2" [routerLink]="'groups'">Group</a>
-                <a class="font-bold text-green-600 px-2" [routerLink]="'restaurant'">Restaurant</a>
+    <div class="border-b-2 border-gray-500 bg-yellow-400">
+        <div class="{{currentUser ? 'p-2' : 'p-4'}} flex justify-between items-center">
+            <div class="divide-x pl-8">
+                <a class="font-bold px-2" [routerLink]="'dashboard'"><button tds-button [size]="'lg'"
+                        color="secondary">Home</button></a>
             </div>
-            <div *ngIf="currentUser" class="flex flex-col items-end">
-                <span>Xin chào, {{currentUser.name}}</span>
-                <button tds-button class="font-bold text-red-500" color="secondary" [size]="'sm'"
+            <div *ngIf="currentUser" class="flex flex-col items-end pr-8">
+                <span>Xin chào, <span class="font-semibold">{{currentUser.name}}</span></span>
+                <button tds-button class="font-bold text-red-500" color="red" [size]="'sm'"
                     (click)="off()">Nghỉ</button>
             </div>
         </div>
     </div>
-    <div class="w-full h-full">
-        <router-outlet></router-outlet>
+    <div class="w-full h-full bg-[url('/assets/imgs/bg/beverage-fast-food-with-copy-space.jpg')] bg-cover  bg-center">
+        <div class="w-full h-full backdrop-blur-sm">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>
+
+<!-- <div class="flex h-full w-full flex-col">
+    <div class="border-b-2 border-gray-500 bg-yellow-400">
+        <div class="{{currentUser ? 'p-2' : 'p-4'}} flex justify-between items-center">
+            <div class="divide-x pl-8">
+                <a class="font-bold px-2" [routerLink]="'dashboard'"><button tds-button [size]="'lg'"
+                        color="secondary">Home</button></a>
+            </div>
+            <div *ngIf="currentUser" class="flex flex-col items-end pr-8">
+                <span>Xin chào, <span class="font-semibold">{{currentUser.name}}</span></span>
+                <button tds-button class="font-bold text-red-500" color="red" [size]="'sm'"
+                    (click)="off()">Nghỉ</button>
+            </div>
+        </div>
+    </div>
+    <div class="w-full h-full bg-cover"
+        style="background-image: linear-gradient(rgba(151, 151, 151, 0.1), rgba(138, 138, 138, 0.486)),url('/assets/imgs/bg/beverage-fast-food-with-copy-space.jpg')">
+        <router-outlet></router-outlet>
+    </div>
+</div> -->

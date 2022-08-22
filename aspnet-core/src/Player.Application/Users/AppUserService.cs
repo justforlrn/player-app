@@ -46,18 +46,22 @@ namespace Player.Users
                 new KeyValuePair<string, string>("password", loginDto.Password),
             };
             var response = await client.PostAsync($"{_configuration.GetSection("AuthServer")["Authority"]}/connect/token", new FormUrlEncodedContent(data));
-
-            var jsonRead = await response.Content.ReadAsStringAsync();
-            var connectTokenResponse = JsonConvert.DeserializeObject<ConnectTokenResponse>(jsonRead);
-            var resonse = new LoginResponseDto
+            if (response.IsSuccessStatusCode)
             {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                Sex = user.GetProperty<string>("Sex"),
-                AccessToken = connectTokenResponse.access_token
-            };
-            return resonse;
+                var jsonRead = await response.Content.ReadAsStringAsync();
+                var connectTokenResponse = JsonConvert.DeserializeObject<ConnectTokenResponse>(jsonRead);
+                var resonse = new LoginResponseDto
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Email = user.Email,
+                    Sex = user.GetProperty<string>("Sex"),
+                    AccessToken = connectTokenResponse.access_token
+                };
+                return resonse;
+            }
+            else throw new UserFriendlyException("Sai email hoặc mật khẩu");
+            
             //if (response.IsSuccessStatusCode)
             //{
             //    result.Data = JsonConvert.DeserializeObject<Model>(jsonResponse);

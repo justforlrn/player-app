@@ -8,15 +8,20 @@ import { UserData } from 'src/app/modules/users/models/users/user-data.model';
   templateUrl: './layout.component.html',
 })
 export class LayoutComponent {
-  currentUser: UserData
+  currentUser: UserData;
   constructor(private _router: Router, private _coreCommonService: CoreCommonService) {
     this.currentUser = this._coreCommonService.getUserData();
   }
-  // public isLogged(): boolean {
-  //   return !!this._coreCommonService.getUserData();
-  // }
+
+  ngOnInit() {
+    this._coreCommonService.onUserEmit().subscribe(res => {
+      this.currentUser = res;
+    });
+  }
+
   public off() {
     localStorage.clear();
+    this.currentUser = null;
     this._router.navigateByUrl('/users/login');
   }
 }

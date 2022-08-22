@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { CoreApiCacheDTO, CoreAPIDTO, CoreDictionary } from '../dto';
@@ -13,6 +13,7 @@ import { UserData } from 'src/app/modules/users/models/users/user-data.model';
 export class CoreCommonService {
   private _dicData: CoreDictionary<Subject<any>> = {};
   private _dicRunning: CoreDictionary<Boolean> = {};
+  private _userData: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient, private cache: CoreCacheService) {}
 
@@ -21,12 +22,17 @@ export class CoreCommonService {
     return JSON.parse(json) as T;
   }
 
+  public onUserEmit(): EventEmitter<UserData> {
+    return this._userData;
+  }
+
   public getUserData(): UserData {
     return this.getLocalStorage<UserData>('userData');
   }
 
   public setUserData(data: UserData) {
     localStorage.setItem('userData', JSON.stringify(data));
+    this._userData.emit(this.getLocalStorage<UserData>('userData'));
   }
 
   public init(): Observable<boolean> {

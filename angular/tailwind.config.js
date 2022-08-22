@@ -571,6 +571,9 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
+      backgroundImage: {
+        'main-bg': "url('/img/hero-pattern.svg')",
+      },
       zIndex: {
         60: 60,
         9999: 9999,

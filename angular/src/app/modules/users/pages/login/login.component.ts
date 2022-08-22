@@ -52,7 +52,8 @@ export class LoginComponent implements OnInit {
         this._router.navigateByUrl('/dashboard');
       },
       (err: any) => {
-        this._message.error(`Lỗi`);
+        console.log(err);
+        this._message.error(`Lỗi: ${err.error.error.message}`);
       }
     );
   }

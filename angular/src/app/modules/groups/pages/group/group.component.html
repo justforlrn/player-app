@@ -3,17 +3,21 @@
         <div class="pb-8"><span class="text-3xl font-bold uppercase">Các order hiện tại đang có</span></div>
         <div *ngIf="orderGroupList.length" class="grid grid-cols-2 gap-6">
             <div *ngFor="let item of orderGroupList"
-                class="flex flex-col items-center bg-gray-100  rounded-lg cursor-pointer hover:opacity-80"
+                class="flex flex-col w-96 items-center bg-yellow-100 border-4 border-white shadow-lg rounded-lg cursor-pointer hover:scale-90"
                 (click)="onClickItem(item.id)">
-                <i class="text-7xl tdsi-group-fill w-full h-full border rounded-t-lg text-center"></i>
-                <div class="bg-green-600 px-16 py-1 text-lg rounded-b-lg w-full text-center text-white font-semibold">
+                <img src="{{item.restaurant.imageUrl}}" alt="" class="object-cover h-32 w-full rounded-t-lg" />
+                <div
+                    class="flex w-full h-full justify-center items-center bg-yellow-400 px-16 py-1 text-lg rounded-b-lg text-black font-semibold">
                     {{item.restaurant.name}}
                 </div>
             </div>
-            <div class="flex flex-col items-center bg-gray-100 rounded-lg cursor-pointer hover:opacity-80"
+            <div class="flex flex-col items-center bg-yellow-100 border-4 border-white shadow-lg rounded-lg cursor-pointer hover:scale-90"
                 (click)="onClickCreateItem()">
-                <i class="text-7xl tdsi-add-fill w-full h-full border text-green-600 rounded-t-lg text-center"></i>
-                <div class="bg-green-600 px-16 py-1 text-lg rounded-b-lg text-white font-semibold">Thêm mới
+                <i
+                    class="text-7xl tdsi-add-fill flex w-full h-full border rounded-t-lg flex justify-center items-center text-yellow-400"></i>
+                <div
+                    class="flex w-full justify-center items-center bg-yellow-400 px-16 py-1 text-lg rounded-b-lg text-black font-semibold">
+                    Thêm mới
                 </div>
             </div>
         </div>
