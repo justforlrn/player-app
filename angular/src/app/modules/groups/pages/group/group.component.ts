@@ -33,8 +33,8 @@ export class GroupListComponent {
     });
   }
 
-  onClickItem(id: string) {
-    this._router.navigate([this._router.url, id]);
+  onClickItem(item: any) {
+    this._router.navigate(['/restaurants', item.restaurant.id]);
   }
 
   onClickCreateItem() {

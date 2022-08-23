@@ -31,7 +31,7 @@ const routes: Routes = [
         loadChildren: () => import('./modules/groups/group.module').then(m => m.GroupModule),
       },
       {
-        path: 'restaurant',
+        path: 'restaurants',
         canActivate: [AuthGuard],
         loadChildren: () =>
           import('./modules/restaurants/restaurant.module').then(m => m.RestaurantModule),
