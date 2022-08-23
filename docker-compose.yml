@@ -2,11 +2,13 @@ version: '3'
 services:
   redis:
     image: redis
+    container_name: app_redis
     restart: always
     ports:
       - '6379:6379'
   app:
     image: justforlrn/player-app:lastest
+    container_name: app_main
     restart: always
     ports:
       - 5000:80

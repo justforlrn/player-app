@@ -195,7 +195,7 @@ namespace Player.Restaurants
             //{
             //    restaurant = await _restaurantRepository.GetListAsync();
             //}
-            //restaurant = await _restaurantRepository.GetRestaurantsByNameAndIdAsync(content);
+            restaurant = await _restaurantRepository.GetRestaurantsByNameAndIdAsync(content);
             
             return restaurant.Select(e => new RestaurantMinimizeDto { Id = e.Id, Name = e.Name, ImageUrl = e.ImageUrl }).ToList();
         }
