@@ -23,7 +23,9 @@ namespace Player.Groups
             var filter1 = Builders<Group>.Filter.ElemMatch(x => x.Members, e => e.Id == userId);
             var filter2 = Builders<Group>.Filter.Eq(x => x.IsPublic, true);
             var filter = Builders<Group>.Filter.Or(new List<FilterDefinition<Group>> { filter1, filter2 });
-            var groups = await collection.FindAsync(filter);
+            var ignoreSoftDelete = Builders<Group>.Filter.Eq(e => e.IsDeleted, false);
+            var finalFilter = Builders<Group>.Filter.And(new List<FilterDefinition<Group>> { filter, ignoreSoftDelete });
+            var groups = await collection.FindAsync(finalFilter );
             return await groups.ToListAsync();
         }
     }

@@ -4,7 +4,7 @@ import { RestaurantComponent } from './pages/group-list/restaurant.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: RestaurantComponent,
   },
 ];

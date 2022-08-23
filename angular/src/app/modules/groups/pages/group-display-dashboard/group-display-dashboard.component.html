@@ -1,10 +1,38 @@
 <div class="flex h-full w-full justify-center items-center">
-    <div class="flex flex-col">
+    <div class="flex flex-col h-full justify-center items-center">
         <div class="pb-8"><span class="text-3xl font-bold uppercase">Các group của bạn</span></div>
         <div *ngIf="joinedGroupList.length" class="grid grid-cols-2 gap-6">
             <div *ngFor="let item of joinedGroupList"
                 class="flex flex-col items-center bg-yellow-100 border-4 border-white shadow-lg rounded-lg cursor-pointer hover:scale-90"
                 (click)="onClickItem(item.id)">
+                <div class="flex w-full justify-between">
+                    <span class="align-center tracking-tight pl-2 py-1 font-thin">{{item.members.length}} <i
+                            class="text-orange-400 tdsi-user-fill"></i></span>
+                    <span class="italic font-thin">{{item.isPublic ? '(Public)' : '(Private)'}}</span>
+                    <button tds-button-flat-icon color="orange" tds-dropdown [tdsDropdownMenu]="menu1"
+                        (click)="openSetting($event)" [placement]="'bottomRight'">
+                        <i class="tdsi-three-dots-vertical-fill"></i>
+                    </button>
+                    <tds-dropdown-menu #menu1="tdsDropdownMenu">
+                        <div class="w-36">
+                            <div tds-dropdown-item>
+                                <a (click)="editGroup(item.id)"> Chỉnh sửa </a>
+                            </div>
+                            <!-- <div tds-dropdown-item>
+                                <a> Đổi tên nhóm </a>
+                            </div> -->
+                            <div tds-dropdown-item>
+                                <a> Chia sẻ nhóm (*) </a>
+                            </div>
+                            <div tds-dropdown-item>
+                                <a (click)="deleteGroup(item.id)"> Xóa </a>
+                            </div>
+                        </div>
+                    </tds-dropdown-menu>
+                    <!-- <button tds-button-flat-icon color="orange" (click)="openSetting($event)">
+                        <i class="tdsi-three-dots-vertical-fill"></i>
+                    </button> -->
+                </div>
                 <!-- <i class="text-7xl tdsi-group-fill w-full h-full border rounded-t-lg text-center"></i> -->
                 <img tds-image width="200px" height="200px" tdsSrc="/assets/imgs/group/teamwork.png" alt="" class="p-4"
                     [disablePreview]="true" />

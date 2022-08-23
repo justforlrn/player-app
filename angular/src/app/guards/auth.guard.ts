@@ -13,6 +13,8 @@ export class AuthGuard implements CanActivate {
     if (userData?.accessToken != null) {
       return true;
     } else {
+      console.log(state.url);
+      this._coreCommonService.backupUnreachedUrl(state.url);
       this._router.navigateByUrl('/users/login');
       return false;
     }

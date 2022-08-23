@@ -1,10 +1,10 @@
 <div class="flex h-full w-full justify-center items-center">
-    <div class="flex flex-col">
+    <div class="flex flex-col h-full justify-center items-center">
         <div class="pb-8"><span class="text-3xl font-bold uppercase">Các order hiện tại đang có</span></div>
         <div *ngIf="orderGroupList.length" class="grid grid-cols-2 gap-6">
             <div *ngFor="let item of orderGroupList"
                 class="flex flex-col w-96 items-center bg-yellow-100 border-4 border-white shadow-lg rounded-lg cursor-pointer hover:scale-90"
-                (click)="onClickItem(item.id)">
+                (click)="onClickItem(item)">
                 <img src="{{item.restaurant.imageUrl}}" alt="" class="object-cover h-32 w-full rounded-t-lg" />
                 <div
                     class="flex w-full h-full justify-center items-center bg-yellow-400 px-16 py-1 text-lg rounded-b-lg text-black font-semibold">

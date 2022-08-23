@@ -49,7 +49,9 @@ export class LoginComponent implements OnInit {
       (res: UserData) => {
         this._coreCommonService.setUserData(res);
         this._message.success(`Hello ${res.name}`);
-        this._router.navigateByUrl('/dashboard');
+        const backupUnreachedUrl = this._coreCommonService.getUnreachedUrl();
+        if (backupUnreachedUrl) this._router.navigateByUrl(backupUnreachedUrl);
+        else this._router.navigateByUrl('/dashboard');
       },
       (err: any) => {
         console.log(err);

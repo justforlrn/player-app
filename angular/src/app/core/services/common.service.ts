@@ -17,6 +17,14 @@ export class CoreCommonService {
 
   constructor(private http: HttpClient, private cache: CoreCacheService) {}
 
+  public backupUnreachedUrl(url: string) {
+    localStorage.setItem('backupUnreachedUrl', url);
+  }
+
+  public getUnreachedUrl(): string {
+    return localStorage.getItem('backupUnreachedUrl');
+  }
+
   public getLocalStorage<T>(name: string): T {
     var json = localStorage.getItem(name);
     return JSON.parse(json) as T;
