@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { TDSButtonModule } from 'tds-ui/button';
 import { TDSFormFieldModule } from 'tds-ui/form-field';
 import { TDSInputModule } from 'tds-ui/tds-input';
-import { TDSMessageModule } from 'tds-ui/message';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TDSButtonMenuModule } from 'tds-ui/button-menu';
 import { TDSNotificationModule } from 'tds-ui/notification';
 import { TDSEmptyModule } from 'tds-ui/empty';
@@ -14,6 +13,8 @@ import { RestaurantRoutingModule } from './restaurant-routing.module';
 import { TDSImageModule } from 'tds-ui/image';
 import { TDSDrawerModule } from 'tds-ui/drawer';
 import { CartComponent } from './components/carts/cart.component';
+import { TDSRadioModule } from 'tds-ui/radio';
+
 
 @NgModule({
   declarations: [RestaurantComponent, CartComponent],
@@ -31,6 +32,8 @@ import { CartComponent } from './components/carts/cart.component';
     RestaurantRoutingModule,
     TDSImageModule,
     TDSDrawerModule,
+    TDSRadioModule,
+    FormsModule
   ],
 })
 export class RestaurantModule {}
