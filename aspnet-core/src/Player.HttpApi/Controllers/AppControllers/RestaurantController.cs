@@ -29,5 +29,10 @@ namespace Player.Controllers.AppControllers
 		{
 			return await _restaurantService.GetMinimizedListAsync(content);
 		}
-	}
+        [HttpGet]
+        public async Task<RestaurantDto> GetAsync(string id)
+        {
+            return await _restaurantService.GetByIdAsync(id);
+        }
+    }
 }

@@ -45,36 +45,38 @@ namespace Player.Restaurants
             {
                 grabCat.items.ForEach(grabItem =>
                 {
-                    var item = new Item(
+                    if(!listItem.Any(_item => _item.Id == grabItem.ID)) {
+                        var item = new Item(
                         id: grabItem.ID,
                         name: grabItem.name,
                         imageUrl: grabItem.images.Count() > 0 ? grabItem.images[0] : "",
                         priceOrigin: grabItem.priceInMinorUnit,
                         priceDiscount: grabItem.discountedPriceInMin
                         );
-                    item.OptionGroups = new List<OptionGroup>();
-                    grabItem.modifierGroups.ForEach(childGroup =>
-                    {
-                        var item_ = new OptionGroup(
-                        id: childGroup.ID,
-                        name: childGroup.name,
-                        isAvailable: childGroup.available,
-                        selectMin: childGroup.selectionRangeMin,
-                        selectMax: childGroup.selectionRangeMax
-                        );
-                        item_.Options = new List<Option>();
-                        childGroup.modifiers.ForEach(childGrab =>
+                        item.OptionGroups = new List<OptionGroup>();
+                        grabItem.modifierGroups.ForEach(childGroup =>
                         {
-                            var child = new Option(
-                                id: childGrab.ID,
-                                name: childGrab.name,
-                                isAvailable: childGrab.available,
-                                price: childGrab.priceInMinorUnit);
-                            item_.Options.Add(child);
+                            var item_ = new OptionGroup(
+                            id: childGroup.ID,
+                            name: childGroup.name,
+                            isAvailable: childGroup.available,
+                            selectMin: childGroup.selectionRangeMin,
+                            selectMax: childGroup.selectionRangeMax
+                            );
+                            item_.Options = new List<Option>();
+                            childGroup.modifiers.ForEach(childGrab =>
+                            {
+                                var child = new Option(
+                                    id: childGrab.ID,
+                                    name: childGrab.name,
+                                    isAvailable: childGrab.available,
+                                    price: childGrab.priceInMinorUnit);
+                                item_.Options.Add(child);
+                            });
+                            item.OptionGroups.Add(item_);
                         });
-                        item.OptionGroups.Add(item_);
-                    });
-                    listItem.Add(item);
+                        listItem.Add(item);
+                    }
                 });
             });
 
@@ -150,6 +152,20 @@ namespace Player.Restaurants
             return restaurant;
         }
 
+        public async Task<RestaurantDto> GetByIdAsync(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new UserFriendlyException("ID sai format");
+            }
+            var restaurant = await _restaurantRepository.FindAsync(id);
+            if(restaurant == null)
+            {
+                throw new UserFriendlyException("Không tìm thấy ID");
+            }
+            return ObjectMapper.Map<Restaurant, RestaurantDto>(restaurant);
+        }
+
         /// <summary>
         /// Content: Id, url, name
         /// </summary>
@@ -174,8 +190,13 @@ namespace Player.Restaurants
                 var grabData = await GrabCrawlerAsync(content);
                 return new List<RestaurantMinimizeDto> { ObjectMapper.Map<RestaurantDto, RestaurantMinimizeDto>(grabData) };
             }
-
-            restaurant = await _restaurantRepository.GetRestaurantsByNameAndIdAsync(content);
+            
+            //if(content == null || content == "")
+            //{
+            //    restaurant = await _restaurantRepository.GetListAsync();
+            //}
+            //restaurant = await _restaurantRepository.GetRestaurantsByNameAndIdAsync(content);
+            
             return restaurant.Select(e => new RestaurantMinimizeDto { Id = e.Id, Name = e.Name, ImageUrl = e.ImageUrl }).ToList();
         }
 
