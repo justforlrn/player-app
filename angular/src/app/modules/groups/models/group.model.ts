@@ -1,7 +1,8 @@
-import { UserData } from "../../users/models/users/user-data.model";
+import { UserData } from '../../users/models/users/user-data.model';
 
 export interface Group {
-    id: string,
-    name: string;
-    members: UserData[],
+  id: string;
+  name: string;
+  members: UserData[];
+  isPublic: boolean;
 }

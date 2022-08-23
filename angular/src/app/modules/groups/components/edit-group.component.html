@@ -7,8 +7,11 @@
             <tds-checkbox formControlName="isPublic">Công khai</tds-checkbox>
             <tds-form-field>
                 <tds-select valueField="email" textField="combineName" placeholder='Thêm thành viên'
-                    formControlName="emails" [data]="userList" mode="multiple" [allowSearch]="true">
+                    formControlName="members" [data]="userList" mode="multiple" [allowSearch]="true">
                 </tds-select>
+                <!-- <tds-select valueField="members" textField="combineName" placeholder='Thêm thành viên' formControlName="members"
+                    [data]="userList" mode="multiple" [allowSearch]="true">
+                </tds-select> -->
             </tds-form-field>
         </form>
     </div>

@@ -21,4 +21,9 @@ export class GroupDisplayDashboardService {
     const url = `${this.apiUrl}/groups`;
     return this._coreCommonService.connect<Group[]>(CoreApiMethodType.post, url, data);
   }
+  public deleteGroup(id: string) {
+    debugger;
+    const url = `${this.apiUrl}/groups/${id}`;
+    return this._coreCommonService.connect<Group[]>(CoreApiMethodType.delete, url, null);
+  }
 }
