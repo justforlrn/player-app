@@ -8,16 +8,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TDSButtonMenuModule } from 'tds-ui/button-menu';
 import { TDSNotificationModule } from 'tds-ui/notification';
 import { TDSEmptyModule } from 'tds-ui/empty';
-import { RestaurantComponent } from './pages/group-list/restaurant.component';
-import { RestaurantRoutingModule } from './restaurant-routing.module';
 import { TDSImageModule } from 'tds-ui/image';
 import { TDSDrawerModule } from 'tds-ui/drawer';
 import { CartComponent } from './components/carts/cart.component';
 import { TDSRadioModule } from 'tds-ui/radio';
-
+import { GroupOrderComponent } from './pages/group-orders/group-orders.component';
+import { OrderRoutingModule } from './order-routing.module';
+import { TDSSpinnerModule } from 'tds-ui/progress-spinner';
 
 @NgModule({
-  declarations: [RestaurantComponent, CartComponent],
+  declarations: [GroupOrderComponent, CartComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -29,11 +29,12 @@ import { TDSRadioModule } from 'tds-ui/radio';
     TDSButtonMenuModule,
     TDSButtonModule,
     TDSEmptyModule,
-    RestaurantRoutingModule,
+    OrderRoutingModule,
     TDSImageModule,
     TDSDrawerModule,
     TDSRadioModule,
-    FormsModule
+    FormsModule,
+    TDSSpinnerModule,
   ],
 })
-export class RestaurantModule {}
+export class OrderModule {}

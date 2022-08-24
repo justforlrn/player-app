@@ -9,5 +9,7 @@ namespace Player.GroupOrders
     {
         Task<GroupOrderDto> CreateOrderGroupAsync(CreateGroupOrderDto input);
         Task<List<GroupOrderDto>> GetListGroupOrderByGroupId(string groupId);
+        Task<GroupOrderDto> GetAsync(string groupOrderId);
+        Task DeleteAsync(string id);
     }
 }

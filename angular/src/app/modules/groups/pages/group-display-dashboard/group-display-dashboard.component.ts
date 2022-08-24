@@ -16,6 +16,7 @@ import { GroupDisplayDashboardService } from '../../services/group-display-dashb
 export class GroupDisplayDashboardComponent {
   //empty = false;
   joinedGroupList: Group[] = [];
+  isLoading = false;
   constructor(
     private _groupDisplayDashboardService: GroupDisplayDashboardService,
     private _router: Router,
@@ -40,19 +41,7 @@ export class GroupDisplayDashboardComponent {
       },
     });
 
-    modal.afterClose.subscribe(result => {
-      // var subData: CreateGroup = {
-      //   name: result.name,
-      //   description: '',
-      //   isPublic: false,
-      //   emails: result.emails,
-      // };
-      // debugger;
-      // this._groupDisplayDashboardService.createGroup(subData).subscribe(() => {
-      //   this._messageService.success('Tạo group thành công');
-      // });
-      // this.getCustomer();
-    });
+    modal.afterClose.subscribe(result => {});
   }
 
   deleteGroup(groupId: string) {
@@ -71,8 +60,10 @@ export class GroupDisplayDashboardComponent {
     this._router.navigate([this._router.url, id]);
   }
   getList(): void {
+    this.isLoading = true;
     this._groupDisplayDashboardService.getJoinedGroupList().subscribe((res: Group[]) => {
       this.joinedGroupList = res;
+      this.isLoading = false;
     });
   }
   onClickCreateItem() {

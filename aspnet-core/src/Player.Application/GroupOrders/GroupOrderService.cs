@@ -34,6 +34,17 @@ namespace Player.GroupOrders
             await _groupOrderRepository.InsertAsync(groupOrder);
             return ObjectMapper.Map<GroupOrder, GroupOrderDto>(groupOrder);
         }
+
+        public async Task<GroupOrderDto> GetAsync(string groupOrderId)
+        {
+            var groupOrder = await _groupOrderRepository.FindAsync(groupOrderId);
+            if(groupOrder == null)
+            {
+                throw new UserFriendlyException("Không tìm thấy order nào");
+            }
+            return ObjectMapper.Map<GroupOrder, GroupOrderDto>(groupOrder);
+        }
+
         public async Task<List<GroupOrderDto>> GetListGroupOrderByGroupId(string groupId)
 		{
             var groupOrders = await _groupOrderRepository.GetListGroupOrderByGroupId(groupId);
@@ -43,6 +54,16 @@ namespace Player.GroupOrders
             //    result[i].Restaurant = await _restaurantService.Cache_Get(result[i].RestaurantId);
             //};
             return result;
+        }
+
+        public async Task DeleteAsync(string id)
+        {
+            var group = await _groupOrderRepository.FindAsync(id);
+            if (group == null)
+            {
+                throw new BusinessException("Nhóm không tồn tại");
+            }
+            await _groupOrderRepository.DeleteAsync(group);
         }
     }
 }

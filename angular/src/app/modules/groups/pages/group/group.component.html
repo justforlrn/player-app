@@ -1,27 +1,50 @@
 <div class="flex h-full w-full justify-center items-center">
     <div class="flex flex-col h-full justify-center items-center">
         <div class="pb-8"><span class="text-3xl font-bold uppercase">Các order hiện tại đang có</span></div>
-        <div *ngIf="orderGroupList.length" class="grid grid-cols-2 gap-6">
-            <div *ngFor="let item of orderGroupList"
-                class="flex flex-col w-96 items-center bg-yellow-100 border-4 border-white shadow-lg rounded-lg cursor-pointer hover:scale-90"
-                (click)="onClickItem(item)">
-                <img src="{{item.restaurant.imageUrl}}" alt="" class="object-cover h-32 w-full rounded-t-lg" />
-                <div
-                    class="flex w-full h-full justify-center items-center bg-yellow-400 px-16 py-1 text-lg rounded-b-lg text-black font-semibold">
-                    {{item.restaurant.name}}
+        <tds-spin class="" [spinning]="isLoading" tip="Loading...">
+            <div *ngIf="orderGroupList.length" class="grid grid-cols-2 gap-6">
+                <div *ngFor="let item of orderGroupList"
+                    class="flex flex-col w-96 items-center bg-yellow-100 border-4 border-white shadow-lg rounded-lg cursor-pointer hover:scale-95"
+                    (click)="onClickItem(item)">
+                    <div class="flex w-full justify-between">
+                        <span class="align-center tracking-tight pl-2 py-1 font-thin">{{item.userOders.length}}
+                            <i class="text-orange-400 tdsi-user-fill"></i></span>
+                        <button tds-button-flat-icon color="orange" tds-dropdown [tdsDropdownMenu]="menu1"
+                            (click)="openSetting($event)" [placement]="'bottomRight'">
+                            <i class="tdsi-three-dots-vertical-fill"></i>
+                        </button>
+                        <tds-dropdown-menu #menu1="tdsDropdownMenu">
+                            <div class="w-36">
+                                <div tds-dropdown-item (click)="editGroupOrder(item.id)">
+                                    <a> Chỉnh sửa </a>
+                                </div>
+                                <div tds-dropdown-item>
+                                    <a> Chia sẻ nhóm (*) </a>
+                                </div>
+                                <div tds-dropdown-item (click)="deleteGroupOrder(item.id)">
+                                    <a> Xóa </a>
+                                </div>
+                            </div>
+                        </tds-dropdown-menu>
+                    </div>
+                    <img src="{{item.restaurant.imageUrl}}" alt="" class="object-cover h-32 w-full rounded-t-lg" />
+                    <div
+                        class="flex w-full h-full justify-center items-center bg-yellow-400 px-16 py-1 text-lg rounded-b-lg text-black font-semibold">
+                        {{item.restaurant.name}}
+                    </div>
+                </div>
+                <div class="flex flex-col items-center bg-yellow-100 border-4 border-white shadow-lg rounded-lg cursor-pointer hover:scale-95"
+                    (click)="onClickCreateItem()">
+                    <i
+                        class="text-7xl tdsi-add-fill flex w-full h-full border rounded-t-lg flex justify-center items-center text-yellow-400"></i>
+                    <div
+                        class="flex w-full justify-center items-center bg-yellow-400 px-16 py-1 text-lg rounded-b-lg text-black font-semibold">
+                        Thêm mới
+                    </div>
                 </div>
             </div>
-            <div class="flex flex-col items-center bg-yellow-100 border-4 border-white shadow-lg rounded-lg cursor-pointer hover:scale-90"
-                (click)="onClickCreateItem()">
-                <i
-                    class="text-7xl tdsi-add-fill flex w-full h-full border rounded-t-lg flex justify-center items-center text-yellow-400"></i>
-                <div
-                    class="flex w-full justify-center items-center bg-yellow-400 px-16 py-1 text-lg rounded-b-lg text-black font-semibold">
-                    Thêm mới
-                </div>
-            </div>
-        </div>
-        <tds-empty *ngIf="!orderGroupList.length"
+        </tds-spin>
+        <tds-empty *ngIf="!orderGroupList.length && !isLoading"
             notFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
             [notFoundContent]="contentTpl" [notFoundFooter]="footerTpl">
             <ng-template #contentTpl>
@@ -35,5 +58,4 @@
             </ng-template>
         </tds-empty>
     </div>
-
 </div>

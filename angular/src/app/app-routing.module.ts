@@ -33,8 +33,7 @@ const routes: Routes = [
       {
         path: 'restaurants',
         canActivate: [AuthGuard],
-        loadChildren: () =>
-          import('./modules/restaurants/restaurant.module').then(m => m.RestaurantModule),
+        loadChildren: () => import('./modules/orders/order.module').then(m => m.OrderModule),
       },
     ],
   },

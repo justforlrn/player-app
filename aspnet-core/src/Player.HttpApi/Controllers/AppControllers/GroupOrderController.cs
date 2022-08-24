@@ -15,15 +15,29 @@ namespace Player.Controllers.AppControllers
         {
             _groupOrderService = groupOrderService;
         }
+
         [HttpPost]
         public async Task<GroupOrderDto> CreateAsync([FromBody] CreateGroupOrderDto input)
         {
             return await _groupOrderService.CreateOrderGroupAsync(input);
         }
-        [HttpGet]
+
+        [HttpGet("get-list-by-group-id")]
         public async Task<List<GroupOrderDto>> GetListGroupOrderByGroupId(string groupId)
         {
             return await _groupOrderService.GetListGroupOrderByGroupId(groupId);
+        }
+
+        [HttpGet]
+        public async Task<GroupOrderDto> GetAsync(string groupOrderId)
+        {
+            return await _groupOrderService.GetAsync(groupOrderId);
+        }
+
+        [HttpDelete]
+        public async Task DeleteAsync(string id)
+        {
+            await _groupOrderService.DeleteAsync(id);
         }
     }
 }
