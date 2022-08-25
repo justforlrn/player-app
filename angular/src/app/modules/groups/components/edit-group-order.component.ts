@@ -4,14 +4,15 @@ import { Router } from '@angular/router';
 import { TDSAutocompleteTriggerDirective, TDSAutocompleteComponent } from 'tds-ui/auto-complete';
 import { TDSModalRef } from 'tds-ui/modal';
 import { RestaurantMinimized } from '../../orders/models/restaurant-minimized.model';
+import { GroupOrder } from '../models/group-order.model';
 import { GroupService } from '../services/group.service';
 
 @Component({
-  selector: 'app-new-group-order',
-  templateUrl: './new-group-order.component.html',
+  selector: 'app-edit-group-order',
+  templateUrl: './edit-group-order.component.html',
   providers: [GroupService],
 })
-export class NewGroupOrderComponent {
+export class EditGroupOrderComponent {
   @ViewChild(TDSAutocompleteTriggerDirective)
   autoComplete: TDSAutocompleteTriggerDirective;
   @ViewChild(TDSAutocompleteComponent)
@@ -19,7 +20,7 @@ export class NewGroupOrderComponent {
 
   //options: any[] = [];
 
-  @Input() groupId!: string;
+  @Input() groupOrderInfo: GroupOrder;
   restaurantMinimizedList: RestaurantMinimized[] = [];
   selectedRestaurant: any;
   restaurantList: any[];
@@ -29,6 +30,10 @@ export class NewGroupOrderComponent {
     private _groupService: GroupService,
     private _router: Router
   ) {}
+
+  ngOnInit() {
+    this.selectedRestaurant = this.groupOrderInfo.restaurant;
+  }
 
   checkTypeOf(data: any) {
     return typeof data;
@@ -62,7 +67,7 @@ export class NewGroupOrderComponent {
   onSubmit() {
     if (this.selectedRestaurant.id != null) {
       const data = {
-        groupId: this.groupId,
+        groupId: this.groupOrderInfo.groupId,
         restaurantId: this.selectedRestaurant.id,
       };
       this._groupService.createGroupOrder(data).subscribe(res => {

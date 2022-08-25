@@ -20,7 +20,9 @@ namespace Player.GroupOrders
 		{
             var collection = await GetCollectionAsync();
             var filter = Builders<GroupOrder>.Filter.Eq(go => go.GroupId, groupId);
-            var groupOrders = await collection.FindAsync(filter);
+            var ignoreSoftDelete = Builders<GroupOrder>.Filter.Eq(e => e.IsDeleted, false);
+            var finalFilter = Builders<GroupOrder>.Filter.And(new List<FilterDefinition<GroupOrder>> { filter, ignoreSoftDelete });
+            var groupOrders = await collection.FindAsync(finalFilter);
             return await groupOrders.ToListAsync();
         }
     }

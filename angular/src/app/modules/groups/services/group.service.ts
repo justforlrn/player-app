@@ -32,8 +32,13 @@ export class GroupService {
   }
 
   public getGroupOrderList(groupId: string) {
-    const url = `${this.apiUrl}/group-orders?groupId=${groupId}`;
+    const url = `${this.apiUrl}/group-orders/get-list-by-group-id?groupId=${groupId}`;
     return this._coreCommonService.connect<any>(CoreApiMethodType.get, url, null);
+  }
+
+  public deleteGroupOrder(id: string) {
+    const url = `${this.apiUrl}/group-orders?id=${id}`;
+    return this._coreCommonService.connect<Group[]>(CoreApiMethodType.delete, url, null);
   }
   // login(body: LoginDto) {
   //   const url = `${this.apiUrl}/auth/login`;
