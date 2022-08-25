@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44355',
+    issuer: 'http://getsoft.vn',
     redirectUri: baseUrl,
     clientId: 'Player_App',
     responseType: 'code',
@@ -19,7 +19,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://localhost:44355',
+      url: 'http://getsoft.vn',
       rootNamespace: 'Player',
     },
   },

@@ -1,209 +1,135 @@
 <div class="flex h-full w-full overflow-auto">
-    <div class="flex flex-col h-full w-full">
-        <tds-spin class="flex flex-col items-center w-full h-full" [spinning]="isLoading" tip="Loading...">
-            <div class="restaurant-info flex flex-col items-center w-full">
-                <div class="flex flex-col py-8 min-w-60% bg-white p-4 rounded-b-md shadow-lg">
-                    <span class="font-bold text-3xl flex items-center">{{restaurantInfo?.name}} (
-                        {{restaurantInfo?.star}}
-                        <i class="tdsi-star-2-fill text-yellow-600"></i>)
-                    </span>
-                    <span>Giờ mở cửa: {{restaurantInfo?.open}}</span>
-                    <div class="">
-                        <div class="offer space-x-2 text-green-500">
-                            <i class="tdsi-tag-fill"></i>
-                            <span>HEHE Giảm 50%</span>
-                        </div>
-                        <div class="offer space-x-2 text-green-500">
-                            <i class="tdsi-tag-fill"></i>
-                            <span>HEHE Giảm 50%</span>
-                        </div>
-                    </div>
-                </div>
+  <div class="flex flex-col h-full w-full">
+    <tds-spin class="flex flex-col items-center w-full h-full" [spinning]="isLoading" tip="Loading...">
+      <div class="restaurant-info flex flex-col items-center w-full">
+        <div class="flex flex-col py-8 min-w-60% bg-white p-4 rounded-b-md shadow-lg">
+          <span class="font-bold text-3xl flex items-center">{{restaurantInfo?.name}} (
+            {{restaurantInfo?.star}}
+            <i class="tdsi-star-2-fill text-yellow-600"></i>)
+          </span>
+          <span>Giờ mở cửa: {{restaurantInfo?.open}}</span>
+          <div class="">
+            <div class="offer space-x-2 text-green-500">
+              <i class="tdsi-tag-fill"></i>
+              <span>HEHE Giảm 50%</span>
             </div>
-            <div class="restaurant-items flex flex-col h-full">
-                <div class="flex flex-col items-center pt-16 w-full">
-                    <div class="restaurant-info flex flex-col items-center min-w-60%">
-                        <div class="w-2/3">
-                            <div *ngIf="!empty" class="grid grid-cols-3 gap-6">
-                                <div *ngFor="let item of restaurantInfo?.items; let i = index;"
-                                    class="flex flex-col bg-gray-100 rounded-lg border w-full p-3 bg-white shadow-lg">
-                                    <div class="flex flex-row bg-white">
-                                        <img tds-image height="100px" style="width:auto; height:100px !important"
-                                            tdsSrc={{item.imageUrl}} alt="" />
-                                        <div class="flex flex-col flex-1 h-full">
-                                            <div class="font-semibold flex h-full px-2"> {{item.name}}</div>
-                                            <div class="flex gap-1 items-center">
-                                                <span
-                                                    class="pl-2 line-through text-neutral-1-300 font-semibold">{{item.priceOrigin|currency:'VND'}}</span>
-                                            </div>
-                                            <div class="flex justify-between p-1">
-                                                <div class="flex gap-1 items-center">
-                                                    <span
-                                                        class="pl-1 text-lg text-neutral-1-900 font-semibold">{{item.priceDiscount
-                                                        |currency:'VND' }}
-                                                    </span>
-                                                </div>
-                                                <button tds-button-icon color="primary" (click)="openChildItem(item)">
-                                                    <i class="tdsi-plus-circle-fill"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="offer space-x-2 text-green-500">
+              <i class="tdsi-tag-fill"></i>
+              <span>HEHE Giảm 50%</span>
             </div>
-        </tds-spin>
-    </div>
+          </div>
+        </div>
+      </div>
+      <div class="restaurant-items flex flex-col h-full">
+        <div class="flex flex-col items-center pt-16 w-full">
+          <div class="restaurant-info flex flex-col items-center min-w-60%">
+            <div class="w-2/3">
+              <div *ngIf="!empty" class="grid grid-cols-3 gap-6">
+                <div *ngFor="let item of restaurantInfo?.items; let i = index;"
+                  class="flex flex-col bg-gray-100 rounded-lg border w-full p-3 shadow-lg">
+                  <div class="flex flex-row bg-white">
+                    <img tds-image height="100px" style="width:auto; height:100px !important" tdsSrc={{item.imageUrl}}
+                      alt="" />
+                    <div class="flex flex-col flex-1 h-full">
+                      <div class="font-semibold flex h-full px-2"> {{item.name}}</div>
+                      <div class="flex gap-1 items-center">
+                        <span
+                          class="pl-2 line-through text-neutral-1-300 font-semibold">{{item.priceOrigin|currency:'VND'}}</span>
+                      </div>
+                      <div class="flex justify-between p-1">
+                        <div class="flex gap-1 items-center">
+                          <span class="pl-1 text-lg text-neutral-1-900 font-semibold">{{item.priceDiscount
+                            |currency:'VND' }}
+                          </span>
+                        </div>
+                        <button tds-button-icon color="primary" (click)="openChildItem(item)">
+                          <i class="tdsi-plus-circle-fill"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tds-spin>
+  </div>
 </div>
 <div class="h-sceen cart flex flex-row justify-center cursor-pointer absolute bottom-0 w-full" (click)="openCart()">
-    <div
-        class="divide-x p-2 flex flex-row justify-center px-8 py-4 bg-green-500 border rounded-t-lg text-white font-semibold">
-        <div class="px-2">
-            Tổng món: {{card.quantity}}
-        </div>
-        <div class="px-2">
-            Tổng tiền: {{card.total | currency:'VND'}}
-        </div>
+  <div
+    class="divide-x p-2 flex flex-row justify-center px-8 py-4 bg-green-500 border rounded-t-lg text-white font-semibold">
+    <div class="px-2">
+      Tổng món: {{card.quantity}}
     </div>
+    <div class="px-2">
+      Tổng tiền: {{card.total | currency:'VND'}}
+    </div>
+  </div>
 </div>
 <ng-template #drawerTemplate let-data let-drawerRef="drawerRef">
-    <form class="flex flex-col h-full  ">
-        <div class="flex flex-col h-full justify-between ">
-            <div class="divide-y">
-                <div class="p-2 flex flex-col gap-4 items-start">
-                    <div class="flex flex-row bg-white gap-2">
-                        <div class=""><img tds-image height="100px" style="width:auto; height:100px !important"
-                                tdsSrc={{data?.value.imageUrl}} alt="" />
-                        </div>
-                        <div class="flex flex-col h-full">
-                            <div class="font-semibold flex h-full px-2">{{data?.value.name}}</div>
-                            <span class="pl-2 line-through">{{data?.value.priceOrigin |currency:'VND'}}</span>
-                            <div class="flex justify-between p-1"><span class="pl-1 text-lg">{{data?.value.priceDiscount
-                                    |currency:'VND'}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-info flex flex-col ">
-                        <div *ngFor="let item of data?.value.optionGroups; let i = index;"
-                            class="flex flex-col items-center justify-between gap-4">
-                            <div class="text-header-1 font-semibold text-neutral-1-900">
-                                {{item.name}}
-                            </div>
-                            <div class="flex w-full flex-col items-start justify-start gap-2 px-4">
-                                <tds-radio-group *ngFor="let itemOption of item.options; let i = index;">
-                                    <label tds-radio class="flex text-title-1 font-semibold text-neutral-1-800">
-                                        {{itemOption.name}}
-                                    </label>
-                                </tds-radio-group>
-                            </div>
-                        </div>
-                    </div>
+  <tds-spin [spinning]="isLoading" class="w-full">
+    <form class="flex flex-col h-full  " id="addForm" [formGroup]="addForm" (ngSubmit)="submit(data?.value)">
+      <div class="flex flex-col h-full justify-between ">
+        <div class="divide-y">
+          <div class="p-2 flex flex-col gap-4 items-start">
+            <div class="flex flex-row bg-white gap-2">
+              <div class=""><img tds-image height="100px" style="width:auto; height:100px !important"
+                  tdsSrc={{data?.value.imageUrl}} alt="" />
+              </div>
+              <div class="flex flex-col h-full">
+                <div class="font-semibold flex h-full px-2">{{data?.value.name}}</div>
+                <span class="pl-2 line-through">{{data?.value.priceOrigin |currency:'VND'}}</span>
+                <div class="flex justify-between p-1"><span class="pl-1 text-lg">{{data?.value.priceDiscount
+                    |currency:'VND'}}</span>
                 </div>
+              </div>
             </div>
-            <div>
-                <div class="bg-gray-200 h-1 w-full">
+            <div class="item-info flex flex-col ">
+              <div *ngFor="let item of data?.value.optionGroups; let i = index;"
+                class="flex flex-col items-center justify-between gap-4">
+                <div class="text-header-1 font-semibold text-neutral-1-900">
+                  {{item.name}}
                 </div>
-                <div class="flex flex-col w-full p-4 space-y-2">
-                    <tds-form-field>
-                        <textarea tdsInput placeholder="Ghi chú"></textarea>
-                    </tds-form-field>
-                    <div class="flex justify-between">
-                        <div class="flex flex-row items-center space-x-2">
-                            <button (click)="changeQuantity(quantity-1)" tds-button-icon color="secondary"
-                                [size]="'sm'">
-                                <i class="tdsi-block-fill text-green-600"></i>
-                            </button>
-                            <span class="text-lg">{{quantity}}</span>
-                            <button (click)="changeQuantity(quantity+1)" tds-button-icon color="secondary"
-                                [size]="'sm'">
-                                <i class="tdsi-add-fill text-green-600"></i>
-                            </button>
-                        </div>
-                        <div class="flex flex-col items-end">
-                            <span>Tổng số lượng: {{quantity}}</span>
-                            <span>Tổng tiền: {{data?.value.priceDiscount *quantity | currency:'VND'}}</span>
-                        </div>
-                    </div>
-                    <button tds-button [size]="'xl'" class="" (click)="submit(data?.value)"
-                        (click)="drawerRef.close()">Submit</button>
+                <div class="flex w-full flex-col items-start justify-start gap-2 px-4">
+                  <tds-radio-group *ngFor="let itemOption of item.options; let i = index;">
+                    <label tds-radio class="flex text-title-1 font-semibold text-neutral-1-800">
+                      {{itemOption.name}}
+                    </label>
+                  </tds-radio-group>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+        <div>
+          <div class="bg-gray-200 h-1 w-full">
+          </div>
+          <div class="flex flex-col w-full p-4 space-y-2">
+            <tds-form-field>
+              <textarea tdsInput placeholder="Ghi chú"></textarea>
+            </tds-form-field>
+            <div class="flex justify-between">
+              <div class="flex flex-row items-center space-x-2">
+                <button (click)="changeQuantity(quantity-1)" tds-button-icon color="secondary" [size]="'sm'">
+                  <i class="tdsi-block-fill text-green-600"></i>
+                </button>
+                <span class="text-lg">{{quantity}}</span>
+                <button (click)="changeQuantity(quantity+1)" tds-button-icon color="secondary" [size]="'sm'">
+                  <i class="tdsi-add-fill text-green-600"></i>
+                </button>
+              </div>
+              <div class="flex flex-col items-end">
+                <span>Tổng số lượng: {{quantity}}</span>
+                <span>Tổng tiền: {{data?.value.priceDiscount *quantity | currency:'VND'}}</span>
+              </div>
+            </div>
+            <button tds-button [size]="'xl'" class=""  form='addForm' type="submit"
+              (click)="drawerRef.close()">Submit</button>
+          </div>
+        </div>
+      </div>
     </form>
-</ng-template>
-<ng-template #drawerTemplate let-data let-drawerRef="drawerTotalTemplate">
-    <div>
-        <div class="flex flex-row bg-white">
-            <div class=""><img tds-image height="100px" style="width:auto; height:100px !important"
-                    tdsSrc="https://post.healthline.com/wp-content/uploads/2020/09/healthy-eating-ingredients-732x549-thumbnail.jpg"
-                    alt="" />
-            </div>
-            <div class="flex flex-col flex-1 h-full">
-                <div class="font-semibold flex h-full px-2">Trà sữa Alooooo</div>
-                <span class="pl-2 line-through">123123</span>
-                <div class="flex justify-between p-1"><span class="pl-1 text-lg">15.000</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="w-full my-2 h-1 bg-gray-200"></div>
-    <div>
-        <div><span class="font-bold text-lg">Topping</span><span class="text-gray-400 ml-1">(tùy chọn)</span></div>
-        <div class="space-y-2 divide-y mt-2">
-            <div class="flex flex-row justify-between px-2 pt-2">
-                <span>Trân châu</span>
-                <div class="flex flex-row items-center space-x-2">
-                    <button tds-button-icon color="secondary" [size]="'sm'">
-                        <i class="tdsi-block-fill text-green-600"></i>
-                    </button>
-                    <span class="text-lg">1</span>
-                    <button tds-button-icon color="secondary" [size]="'sm'">
-                        <i class="tdsi-add-fill text-green-600"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="flex flex-row justify-between px-2 pt-2">
-                <span>Trân châu</span>
-                <div class="flex flex-row items-center space-x-2">
-                    <button tds-button-icon color="secondary" [size]="'sm'">
-                        <i class="tdsi-block-fill text-green-600"></i>
-                    </button>
-                    <span class="text-lg">1</span>
-                    <button tds-button-icon color="secondary" [size]="'sm'">
-                        <i class="tdsi-add-fill text-green-600"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="flex flex-row justify-between px-2 pt-2">
-                <span>Trân châu</span>
-                <div class="flex flex-row items-center space-x-2">
-                    <button tds-button-icon color="secondary" [size]="'sm'">
-                        <i class="tdsi-block-fill text-green-600"></i>
-                    </button>
-                    <span class="text-lg">1</span>
-                    <button tds-button-icon color="secondary" [size]="'sm'">
-                        <i class="tdsi-add-fill text-green-600"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <ng-template #footerTpl>
-        <div class="bg-gray-200 h-1 w-full"></div>
-        <div class="flex justify-between w-full p-4 items-center space-x-4">
-            <div class="flex flex-row items-center space-x-4">
-                <button tds-button-icon color="secondary" [size]="'xl'">
-                    <i class="tdsi-block-fill text-green-600"></i>
-                </button>
-                <span class="text-lg">1</span>
-                <button tds-button-icon color="secondary" [size]="'xl'">
-                    <i class="tdsi-add-fill text-green-600"></i>
-                </button>
-            </div>
-            <button tds-button [size]="'xl'" class="w-full" (click)="close()">Submit</button>
-        </div>
-    </ng-template>
+  </tds-spin>
 </ng-template>

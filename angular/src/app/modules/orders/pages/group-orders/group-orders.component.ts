@@ -1,10 +1,13 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { isThisSecond } from 'date-fns';
 import { TDSDrawerRef, TDSDrawerService } from 'tds-ui/drawer';
+import { TDSMessageService } from 'tds-ui/message';
 import { TDSSafeAny } from 'tds-ui/shared/utility';
 import { OrderDto } from '../../models/order.model';
 import { ItemCardDTO, ItemDTO, RestaurantDTO } from '../../models/restaurant.dto';
+import { UserCreateOderDTO } from '../../models/user-order.model';
 import { OrderService } from '../../services/orders.service';
 
 @Component({
@@ -26,7 +29,9 @@ export class GroupOrderComponent {
   childItemVisible = false;
   cartVisible = false;
   orderId: string;
+  addForm!: FormGroup;
   orderInfo: OrderDto;
+  userCreateOrder: UserCreateOderDTO
   restaurantInfo: RestaurantDTO;
   @ViewChild('drawerTemplate', { static: false }) drawerTemplate?: TemplateRef<{
     $implicit: { value: string };
@@ -44,13 +49,22 @@ export class GroupOrderComponent {
   constructor(
     private drawerService: TDSDrawerService,
     private orderService: OrderService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private message: TDSMessageService,
   ) {
+    this.createForm()
     this.orderId = this.activatedRoute.snapshot.params['orderId'];
   }
 
   ngOnInit() {
     this.getOrderInfo(this.orderId);
+  }
+
+  createForm() {
+    this.addForm = this.fb.group({
+      name: new FormControl(null, [Validators.required]),
+    })
   }
 
   getOrderInfo(id: string) {
@@ -86,7 +100,7 @@ export class GroupOrderComponent {
     });
   }
   openChildItem(data: TDSSafeAny): void {
-    console.log(data.name);
+    console.log(data);
     const drawerRef = this.drawerService.create({
       title: 'Chọn món',
       content: this.drawerTemplate,
@@ -95,7 +109,8 @@ export class GroupOrderComponent {
         value: data,
       },
     });
-    drawerRef.afterOpen.subscribe(() => {
+    drawerRef.afterOpen.subscribe((res) => {
+        // this.orderInfo.userOders.push(r)
       console.log('Drawer(Template) open');
     });
     drawerRef.afterClose.subscribe(() => {
@@ -108,6 +123,7 @@ export class GroupOrderComponent {
   }
 
   submit(data) {
+    console.log(this.addForm.value)
     this.card.quantity = this.quantity;
     this.card.total = data.priceDiscount * this.quantity;
   }
