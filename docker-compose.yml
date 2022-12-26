@@ -1,18 +1,16 @@
 version: '3'
 services:
-  redis:
-    image: redis
-    container_name: app_redis
-    restart: always
-    ports:
-      - '6379:6379'
   app:
-    image: justforlrn/player-app:lastest
+    image: justforlrn/player-app:1.0.0
     container_name: app_main
     restart: always
     ports:
       - 5000:80
-    depends_on:
-      - 'redis'
-    links:
-      - 'redis'
+  sql:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: sql_server2022
+    ports: # not actually needed, because the two services are on the same network
+      - "1433:1433" 
+    environment:
+      - ACCEPT_EULA=y
+      - SA_PASSWORD=A&VeryComplex123Password
