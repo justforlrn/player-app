@@ -9,74 +9,33 @@ import localeVi from '@angular/common/locales/vi';
 import { registerLocaleData } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { UserModule } from './modules/users/user.module';
-import { HttpClientModule } from '@angular/common/http';
-import { CoreModule } from './core/lib.module';
-import { TDSMenuModule } from 'tds-ui/menu';
-import { LayoutModule } from '@angular/cdk/layout';
-import { RouterModule } from '@angular/router';
-import { LayoutComponent } from './shared/layouts/layout.component';
+// import { AppClientLayoutModule } from './layouts/client-layout/client-layout.module';
+import { TDSBreadCrumbModule } from 'tds-ui/breadcrumb';
+// import { ClientPublicationsComponent } from './modules/publications/publications.component';
+// import { ClientEventComponent } from './modules/event/event.component';
+import { TDSFormFieldModule } from 'tds-ui/form-field';
+import { TDSInputModule } from 'tds-ui/tds-input';
+// import { ClientLoginComponent } from './modules/login/login.component';
 import { TDSButtonModule } from 'tds-ui/button';
-import { TDSModalModule } from 'tds-ui/modal';
-import { TDSAutocompleteModule } from 'tds-ui/auto-complete';
-import { TDSDrawerModule } from 'tds-ui/drawer';
+import { HttpClientModule } from '@angular/common/http';
+import { TDSNotificationModule } from 'tds-ui/notification';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TDSMessageModule } from 'tds-ui/message';
 // Thiết lập tiếng Việt
 registerLocaleData(localeVi);
 @NgModule({
-  declarations: [AppComponent, LayoutComponent],
+  declarations: [
+    AppComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     DragDropModule,
     ScrollingModule,
-    HttpClientModule,
-    CoreModule,
-    UserModule,
-    TDSButtonModule,
-    TDSModalModule,
-    TDSAutocompleteModule ,
-    TDSDrawerModule
+    // AppClientLayoutModule,
   ],
   providers: [{ provide: TDS_I18N, useValue: vi_VN }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-
-// import { AccountConfigModule } from '@abp/ng.account/config';
-// import { CoreModule } from '@abp/ng.core';
-// import { registerLocale } from '@abp/ng.core/locale';
-// import { IdentityConfigModule } from '@abp/ng.identity/config';
-// import { SettingManagementConfigModule } from '@abp/ng.setting-management/config';
-// import { TenantManagementConfigModule } from '@abp/ng.tenant-management/config';
-// import { ThemeBasicModule } from '@abp/ng.theme.basic';
-// import { ThemeSharedModule } from '@abp/ng.theme.shared';
-// import { NgModule } from '@angular/core';
-// import { BrowserModule } from '@angular/platform-browser';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { environment } from '../environments/environment';
-// import { AppRoutingModule } from './app-routing.module';
-// import { AppComponent } from './app.component';
-// import { APP_ROUTE_PROVIDER } from './route.provider';
-
-// @NgModule({
-//   imports: [
-//     BrowserModule,
-//     BrowserAnimationsModule,
-//     AppRoutingModule,
-//     CoreModule.forRoot({
-//       environment,
-//       registerLocaleFn: registerLocale(),
-//     }),
-//     ThemeSharedModule.forRoot(),
-//     AccountConfigModule.forRoot(),
-//     IdentityConfigModule.forRoot(),
-//     TenantManagementConfigModule.forRoot(),
-//     SettingManagementConfigModule.forRoot(),
-//     ThemeBasicModule.forRoot(),
-//   ],
-//   declarations: [AppComponent],
-//   providers: [APP_ROUTE_PROVIDER],
-//   bootstrap: [AppComponent],
-// })
-// export class AppModule {}

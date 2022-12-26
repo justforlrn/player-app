@@ -1,0 +1,41 @@
+<div class="lg:hidden p-4 flex justify-start">
+    <tds-breadcrumb>
+        <tds-breadcrumb-item><a routerLink="/home"><span
+                    class="text-md font-semibold">{{appLabels.header.Home}}</span></a></tds-breadcrumb-item>
+        <tds-breadcrumb-item><span
+                class="text-md font-semibold">{{appLabels.header.AboutUs}}</span></tds-breadcrumb-item>
+    </tds-breadcrumb>
+</div>
+<div class="w-full min-h-screen p-4 py-8 md:py-16">
+    <div class="space-y-8">
+        <div>
+            <h2 class="font-semibold pl-8 py-1">{{pageData.AHKGA.Title}}</h2>
+            <div class="p-2 bg-white rounded-lg drop-shadow-2xl" [innerHTML]="pageData.AHKGA.Content"></div>
+        </div>
+        <div>
+            <h2 class="font-semibold pl-8 py-1">{{pageData.VNTeam.Title}}</h2>
+            <p class="p-2 bg-white rounded-lg drop-shadow-2xl" [innerHTML]="pageData.VNTeam.Content">
+            </p>
+        </div>
+        <div>
+            <p class="font-semibold md:pl-8">{{pageData.ListAuthor.Title}}</p>
+            <div class="px-4 md:px-12" [innerHTML]="pageData.ListAuthor.Content">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bg-transparent py-4 md:py-8 w-full">
+    <div class="mx-auto w-full p-2 md:w-2/3 space-y-2">
+        <div
+            class="flex flex-row md:h-16 w-full flex-wrap md:flex-nowrap md: space-x-2 space-y-2 justify-center items-center">
+            <img class="h-10 rounded-xl object-cover" src="/assets/imgs/logos/footer/footer-1.png" />
+            <img class="h-12 rounded-xl object-cover" src="/assets/imgs/logos/footer/footer-2.webp" />
+            <img class="h-12 rounded-xl object-cover" src="/assets/imgs/logos/footer/footer-3.png" />
+            <img class="h-12 rounded-xl object-cover" src="/assets/imgs/logos/footer/footer-4.png" />
+        </div>
+        <div class="flex justify-center items-center text-center">
+            Copyright © 2022. All Rights Reserved.<br>
+            Active Healthy Kids Viet Nam
+        </div>
+    </div>
+</div>

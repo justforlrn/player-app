@@ -1,0 +1,8 @@
+﻿using Volo.Abp;
+
+namespace WebActiveHealthyKidsVietNam.EntityFrameworkCore;
+
+public abstract class WebActiveHealthyKidsVietNamEntityFrameworkCoreTestBase : WebActiveHealthyKidsVietNamTestBase<WebActiveHealthyKidsVietNamEntityFrameworkCoreTestModule>
+{
+
+}

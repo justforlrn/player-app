@@ -1,0 +1,1 @@
+function clickCollapse(t){t.classList.toggle("tds-hide-toc")}window.addEventListener("load",function(){var t=document.getElementsByClassName("tds-custom-toc");document.addEventListener("click",function(e){for(element of t)element.contains(e.target)&&"H2"==e.target.tagName&&clickCollapse(element)})});

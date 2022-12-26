@@ -1,0 +1,26 @@
+<div class="carousel">
+  <div class="slide relative">
+    <div *ngIf="type == 'banner'; else slider">
+      <ng-container *ngFor="let slide of sliderContentStringList; let i = index">
+        <div class="flex w-full absolute top-0 justify-center h-{{height[0]}} md:h-{{height[1]}}">
+          <img *ngIf="i === currentSlide" [src]="slide" class="object-cover w-full" />
+        </div>
+      </ng-container>
+    </div>
+    <ng-template #slider>
+      <ng-container *ngFor="let slide of sliderContentStringList; let i = index">
+        <div class="flex justify-center">
+          <div *ngIf="i === currentSlide" [innerHTML]="bypassSecurityTrustHtml(slide)"></div>
+        </div>
+      </ng-container>
+    </ng-template>
+  </div>
+  <button class="controll prev relative" (click)="onPreviousClick()">
+    <div class="w-12 h-12 bg-black rounded-full"></div>
+    <span class="absolute ml-4 arrow left"></span>
+  </button>
+  <button class="controlr next relative" (click)="onNextClick()">
+    <div class="w-12 h-12 bg-black rounded-full"></div>
+    <span class="absolute ml-2 arrow right"></span>
+  </button>
+</div>

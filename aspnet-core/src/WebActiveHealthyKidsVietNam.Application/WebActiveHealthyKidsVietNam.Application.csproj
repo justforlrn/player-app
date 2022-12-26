@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>WebActiveHealthyKidsVietNam</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebActiveHealthyKidsVietNam.Domain\WebActiveHealthyKidsVietNam.Domain.csproj" />
+    <ProjectReference Include="..\WebActiveHealthyKidsVietNam.Application.Contracts\WebActiveHealthyKidsVietNam.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.1" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="6.0.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="6.0.2" />
+  </ItemGroup>
+
+</Project>

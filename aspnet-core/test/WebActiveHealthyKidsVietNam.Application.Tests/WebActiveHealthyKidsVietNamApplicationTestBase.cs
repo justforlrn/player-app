@@ -1,0 +1,6 @@
+﻿namespace WebActiveHealthyKidsVietNam;
+
+public abstract class WebActiveHealthyKidsVietNamApplicationTestBase : WebActiveHealthyKidsVietNamTestBase<WebActiveHealthyKidsVietNamApplicationTestModule>
+{
+
+}

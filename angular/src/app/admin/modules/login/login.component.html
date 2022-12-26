@@ -1,0 +1,40 @@
+<!-- <div class="lg:hidden p-4 flex justify-start">
+    <tds-breadcrumb>
+        <tds-breadcrumb-item><a routerLink="/home"><span
+                    class="text-md font-semibold">{{appLabels.header.Home}}</span></a></tds-breadcrumb-item>
+        <tds-breadcrumb-item><span class="text-md font-semibold">{{appLabels.header.Event}}</span></tds-breadcrumb-item>
+    </tds-breadcrumb>
+</div> -->
+<div class="relative m-auto w-80 min-h-screen space-y-2">
+    <div class="absolute -top-20 h-screen flex flex-col justify-center items-center">
+        <div class="flex justify-start text-2xl font-bold">ĐĂNG NHẬP</div>
+        <form novalidate class="space-y-1" [formGroup]="form">
+            <tds-form-field>
+                <div class="bg-neutral-3-50 text-body-2 font-regular w-24" tdsAddOnLeft>TÀI KHOẢN</div>
+                <input tdsInput placeholder="Tên tài khoản" formControlName="usernameOrEmail" />
+            </tds-form-field>
+            <tds-form-field>
+                <div class="bg-neutral-3-50 text-body-2 font-regular w-24" tdsAddOnLeft>MẬT KHẨU</div>
+                <input tdsInput type="password" placeholder="Mật khẩu" formControlName="password" />
+            </tds-form-field>
+            <div class="flex justify-end"><button tds-button color="orange" (click)="login()">XÁC NHẬN</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="bg-transparent py-4 md:py-8 w-full">
+    <div class="mx-auto w-full md:w-2/3">
+        <div class="flex flex-col justify-center items-center space-x-4">
+            <div class="flex flex-row h-12 md:h-16 space-x-4 justify-center items-center">
+                <img class="h-full rounded-xl" src="/assets/imgs/logos/home/ahk.png" />
+                <img class="h-full rounded-xl" src="/assets/imgs/logos/home/sl.png" />
+                <img class="h-full rounded-xl" src="/assets/imgs/logos/home/dk.png" />
+                <img class="h-full rounded-xl" src="/assets/imgs/logos/home/pnt-logo.webp" />
+            </div>
+            <div class="text-center">
+                Copyright © 2022. All Rights Reserved.<br>
+                Active Healthy Kids Viet Nam
+            </div>
+        </div>
+    </div>
+</div>

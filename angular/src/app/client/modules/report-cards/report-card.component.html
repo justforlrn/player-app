@@ -1,0 +1,60 @@
+<div class="lg:hidden p-4 flex justify-start">
+    <tds-breadcrumb>
+        <tds-breadcrumb-item><a routerLink="/home"><span
+                    class="text-md font-semibold">{{appLabels.header.Home}}</span></a></tds-breadcrumb-item>
+        <tds-breadcrumb-item><span
+                class="text-md font-semibold">{{appLabels.header.ReportCard}}</span></tds-breadcrumb-item>
+    </tds-breadcrumb>
+</div>
+<div *ngIf="reportCardInformation" class="h-full lg:drop-shadow-2xlCustom p-4 bg-yellow-200 divide-y-2 divide-black">
+    <div class="py-2" [innerHTML]="bypassSecurityTrustHtml(reportCardInformation.title)">
+    </div>
+    <div class="py-2" [innerHTML]="bypassSecurityTrustHtml(reportCardInformation.content)">
+    </div>
+</div>
+<div class="md:hidden flex flex-col items-end p-4 space-y-2">
+    <button tds-button color="primary" rounded="!rounded-full" [size]="'sm'">
+        <span class="flex items-center">
+            <i class="tdsi-download-fill text-md leading-none mr-2"></i><a
+                href="assets/files-download/VN_AHKR_tiếng Việt.pdf" download>Tải về bản Tiếng việt</a>
+        </span>
+    </button>
+    <button tds-button color="primary" rounded="!rounded-full" [size]="'sm'">
+        <span class=" flex items-center">
+            <i class="tdsi-download-fill text-lg leading-none mr-2"></i><a
+                href="assets/files-download/VN_AHKR_English.pdf" download>Download English
+                version</a>
+        </span>
+    </button>
+</div>
+<div class="hidden md:flex justify-end p-4 md:space-x-4 space-x-2">
+    <button tds-button color="primary" rounded="!rounded-full">
+        <span class="flex items-center">
+            <i class="tdsi-download-fill text-lg leading-none mr-2"></i><a
+                href="assets/files-download/VN_AHKR_tiếng Việt.pdf" download>Tải về bản Tiếng việt</a>
+        </span>
+    </button>
+    <button tds-button color="primary" rounded="!rounded-full">
+        <span class="flex items-center">
+            <i class="tdsi-download-fill text-lg leading-none mr-2"></i><a
+                href="assets/files-download/VN_AHKR_English.pdf" download>Download English
+                version</a>
+        </span>
+    </button>
+</div>
+<div class="bg-transparent py-4 md:py-8 w-full">
+    <div class="mx-auto w-full md:w-2/3">
+        <div class="flex flex-col justify-center items-center space-x-4">
+            <div class="flex flex-row h-12 md:h-16 space-x-4 justify-center items-center">
+                <img class="h-full rounded-xl" src="/assets/imgs/logos/home/ahk.png" />
+                <img class="h-full rounded-xl" src="/assets/imgs/logos/home/sl.png" />
+                <img class="h-full rounded-xl" src="/assets/imgs/logos/home/dk.png" />
+                <img class="h-full rounded-xl" src="/assets/imgs/logos/home/pnt-logo.webp" />
+            </div>
+            <div class="text-center">
+                Copyright © 2022. All Rights Reserved.<br>
+                Active Healthy Kids Viet Nam
+            </div>
+        </div>
+    </div>
+</div>

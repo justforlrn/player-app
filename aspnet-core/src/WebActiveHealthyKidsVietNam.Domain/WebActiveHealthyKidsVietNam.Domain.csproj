@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>WebActiveHealthyKidsVietNam</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebActiveHealthyKidsVietNam.Domain.Shared\WebActiveHealthyKidsVietNam.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Emailing" Version="6.0.2" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" Version="6.0.2" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="6.0.2" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="6.0.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="6.0.2" />
+  </ItemGroup>
+
+</Project>

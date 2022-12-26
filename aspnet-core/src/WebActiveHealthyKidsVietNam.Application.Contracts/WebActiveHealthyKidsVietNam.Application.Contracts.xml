@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebActiveHealthyKidsVietNam.Application.Contracts</name>
+    </assembly>
+    <members>
+        <member name="M:WebActiveHealthyKidsVietNam.Auths.IAuthService.UserCreateAsync(WebActiveHealthyKidsVietNam.Auths.UserCreateDto)">
+            <summary>
+            tạo tai khoan
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebActiveHealthyKidsVietNam.Auths.IAuthService.SignInAsync(WebActiveHealthyKidsVietNam.Auths.SignInDto)">
+            <summary>
+            login
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebActiveHealthyKidsVietNam.Auths.IAuthService.ChangePasswordAsync(WebActiveHealthyKidsVietNam.Auths.ChangePasswordDto)">
+            <summary>
+            thay doi mat khau
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

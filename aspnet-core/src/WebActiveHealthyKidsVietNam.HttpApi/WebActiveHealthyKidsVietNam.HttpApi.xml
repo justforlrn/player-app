@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebActiveHealthyKidsVietNam.HttpApi</name>
+    </assembly>
+    <members>
+        <member name="M:WebActiveHealthyKids.Controllers.AboutUsController.CreateAsync(WebActiveHealthyKidsVietNam.AboutUss.CreateAboutUsDto)">
+            <summary>
+            api tạo aboutUs
+            </summary>
+            <param name="input">
+            <h5>0:VietNam</h5>
+            <h5>1:English</h5>
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:WebActiveHealthyKids.Controllers.AboutUsController.UpdateAsync(WebActiveHealthyKidsVietNam.AboutUss.UpdateAboutUsDto)">
+            <summary>
+            api chỉnh sửa aboutUs
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebActiveHealthyKids.Controllers.AboutUsController.GetAsync(WebActiveHealthyKidsVietNam.Commons.LanguageType)">
+            <summary>
+            api get list aboutUs
+            </summary>
+            <param name="language">
+            <h5>0:VietNam</h5>
+            <h5>1:English</h5>
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:WebActiveHealthyKids.Controllers.InformationController.UpdateAsync(WebActiveHealthyKidsVietNam.Informations.UpdateInformationDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebActiveHealthyKids.Controllers.SlideListController.CreateAsync(WebActiveHealthyKidsVietNam.SlideLists.CreateSlideListDto)">
+            <summary>
+            api tạo banner, slides, publication, event
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

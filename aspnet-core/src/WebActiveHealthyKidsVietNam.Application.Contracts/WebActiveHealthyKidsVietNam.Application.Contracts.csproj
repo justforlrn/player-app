@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>WebActiveHealthyKidsVietNam</RootNamespace>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>WebActiveHealthyKidsVietNam.Application.Contracts.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="WebActiveHealthyKidsVietNam.Application.Contracts.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="WebActiveHealthyKidsVietNam.Application.Contracts.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebActiveHealthyKidsVietNam.Domain.Shared\WebActiveHealthyKidsVietNam.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.ObjectExtending" Version="6.0.2" />
+    <PackageReference Include="Volo.Abp.Identity.Application.Contracts" Version="6.0.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="6.0.2" />
+  </ItemGroup>
+
+</Project>

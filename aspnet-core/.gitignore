@@ -251,15 +251,15 @@ paket-files/
 .idea/
 *.sln.iml
 
-# Player
-src/Player.Web/Logs/*
-src/Player.Web.Host/Logs/*
-src/Player.IdentityServer/Logs/*
-src/Player.HttpApi.Host/Logs/*
-src/Player.HttpApi.Host/Logs/*
-src/Player.DbMigrator/Logs/*
-src/Player.Blazor.Server/Logs/*
-src/Player.Blazor.Server.Tiered/Logs/*
+# WebActiveHealthyKidsVietNam
+src/WebActiveHealthyKidsVietNam.Web/Logs/*
+src/WebActiveHealthyKidsVietNam.Web.Host/Logs/*
+src/WebActiveHealthyKidsVietNam.AuthServer/Logs/*
+src/WebActiveHealthyKidsVietNam.HttpApi.Host/Logs/*
+src/WebActiveHealthyKidsVietNam.HttpApi.HostWithIds/Logs/*
+src/WebActiveHealthyKidsVietNam.DbMigrator/Logs/*
+src/WebActiveHealthyKidsVietNam.Blazor.Server/Logs/*
+src/WebActiveHealthyKidsVietNam.Blazor.Server.Tiered/Logs/*
 
 # Use abp install-libs to restore.
 **/wwwroot/libs/*

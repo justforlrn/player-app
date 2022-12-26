@@ -1,0 +1,128 @@
+<div class="hidden lg:flex logo-side w-full h-20 border-b bg-yellow-400 border-gray-300 items-center justify-center">
+    <div class="absolute left-0 flex flex-row items-center px-8">
+        <div class="logo max-h-[5rem]">
+            <img src="{{data.LogoUrl}}" class="max-h-[4rem]" alt="" />
+        </div>
+        <div class="2xl:text-2xl 2xl:block hidden font-semibold pl-4">
+            {{data.WebTitle}}
+        </div>
+    </div>
+
+    <div class="w-full text-md">
+        <div class="flex mx-auto flex-row w-1/2 space-x-1 justify-center">
+            <div [routerLink]="'home'" routerLinkActive="text-orange-600" [routerLinkActiveOptions]="{exact: true}"
+                class="relative btn4 cursor-pointer p-2  uppercase font-semibold  flex h-full justify-center items-center leading-none overflow-hidden">
+                <div class="whitespace-nowrap">{{appLabels.header.Home}}</div>
+                <span class="absolute inset-x-0 h-1 bottom-0 bg-black" routerLinkActive="bg-orange-600"></span>
+                <div class="absolute left-4 right-4 inset-x-0 bottom-out bottom-0 h-0.5 bg-black"
+                    routerLinkActive="bg-orange-600"></div>
+            </div>
+            <div [routerLink]="'report-cards'" routerLinkActive="text-orange-600"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="relative btn4 cursor-pointer p-2  uppercase font-semibold whitespace-nowrap  flex flex-initial h-full justify-center items-center leading-none overflow-hidden">
+                <div class="whitespace-nowrap">{{appLabels.header.ReportCard}}</div>
+                <span class="absolute inset-x-0 h-1 bottom-0 bg-black" routerLinkActive="bg-orange-600"></span>
+                <div class="absolute left-4 right-4 inset-x-0 bottom-out bottom-0 h-0.5 bg-black"
+                    routerLinkActive="bg-orange-600"></div>
+            </div>
+            <div [routerLink]="'about-us'" routerLinkActive="text-orange-600" [routerLinkActiveOptions]="{exact: true}"
+                class="relative btn4 cursor-pointer p-2  uppercase font-semibold  flex h-full justify-center items-center leading-none overflow-hidden">
+                <div class="whitespace-nowrap">{{appLabels.header.AboutUs}}</div>
+                <span class="absolute inset-x-0 h-1 bottom-0 bg-black" routerLinkActive="bg-orange-600"></span>
+                <div class="absolute left-4 right-4 inset-x-0 bottom-out bottom-0 h-0.5 bg-black"
+                    routerLinkActive="bg-orange-600"></div>
+            </div>
+            <div [routerLink]="'publications'" routerLinkActive="text-orange-600"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="relative btn4 cursor-pointer p-2  uppercase font-semibold  flex h-full justify-center items-center leading-none overflow-hidden">
+                <div class="whitespace-nowrap">{{appLabels.header.Publications}}</div>
+                <span class="absolute inset-x-0 h-1 bottom-0 bg-black" routerLinkActive="bg-orange-600"></span>
+                <div class="absolute left-4 right-4 inset-x-0 bottom-out bottom-0 h-0.5 bg-black"
+                    routerLinkActive="bg-orange-600"></div>
+            </div>
+            <div [routerLink]="'event'" routerLinkActive="text-orange-600" [routerLinkActiveOptions]="{exact: true}"
+                class="relative btn4 cursor-pointer p-2  uppercase font-semibold  flex h-full justify-center items-center leading-none overflow-hidden">
+                <div class="whitespace-nowrap">{{appLabels.header.Event}}</div>
+                <span class="absolute inset-x-0 h-1 bottom-0 bg-black" routerLinkActive="bg-orange-600"></span>
+                <div class="absolute left-4 right-4 inset-x-0 bottom-out bottom-0 h-0.5 bg-black"
+                    routerLinkActive="bg-orange-600"></div>
+            </div>
+        </div>
+    </div>
+    <div class="absolute right-0 font-semibold px-8 cursor-pointer space-x-1">
+        <button (click)="switchLanguage(0)">VI</button><span>/</span><button (click)="switchLanguage(1)">EN</button>
+    </div>
+</div>
+
+<div
+    class="flex lg:hidden px-4 logo-side w-full h-20 border-b bg-yellow-400 border-gray-400 items-center justify-between">
+    <div class="flex flex-row items-center">
+        <div class="logo max-h-[5rem]">
+            <a routerLink="home">
+                <img src="{{data.LogoUrl}}" class="max-h-[4rem]" alt="" /></a>
+        </div>
+        <div class="text-lg font-semibold px-4">
+            Active Healthy Kids<br> Viet Nam
+        </div>
+    </div>
+    <tds-drawer [visible]="isShowMobileMenu" placement="right" title="MENU" [size]="'sm'" (onClose)="closeMobileMenu()"
+        [bodyStyle]="{'background-color': 'rgb(255 234 131)'}">
+        <ng-container *tdsDrawerContent>
+            <div class="text-body-2 font-regular text-neutral-1-900">
+                <div class="flex mx-auto flex-col space-y-4 justify-center">
+                    <div [routerLink]="'home'" routerLinkActive="text-orange-600" (click)="closeMobileMenu()"
+                        [routerLinkActiveOptions]="{exact: true}"
+                        class="relative btn4 cursor-pointer p-2  uppercase font-semibold  flex h-full justify-center items-center leading-none overflow-hidden">
+                        <div class="whitespace-nowrap">{{appLabels.header.Home}}</div>
+                        <span class="absolute inset-x-0 h-1 bottom-0 bg-black" routerLinkActive="bg-orange-600"></span>
+                        <div class="absolute left-4 right-4 inset-x-0 bottom-out bottom-0 h-0.5 bg-black"
+                            routerLinkActive="bg-orange-600"></div>
+                    </div>
+                    <div [routerLink]="'report-cards'" routerLinkActive="text-orange-600" (click)="closeMobileMenu()"
+                        [routerLinkActiveOptions]="{exact: true}"
+                        class="relative btn4 cursor-pointer p-2  uppercase font-semibold whitespace-nowrap  flex flex-initial h-full justify-center items-center leading-none overflow-hidden">
+                        <div class="whitespace-nowrap">{{appLabels.header.ReportCard}}</div>
+                        <span class="absolute inset-x-0 h-1 bottom-0 bg-black" routerLinkActive="bg-orange-600"></span>
+                        <div class="absolute left-4 right-4 inset-x-0 bottom-out bottom-0 h-0.5 bg-black"
+                            routerLinkActive="bg-orange-600"></div>
+                    </div>
+                    <div [routerLink]="'about-us'" routerLinkActive="text-orange-600" (click)="closeMobileMenu()"
+                        [routerLinkActiveOptions]="{exact: true}"
+                        class="relative btn4 cursor-pointer p-2  uppercase font-semibold  flex h-full justify-center items-center leading-none overflow-hidden">
+                        <div class="whitespace-nowrap">{{appLabels.header.AboutUs}}</div>
+                        <span class="absolute inset-x-0 h-1 bottom-0 bg-black" routerLinkActive="bg-orange-600"></span>
+                        <div class="absolute left-4 right-4 inset-x-0 bottom-out bottom-0 h-0.5 bg-black"
+                            routerLinkActive="bg-orange-600"></div>
+                    </div>
+                    <div [routerLink]="'publications'" routerLinkActive="text-orange-600" (click)="closeMobileMenu()"
+                        [routerLinkActiveOptions]="{exact: true}"
+                        class="relative btn4 cursor-pointer p-2  uppercase font-semibold  flex h-full justify-center items-center leading-none overflow-hidden">
+                        <div class="whitespace-nowrap">{{appLabels.header.Publications}}</div>
+                        <span class="absolute inset-x-0 h-1 bottom-0 bg-black" routerLinkActive="bg-orange-600"></span>
+                        <div class="absolute left-4 right-4 inset-x-0 bottom-out bottom-0 h-0.5 bg-black"
+                            routerLinkActive="bg-orange-600"></div>
+                    </div>
+                    <div [routerLink]="'event'" routerLinkActive="text-orange-600" (click)="closeMobileMenu()"
+                        [routerLinkActiveOptions]="{exact: true}"
+                        class="relative btn4 cursor-pointer p-2  uppercase font-semibold  flex h-full justify-center items-center leading-none overflow-hidden">
+                        <div class="whitespace-nowrap">{{appLabels.header.Event}}</div>
+                        <span class="absolute inset-x-0 h-1 bottom-0 bg-black" routerLinkActive="bg-orange-600"></span>
+                        <div class="absolute left-4 right-4 inset-x-0 bottom-out bottom-0 h-0.5 bg-black"
+                            routerLinkActive="bg-orange-600"></div>
+                    </div>
+                </div>
+                <div class="absolute right-0 bottom-0 font-semibold p-4 cursor-pointer space-x-2 text-lg">
+                    <button (click)="switchLanguage(0)">VI</button><span>/</span><button
+                        (click)="switchLanguage(1)">EN</button>
+                </div>
+            </div>
+        </ng-container>
+    </tds-drawer>
+    <div class="font-semibold">
+        <button tds-button-flat color="orange" rounded="!rounded-full" (click)="showMobileMenu()">
+            <span class="flex items-center">
+                <i class="tdsi-menu-1-fill text-2xl leading-5"></i>
+            </span>
+        </button>
+    </div>
+</div>

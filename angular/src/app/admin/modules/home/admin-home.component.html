@@ -1,0 +1,89 @@
+<div class="main py-8 space-y-4 px-2">
+  <div class="bg-white border border-yellow-400 rounded-xl">
+    <tds-collapse [bordered]="false">
+      <tds-collapse-panel header="Banner" [active]="true" [disabled]=false>
+        <tds-upload listType="picture-card" [(fileList)]="bannerList" [showButton]="bannerList.length < 8"
+          [preview]="handlePreview" [customRequest]="handleUpload" [download]="handleDownload">
+          <div class="w-full text-neutral-1-300">
+            <div class="flex items-center justify-center">
+              <span class="tdsi-images-fill text-xl leading-5"></span>
+            </div>
+            <div class="mt-2 text-body-2 font-regular">Upload</div>
+          </div>
+        </tds-upload>
+        <tds-modal [visible]="previewVisible" [content]="modalContent" [footer]="null"
+          (onCancel)="previewVisible = false">
+          <ng-template #modalContent>
+            <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+          </ng-template>
+        </tds-modal>
+      </tds-collapse-panel>
+    </tds-collapse>
+  </div>
+  <div class="bg-white border border-yellow-400 rounded-xl">
+    <tds-collapse [bordered]="false">
+      <tds-collapse-panel header="Thông báo" [active]="true" [disabled]=false>
+        <div class="divide-y-2">
+          <div class="pb-2">
+            <button tds-button color="primary" type="button" class="w-full" (click)="onAddNewAnnouncement()"
+              *ngIf="!addNewAnnouncement; else addNewAnnouncementTemp">Thêm mới</button>
+            <ng-template #addNewAnnouncementTemp class="flex flex-col items-center w-full">
+              <div class="flex flex-col py-1">
+                <tds-label>Tên: </tds-label>
+                <tds-form-field class="grow"
+                  [color]="annouceImageData.slideTitle == '' && submitNewAnnounce ? 'error' : 'default'">
+                  <input tdsInput autocomplete="off" placeholder="Tên miêu tả cho thông báo"
+                    [(ngModel)]="annouceImageData.slideTitle" [required]="true" />
+                </tds-form-field><tds-error *ngIf="annouceImageData.slideTitle =='' && submitNewAnnounce">Vui lòng nhập
+                  giá trị cho trường này, vd: "Thông báo 1"</tds-error>
+              </div>
+              <div class="flex flex-col py-1">
+                <tds-label>Nội dung: </tds-label>
+                <tds-editor class="w-full" [customUploadHandler]="customUpload"
+                  [(ngModel)]="newAnnounceText"></tds-editor>
+                <tds-error *ngIf="newAnnounceText == '' && submitNewAnnounce">Vui lòng nhập
+                  giá trị cho trường này, vd: "Thông báo 1"</tds-error>
+              </div>
+              <div class="flex w-full justify-end space-x-1">
+                <button tds-button type="button" color="secondary" (click)="cancelNewAnnounce()">Hủy</button>
+                <button tds-button type="button" color="primary" (click)="saveNewAnnounce()">Lưu</button>
+              </div>
+            </ng-template>
+          </div>
+          <div class="old-announce py-2 space-y-2" *ngIf="!!sliderList.length; else empty">
+            <tds-collapse *ngFor="let slider of sliderList">
+              <tds-collapse-panel [header]="slider.slideTitle" [active]="false" [disabled]=false class="bg-white">
+                <div [innerHTML]="bypassSecurityTrustHtml(slider.slideContent)"></div>
+              </tds-collapse-panel>
+            </tds-collapse>
+          </div>
+        </div>
+      </tds-collapse-panel>
+    </tds-collapse>
+  </div>
+  <div class="bg-white border border-yellow-400 rounded-xl" *ngIf="introductionInformation">
+    <tds-collapse [bordered]="false">
+      <tds-collapse-panel header="Giới thiệu" [active]="true" [disabled]=false [extra]="extraTpl">
+        <ng-template #extraTpl>
+          <span class="tdsi-edit-2-fill text-blue-500 leading-none text-2xl font-semibold cursor-pointer" tds-tooltip
+            tooltipTitle="Chỉnh sửa" (click)="showEditIntroduction($event)"></span>
+        </ng-template>
+        <div *ngIf="!isEditIntroduction; else editIntroduction">
+          <div class="px-2 pb-4" *ngIf="!!introductionInformation.content.length; else empty"
+            [innerHTML]="bypassSecurityTrustHtml(introductionInformation.content)"></div>
+        </div>
+        <ng-template #editIntroduction>
+          <tds-editor class="w-full" [customUploadHandler]="customUpload"
+            [(ngModel)]="introductionInformation.content"></tds-editor>
+          <div class="flex w-full justify-end space-x-1 pt-2">
+            <button tds-button type="button" color="secondary" (click)="cancelIntroduce()">Hủy</button>
+            <button tds-button type="button" color="primary" (click)="saveIntroduce()">Lưu</button>
+          </div>
+        </ng-template>
+      </tds-collapse-panel>
+    </tds-collapse>
+  </div>
+</div>
+<ng-template #empty>
+  <tds-empty></tds-empty>
+</ng-template>

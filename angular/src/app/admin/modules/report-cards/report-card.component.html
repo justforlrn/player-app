@@ -1,0 +1,50 @@
+<div class="lg:hidden px-4 flex justify-start">
+    <tds-breadcrumb>
+        <tds-breadcrumb-item><a routerLink="/admin/home"><span
+                    class="text-md font-semibold">{{appLabels.header.Home}}</span></a></tds-breadcrumb-item>
+        <tds-breadcrumb-item><span
+                class="text-md font-semibold">{{appLabels.header.ReportCard}}</span></tds-breadcrumb-item>
+    </tds-breadcrumb>
+</div>
+<div class="h-full lg:drop-shadow-2xlCustom p-2 pt-4 bg-yellow-200" *ngIf="reportCardInformation">
+    <div class="w-full py-2">
+        <tds-label>Tên: </tds-label>
+        <tds-editor [height]="'200'" [(ngModel)]="reportCardInformation.title"></tds-editor>
+    </div>
+    <div class="w-full py-2">
+        <tds-label>Nội dung: </tds-label>
+        <tds-editor [(ngModel)]="reportCardInformation.content"></tds-editor>
+    </div>
+    <!-- <diV class="py-2">
+        <tds-label>Link down tiếng việt: </tds-label>
+        <tds-form-field class="grow">
+            <input tdsInput autocomplete="off" placeholder="Tên miêu tả cho thông báo"
+                [required]="true" /></tds-form-field>
+    </diV>
+    <diV class="py-2">
+        <tds-label>Link down tiếng việt: </tds-label>
+        <tds-form-field class="grow">
+            <input tdsInput autocomplete="off" placeholder="Tên miêu tả cho thông báo"
+                [required]="true" /></tds-form-field>
+    </diV> -->
+    <div class="flex w-full justify-end space-x-1 pt-2">
+        <!-- <button tds-button type="button" color="secondary" (click)="cancelIntroduce()">Hủy</button> -->
+        <button tds-button type="button" color="primary" (click)="save()">Lưu</button>
+    </div>
+</div>
+<div class="bg-transparent py-4 md:py-8 w-full">
+    <div class="mx-auto w-full md:w-2/3">
+        <div class="flex flex-col justify-center items-center space-x-4">
+            <div class="flex flex-row h-12 md:h-16 space-x-4 justify-center items-center">
+                <img class="h-full rounded-xl" src="/assets/imgs/logos/home/ahk.png" />
+                <img class="h-full rounded-xl" src="/assets/imgs/logos/home/sl.png" />
+                <img class="h-full rounded-xl" src="/assets/imgs/logos/home/dk.png" />
+                <img class="h-full rounded-xl" src="/assets/imgs/logos/home/pnt-logo.webp" />
+            </div>
+            <div class="text-center">
+                Copyright © 2022. All Rights Reserved.<br>
+                Active Healthy Kids Viet Nam
+            </div>
+        </div>
+    </div>
+</div>

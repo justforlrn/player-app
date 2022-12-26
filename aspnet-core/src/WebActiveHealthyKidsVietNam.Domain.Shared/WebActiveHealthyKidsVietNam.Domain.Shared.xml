@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebActiveHealthyKidsVietNam.Domain.Shared</name>
+    </assembly>
+    <members>
+        <member name="P:WebActiveHealthyKidsVietNam.AboutUss.CreateAboutUsDto.Language">
+            <summary>
+            <h5>0:Viet Nam</h5>
+            <h5>1:English</h5>
+            </summary>
+        </member>
+        <member name="P:WebActiveHealthyKidsVietNam.SlideLists.CreateSlideListDto.SlideType">
+            <summary>
+            <h5>0: Banner</h5>
+            <h5>1: Slide</h5>
+            <h5>2: Publication</h5>
+            <h5>3: Event</h5>
+            </summary>
+        </member>
+        <member name="P:WebActiveHealthyKidsVietNam.SlideLists.CreateSlideListDto.SlideOder">
+            <summary>
+            thứ tự từng hình ảnh
+            </summary>
+        </member>
+        <member name="P:WebActiveHealthyKidsVietNam.SlideLists.UpdateSlideListDto.SlideType">
+            <summary>
+            <h5>0: Banner</h5>
+            <h5>1: Slide</h5>
+            <h5>2: Publication</h5>
+            <h5>3: Event</h5>
+            </summary>
+        </member>
+        <member name="P:WebActiveHealthyKidsVietNam.SlideLists.UpdateSlideListDto.SlideOder">
+            <summary>
+            thứ tự từng hình ảnh
+            </summary>
+        </member>
+    </members>
+</doc>
