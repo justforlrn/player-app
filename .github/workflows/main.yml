@@ -24,6 +24,6 @@ jobs:
           file: ./aspnet-core/src/WebActiveHealthyKidsVietNam.HttpApi.Host/Dockerfile
           push: true
           pull: true
-          tags: justforlrn/player-app:lastest
+          tags: justforlrn/player-app:1.0.0
       - name: Verify
         run: echo ${{ steps.docker_build.outputs.digest }}
