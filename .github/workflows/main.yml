@@ -1,7 +1,7 @@
 name: playerCI
 on:
   push:
-    branches: [ dev ]
+    branches: [ ahkvn ]
 jobs:
     Docker:
       runs-on: ubuntu-latest
@@ -21,29 +21,9 @@ jobs:
         id: docker_build
         with:
           context: ./aspnet-core
-          file: ./aspnet-core/src/Player.HttpApi.Host/Dockerfile
+          file: ./aspnet-core/src/WebActiveHealthyKidsVietNam.HttpApi.Host/Dockerfile
           push: true
           pull: true
-          tags: justforlrn/player-app:lastest
+          tags: justforlrn/player-app:1.0.0
       - name: Verify
         run: echo ${{ steps.docker_build.outputs.digest }}
-    PullAndRunDockerInServer:
-      needs: Docker
-      runs-on: ubuntu-latest
-      steps:
-        - name: ls -a via ssh
-          uses: fifsky/ssh-action@master
-          with:
-            command: |
-              cd ~/www/player-app
-              git checkout dev
-              git pull
-              docker stop $(docker ps -a -q)
-              docker rm $(docker ps -a -q)
-              docker system prune -a --force
-              docker-compose up -d
-            host: ${{ secrets.SSH_HOST }}
-            user: ${{ secrets.SSH_USER }}
-            key: ${{ secrets.SSH_PRIVATE_KEY}}
-            pass: ${{ secrets.SSH_PASSWORD}}
-            args: "-tt"
