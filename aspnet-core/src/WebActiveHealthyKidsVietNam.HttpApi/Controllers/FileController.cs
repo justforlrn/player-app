@@ -57,8 +57,11 @@ namespace WebActiveHealthyKidsVietNam.Controllers
                 }
 
                 // I only want to get its relative path
-                return fullFileLocation.Replace(_env.WebRootPath,
-                    String.Empty, StringComparison.OrdinalIgnoreCase);
+                return new
+                {
+                    imageUrl = fullFileLocation.Replace(_env.WebRootPath,
+                    String.Empty, StringComparison.OrdinalIgnoreCase)
+                };
                 //string imagePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images");
                 //bool exists = Directory.Exists(imagePath);
                 //if (!exists)
