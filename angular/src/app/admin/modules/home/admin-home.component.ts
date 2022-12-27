@@ -167,9 +167,7 @@ export class AdminHomeComponent {
   customUpload = (blobInfo: any, success: any, failure: any) => {
     const formData = new FormData();
     formData.append('ufile', blobInfo.blob(), blobInfo.filename());
-    const url = `${environment.apiUrl}/api/file/uploadimage`;
-    let _options: any = {};
-    _options.headers = new HttpHeaders({});
+    const url = `${environment.apiUrl}/api/file/uploadimage`;    
     return this._homeService
       .uploadImage(url, formData)
       .subscribe((res: any) => {
