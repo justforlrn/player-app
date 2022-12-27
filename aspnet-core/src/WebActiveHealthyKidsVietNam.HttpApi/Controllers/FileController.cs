@@ -40,6 +40,7 @@ namespace WebActiveHealthyKidsVietNam.Controllers
                     await ufile.CopyToAsync(fileStream);
                 }
                 var pathImage = _env.WebRootFileProvider.GetFileInfo("images/" + groupNameExtension)?.PhysicalPath;
+                Console.WriteLine(pathImage);
                 return new
                 {
                     imageUrl = $"images/{pathImage.Split("wwwroot\\images\\").Last()}"
