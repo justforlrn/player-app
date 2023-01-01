@@ -3,7 +3,7 @@
     <tds-collapse [bordered]="false">
       <tds-collapse-panel header="Banner" [active]="true" [disabled]=false>
         <tds-upload listType="picture-card" [(fileList)]="bannerList" [showButton]="bannerList.length < 8"
-          [preview]="handlePreview" [customRequest]="handleUpload" [download]="handleDownload">
+          [preview]="handlePreview" [customRequest]="handleUpload" [download]="handleDownload" [remove]="handleRemove">
           <div class="w-full text-neutral-1-300">
             <div class="flex items-center justify-center">
               <span class="tdsi-images-fill text-xl leading-5"></span>
@@ -52,7 +52,13 @@
           </div>
           <div class="old-announce py-2 space-y-2" *ngIf="!!sliderList.length; else empty">
             <tds-collapse *ngFor="let slider of sliderList">
-              <tds-collapse-panel [header]="slider.slideTitle" [active]="false" [disabled]=false class="bg-white">
+              <tds-collapse-panel [header]="slider.slideTitle" [active]="false" [disabled]=false class="bg-white"
+                [extra]="removeAnno">
+                <ng-template #removeAnno>
+                  <span class="
+                tdsi-trash-fill text-red-500 leading-none text-2xl font-semibold cursor-pointer" tds-tooltip
+                    tooltipTitle="Xóa" (click)="removeSlideAnno(slider)"></span>
+                </ng-template>
                 <div [innerHTML]="bypassSecurityTrustHtml(slider.slideContent)"></div>
               </tds-collapse-panel>
             </tds-collapse>
@@ -63,8 +69,8 @@
   </div>
   <div class="bg-white border border-yellow-400 rounded-xl" *ngIf="introductionInformation">
     <tds-collapse [bordered]="false">
-      <tds-collapse-panel header="Giới thiệu" [active]="true" [disabled]=false [extra]="extraTpl">
-        <ng-template #extraTpl>
+      <tds-collapse-panel header="Giới thiệu" [active]="true" [disabled]=false>
+        <ng-template #editIntro>
           <span class="tdsi-edit-2-fill text-blue-500 leading-none text-2xl font-semibold cursor-pointer" tds-tooltip
             tooltipTitle="Chỉnh sửa" (click)="showEditIntroduction($event)"></span>
         </ng-template>

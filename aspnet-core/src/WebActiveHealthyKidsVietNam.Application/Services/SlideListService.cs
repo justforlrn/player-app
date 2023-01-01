@@ -43,5 +43,15 @@ namespace WebActiveHealthyKidsVietNam.Services
             var entity = await _slideListManager.UpdateAsync(input);
             return ObjectMapper.Map<SlideList, SlideListDto>(entity);
         }
+        public async
+        Task DeleteAsync(Guid sildeId)
+        {
+            var target = await _slideListRepo.FindAsync(e => e.Id == sildeId);
+            if (target == null) throw new UserFriendlyException("Không tìm thấy slide này");
+            else
+            {
+               await _slideListRepo.DeleteAsync(target);
+            }
+        }
     }
 }

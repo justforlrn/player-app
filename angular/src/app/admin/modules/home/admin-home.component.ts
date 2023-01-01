@@ -1,11 +1,13 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
 import { AppLabels } from 'src/app/shared/app.constants';
 import { HttpCustomSharedService } from 'src/app/shared/http-custom.shared.service';
 import { SharedService } from 'src/app/shared/shared.service';
 import { environment } from 'src/environments/environment';
 import { TDSMessageService } from 'tds-ui/message';
+import { TDSModalService } from 'tds-ui/modal';
 import { TDSUploadFile } from 'tds-ui/upload';
 import { CreateSlider, Slider } from '../slider/slider.model';
 import { SliderService } from '../slider/slider.service';
@@ -63,7 +65,8 @@ export class AdminHomeComponent {
     private _sliderService: SliderService,
     private _msg: TDSMessageService,
     private _sanitizer: DomSanitizer,
-    private _homeService: HomeService
+    private _homeService: HomeService,
+    private _modal: TDSModalService
   ) {
     this.language = this._sharedService._language;
     this.appLabels = this._sharedService.language;
@@ -131,6 +134,49 @@ export class AdminHomeComponent {
     this.addNewAnnouncement = true;
   }
 
+  removeSlideAnno(slide: any) {
+    debugger;
+    return this._sliderService.removeSlide(slide.id).subscribe({
+      next: () => {
+        this.sliderList = this.sliderList.filter((e) => e.id != slide.id);
+        this._msg.success('Xóa thành công');
+      },
+      error: () => {
+        this._msg.error('Thất bại');
+      },
+    });
+  }
+
+  handleRemove = (file: TDSUploadFile) => {
+    return new Observable<any>((res) => {
+      this._modal.warning({
+        title: 'Xóa file ' + file.name,
+        content: 'Bạn xác nhận xóa file ' + file.name,
+        onOk: () => {
+          debugger;
+          this._sliderService.removeSlide(file.uid).subscribe({
+            next: () => {
+              this._msg.success('Xóa ảnh thành công');
+            },
+            error: () => {
+              this._msg.error('Thất bại');
+            },
+          });
+          res.next(true);
+          res.complete();
+          this._msg.success('Xóa file thành công');
+        },
+        onCancel: () => {
+          res.next(false);
+          res.complete();
+          this._msg.info('Bạn đã hủy xóa file');
+        },
+        okText: 'Xóa file',
+        cancelText: 'Hủy',
+      });
+    });
+  };
+
   handlePreview = async (file: TDSUploadFile) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj!);
@@ -167,7 +213,7 @@ export class AdminHomeComponent {
   customUpload = (blobInfo: any, success: any, failure: any) => {
     const formData = new FormData();
     formData.append('ufile', blobInfo.blob(), blobInfo.filename());
-    const url = `${environment.apiUrl}/api/file/uploadimage`;    
+    const url = `${environment.apiUrl}/api/file/uploadimage`;
     return this._homeService
       .uploadImage(url, formData)
       .subscribe((res: any) => {

@@ -25,6 +25,11 @@ export class SliderService {
     return this._httpCustomSharedService.post<Slider>(url, body);
   }
 
+  removeSlide(slideId: string) {
+    const url = `${environment.apiUrl}/api/slidelist?slideId=${slideId}`;
+    return this._httpCustomSharedService.delete(url);
+  }
+
   public createSlider(body: CreateSlider) {
     const url = `${environment.apiUrl}/api/slidelist`;
     return this._httpCustomSharedService.post<Slider>(url, body);

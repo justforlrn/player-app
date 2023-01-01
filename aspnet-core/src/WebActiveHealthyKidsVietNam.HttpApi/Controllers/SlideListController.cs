@@ -45,5 +45,11 @@ namespace WebActiveHealthyKids.Controllers
         {
             return await _slideListSer.GetAsync(moduleId, language);
         }
+
+        [HttpDelete]
+        public async Task DeleteAsync(Guid slideId)
+        {
+            await _slideListSer.DeleteAsync(slideId);
+        }
     }
 }
