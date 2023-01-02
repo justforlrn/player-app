@@ -39,7 +39,7 @@
               </div>
               <div class="flex flex-col py-1">
                 <tds-label>Nội dung: </tds-label>
-                <tds-editor class="w-full" [customUploadHandler]="customUpload"
+                <tds-editor class="w-full block" [customUploadHandler]="customUpload"
                   [(ngModel)]="newAnnounceText"></tds-editor>
                 <tds-error *ngIf="newAnnounceText == '' && submitNewAnnounce">Vui lòng nhập
                   giá trị cho trường này, vd: "Thông báo 1"</tds-error>
@@ -79,7 +79,7 @@
             [innerHTML]="bypassSecurityTrustHtml(introductionInformation.content)"></div>
         </div>
         <ng-template #editIntroduction>
-          <tds-editor class="w-full" [customUploadHandler]="customUpload"
+          <tds-editor class="w-full block" [customUploadHandler]="customUpload"
             [(ngModel)]="introductionInformation.content"></tds-editor>
           <div class="flex w-full justify-end space-x-1 pt-2">
             <button tds-button type="button" color="secondary" (click)="cancelIntroduce()">Hủy</button>

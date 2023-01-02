@@ -6,7 +6,7 @@
     </tds-breadcrumb>
 </div>
 <div class="pt-4 px-2" *ngIf="eventInformation">
-    <tds-editor [height]="'600'" [(ngModel)]="eventInformation.content"></tds-editor>
+    <tds-editor class="block" [height]="'600'" [(ngModel)]="eventInformation.content" [customUploadHandler]="customUpload"></tds-editor>
     <div class="flex w-full justify-end space-x-1 pt-2">
         <!-- <button tds-button type="button" color="secondary" (click)="cancelIntroduce()">Hủy</button> -->
         <button tds-button type="button" color="primary" (click)="save()">Lưu</button>

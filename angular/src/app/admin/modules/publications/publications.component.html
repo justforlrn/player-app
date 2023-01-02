@@ -8,7 +8,7 @@
 </div>
 <!-- class="w-full min-h-[650px] md:min-h-[850px] py-16 p-4 md:py-16" -->
 <div class="pt-4 px-2" *ngIf="publicationInformation">
-    <tds-editor [height]="'600'" [(ngModel)]="publicationInformation.content"></tds-editor>
+    <tds-editor class="block" [height]="'600'" [(ngModel)]="publicationInformation.content" [customUploadHandler]="customUpload"></tds-editor>
     <div class="flex w-full justify-end space-x-1 pt-2">
         <!-- <button tds-button type="button" color="secondary" (click)="cancelIntroduce()">Hủy</button> -->
         <button tds-button type="button" color="primary" (click)="save()">Lưu</button>

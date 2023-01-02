@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AppLabels } from 'src/app/shared/app.constants';
 import { HttpCustomSharedService } from 'src/app/shared/http-custom.shared.service';
 import { SharedService } from 'src/app/shared/shared.service';
+import { environment } from 'src/environments/environment';
 import { TDSMessageService } from 'tds-ui/message';
 import {
   Information,
@@ -42,12 +43,29 @@ export class ClientEventComponent {
       }
     });
   }
+  customUpload = (blobInfo: any, success: any, failure: any) => {
+    debugger
+    const formData = new FormData();
+    formData.append('ufile', blobInfo.blob(), blobInfo.filename());
+    const url = `${environment.apiUrl}/api/file/uploadimage`;
+    return this._homeService
+      .uploadImage(url, formData)
+      .subscribe((res: any) => {
+        if (res && res.imageUrl) {
+          // this.annouceImageData.imageUrl = res.imageUrl;
+          success(res.imageUrl);
+          failure('Tải ảnh lên thất bại');
+          // this._msg.success('Tải ảnh lên thành công');
+        }
+      });
+  };
+
   getEventInformation(eventKey: string) {
     this._homeService
       .getInformationList(this.eventModule.id, this.language)
-      .subscribe((res) => {
+      .subscribe((res: any) => {
         if (res && res.length) {
-          let eventInformation = res.find((e) => e.keyName == eventKey);
+          let eventInformation = res.find((e: any) => e.keyName == eventKey);
           if (eventInformation) {
             this.eventInformation = eventInformation;
             this.backupEventInformation = JSON.parse(

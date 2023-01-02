@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AppLabels } from 'src/app/shared/app.constants';
 import { HttpCustomSharedService } from 'src/app/shared/http-custom.shared.service';
 import { SharedService } from 'src/app/shared/shared.service';
+import { environment } from 'src/environments/environment';
 import { TDSMessageService } from 'tds-ui/message';
 import {
   Information,
@@ -32,6 +33,24 @@ export class ClientPublicationsComponent {
     this.language = this._sharedService._language;
     this.appLabels = this._sharedService.language;
   }
+  
+  customUpload = (blobInfo: any, success: any, failure: any) => {
+    const formData = new FormData();
+    formData.append('ufile', blobInfo.blob(), blobInfo.filename());
+    const url = `${environment.apiUrl}/api/file/uploadimage`;
+    return this._homeService
+      .uploadImage(url, formData)
+      .subscribe((res: any) => {
+        if (res && res.imageUrl) {
+          // this.annouceImageData.imageUrl = res.imageUrl;
+          success(res.imageUrl);
+          failure('Tải ảnh lên thất bại');
+          // this._msg.success('Tải ảnh lên thành công');
+        }
+      });
+  };
+
+
   getPublication(publicationKey: string) {
     this._homeService.getModule(this.language).subscribe((res) => {
       if (res && res?.length) {

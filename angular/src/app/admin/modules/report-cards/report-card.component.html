@@ -9,11 +9,11 @@
 <div class="h-full lg:drop-shadow-2xlCustom p-2 pt-4 bg-yellow-200" *ngIf="reportCardInformation">
     <div class="w-full py-2">
         <tds-label>Tên: </tds-label>
-        <tds-editor [height]="'200'" [(ngModel)]="reportCardInformation.title"></tds-editor>
+        <tds-editor class="block" [height]="'200'" [(ngModel)]="reportCardInformation.title"></tds-editor>
     </div>
     <div class="w-full py-2">
         <tds-label>Nội dung: </tds-label>
-        <tds-editor [(ngModel)]="reportCardInformation.content"></tds-editor>
+        <tds-editor class="block" [(ngModel)]="reportCardInformation.content"></tds-editor>
     </div>
     <!-- <diV class="py-2">
         <tds-label>Link down tiếng việt: </tds-label>
