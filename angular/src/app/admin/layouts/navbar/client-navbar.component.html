@@ -1,11 +1,14 @@
 <div class="hidden lg:flex logo-side w-full h-20 border-b bg-yellow-400 border-gray-300 items-center justify-center">
     <div class="absolute left-0 flex flex-row items-center px-8">
         <div class="logo max-h-[5rem]">
+            <a routerLink="home">
             <img src="{{data.LogoUrl}}" class="max-h-[4rem]" alt="" />
-        </div>
+            </a>
+        </div>        
+        <a routerLink="home">
         <div class="2xl:text-2xl 2xl:block hidden font-semibold pl-4">
             {{data.WebTitle}}
-        </div>
+        </div></a>
     </div>
 
     <div class="w-full text-md">
@@ -50,7 +53,7 @@
         </div>
     </div>
     <div class="absolute right-0 font-semibold px-8 cursor-pointer space-x-1">
-        <button (click)="switchLanguage(0)">VI</button><span>/</span><button (click)="switchLanguage(1)">EN</button>
+        <button (click)="switchLanguage(0)" [ngClass]="{'font-semibold decoration-solid text-orange-600': currentActiveLanguage == 0}">VI</button><span>/</span><button (click)="switchLanguage(1)" [ngClass]="{'font-semibold decoration-solid text-orange-600': currentActiveLanguage == 1}">EN</button>
     </div>
 </div>
 
@@ -112,8 +115,8 @@
                     </div>
                 </div>
                 <div class="absolute right-0 bottom-0 font-semibold p-4 cursor-pointer space-x-2 text-lg">
-                    <button (click)="switchLanguage(0)">VI</button><span>/</span><button
-                        (click)="switchLanguage(1)">EN</button>
+                    <button (click)="switchLanguage(0)" [ngClass]="{'font-semibold decoration-solid text-orange-600': currentActiveLanguage == 0}">VI</button><span>/</span><button
+                        (click)="switchLanguage(1)" [ngClass]="{'font-semibold decoration-solid text-orange-600': currentActiveLanguage == 1}">EN</button>
                 </div>
             </div>
         </ng-container>

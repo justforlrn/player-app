@@ -69,7 +69,7 @@
   </div>
   <div class="bg-white border border-yellow-400 rounded-xl" *ngIf="introductionInformation">
     <tds-collapse [bordered]="false">
-      <tds-collapse-panel header="Giới thiệu" [active]="true" [disabled]=false>
+      <tds-collapse-panel header="Giới thiệu" [active]="true" [disabled]=false [extra]="editIntro">
         <ng-template #editIntro>
           <span class="tdsi-edit-2-fill text-blue-500 leading-none text-2xl font-semibold cursor-pointer" tds-tooltip
             tooltipTitle="Chỉnh sửa" (click)="showEditIntroduction($event)"></span>
@@ -86,6 +86,74 @@
             <button tds-button type="button" color="primary" (click)="saveIntroduce()">Lưu</button>
           </div>
         </ng-template>
+      </tds-collapse-panel>
+    </tds-collapse>
+  </div>
+  <div class="bg-white border border-yellow-400 rounded-xl">
+    <tds-collapse [bordered]="false">
+      <tds-collapse-panel header="Indicators" [active]="true" [disabled]=false>
+        <tds-modal [(visible)]="isVisible" title="Thêm mới indicator" (onCancel)="handleCancel()" (onOk)="handleOk()">
+          <ng-container *tdsModalContent>
+            <div class="flex flex-col">
+              <tds-label>Indicator Icon:</tds-label>
+              <tds-upload listType="picture-card" [(fileList)]="indicatorImageList"
+                [showButton]="indicatorImageList.length < 1" [preview]="handlePreview"
+                [customRequest]="handleUploadIndicatorImage" [download]="handleDownload" [remove]="handleRemove">
+                <div class="w-full text-neutral-1-300">
+                  <div class="flex items-center justify-center">
+                    <span class="tdsi-images-fill text-xl leading-5"></span>
+                  </div>
+                  <div class="mt-2 text-body-2 font-regular">Upload</div>
+                </div>
+              </tds-upload>
+              <tds-modal [visible]="previewVisible" [content]="modalContent" [footer]="null"
+                (onCancel)="previewVisible = false">
+                <ng-template #modalContent>
+                  <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                </ng-template>
+              </tds-modal>
+            </div>
+            <div class="flex flex-col">
+              <tds-label>indicatorTitle</tds-label>
+              <tds-form-field>
+                <input tdsInput autocomplete="off" placeholder="Tên indicator"
+                  [(ngModel)]="this.newIndicator.indicatorTitle" [required]="true" />
+              </tds-form-field>
+            </div>
+            <div class="flex flex-col">
+              <tds-label>gradeContent</tds-label>
+              <tds-form-field>
+                <input tdsInput autocomplete="off" placeholder="Nội dung" [(ngModel)]="this.newIndicator.gradeContent"
+                  [required]="true" />
+              </tds-form-field>
+            </div>
+            <div class="flex flex-col">
+              <tds-label>Liên kết</tds-label>
+              <tds-form-field>
+                <input tdsInput autocomplete="off" placeholder="Nội dung" [(ngModel)]="this.newIndicator.reference"
+                  [required]="true" />
+              </tds-form-field>
+            </div>
+          </ng-container>
+        </tds-modal>
+        <div *ngIf="listIndicator && !!listIndicator.length" class="flex flex-row space-x-4">
+          <div
+            class="w-40 h-40 flex flex-col items-center justify-center border-2 border-dashed border-green-400 cursor-pointer"
+            *ngFor="let indicator of listIndicator">
+            <div class="w-20 h-20 overflow-hidden">
+              <img tds-image [tdsSrc]="indicator.indicatorIcon" />
+            </div>
+            <div class="p-4">
+              {{indicator.indicatorTitle}}
+            </div>
+          </div>
+          <div
+            class="w-40 h-40 flex flex-col items-center justify-center border-2 border-dashed border-green-400 cursor-pointer"
+            (click)="clickAddIndicator()">
+            <i class="tdsi-add-fill text-3xl text-green-500"></i>
+            <span>Thêm mới</span>
+          </div>
+        </div>
       </tds-collapse-panel>
     </tds-collapse>
   </div>

@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpCustomSharedService } from 'src/app/shared/http-custom.shared.service';
 import {
+  CreateIndicator,
   CreateInformation,
+  Indicator,
   Information,
   Module,
   UpdateInformation,
@@ -22,6 +24,16 @@ export class HomeService {
   //       .get(url, options ?? this.options)
   //       .pipe(catchError((error) => this.errorHandling(error)));
   //   }
+
+  getlistIndicator(language: number) {
+    const url = `${environment.apiUrl}/api/reports?language=${language}`;
+    return this._httpCustomSharedService.get<Indicator[]>(url);
+  }
+
+  createIndicator(body: CreateIndicator) {
+    const url = `${environment.apiUrl}/api/reports`;
+    return this._httpCustomSharedService.post<Indicator>(url, body);
+  }
 
   getModule(language: number) {
     const url = `${environment.apiUrl}/api/module?language=${language}`;

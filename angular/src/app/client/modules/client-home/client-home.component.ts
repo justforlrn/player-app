@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
+  Indicator,
   Information,
   Module,
 } from 'src/app/admin/modules/home/admin-home.model';
@@ -30,6 +31,7 @@ export class AppClientHomeComponent {
 
   homeModule!: Module;
   language = 0;
+  listIndicator!: Indicator[];
   constructor(
     private _sharedService: SharedService,
     private _sliderService: SliderService,
@@ -41,7 +43,6 @@ export class AppClientHomeComponent {
   }
 
   getModuleHome() {
-    debugger;
     this._homeService.getModule(this.language).subscribe((res) => {
       if (res && res?.length) {
         let target = res.find((e) => e.moduleName == 'home');
@@ -57,6 +58,10 @@ export class AppClientHomeComponent {
   ngOnInit() {
     this.pageData = this._sharedService.demo_getHomePage();
     this.getModuleHome();
+    this._homeService.getlistIndicator(this.language).subscribe(res => {
+      this.listIndicator = res;
+      console.log(this.listIndicator)
+    })
   }
   getListSlider(moduleId: string) {
     this._sliderService

@@ -16,6 +16,15 @@
 @import "../node_modules/tds-editor/assets/tdsskin.scss";
 @import "../node_modules/tds-editor/assets/tdscontent.scss";
 
+
+.indicator .on-hover {
+  display: none;
+}
+
+.indicator:hover .on-hover {
+  display: block;
+}
+
 html {
   font-size: 14px;
   // @screen md {

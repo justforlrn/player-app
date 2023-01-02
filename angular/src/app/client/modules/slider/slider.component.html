@@ -2,9 +2,9 @@
   <div class="slide relative">
     <div *ngIf="type == 'banner'; else slider">
       <ng-container *ngFor="let slide of sliderContentStringList; let i = index">
-        <div class="flex w-full absolute top-0 justify-center h-{{height[0]}} md:h-{{height[1]}}">
-          <img *ngIf="i === currentSlide" [src]="slide" class="object-cover w-full" />
-        </div>
+        <!-- <div class="flex w-full absolute top-0 justify-center h-{{height[0]}} md:h-{{height[1]}}"> -->
+          <div class="flex justify-center"><img *ngIf="i === currentSlide" [src]="slide" class="object-cover w-full" /></div>
+        <!-- </div> -->
       </ng-container>
     </div>
     <ng-template #slider>

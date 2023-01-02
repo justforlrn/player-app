@@ -11,8 +11,10 @@ export class AppClientNavbarComponent {
   appLabels!: AppLabels;
   data!: NavElements;
   isShowMobileMenu = false;
+  currentActiveLanguage!: number;
   constructor(private _sharedService: SharedService) {
     this.appLabels = this._sharedService.language;
+    this.currentActiveLanguage = this._sharedService._language;
   }
 
   showMobileMenu() {

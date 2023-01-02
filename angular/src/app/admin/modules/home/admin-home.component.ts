@@ -12,7 +12,9 @@ import { TDSUploadFile } from 'tds-ui/upload';
 import { CreateSlider, Slider } from '../slider/slider.model';
 import { SliderService } from '../slider/slider.service';
 import {
+  CreateIndicator,
   CreateInformation,
+  Indicator,
   Information,
   Module,
   UpdateInformation,
@@ -38,12 +40,6 @@ export class AdminHomeComponent {
   annouceImageData!: CreateSlider;
   submitNewAnnounce = false;
   bannerList: TDSUploadFile[] = [
-    // {
-    //   uid: '-1',
-    //   name: 'image.png',
-    //   status: 'done',
-    //   url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    // },
   ];
   sliderList: Slider[] = [];
   previewImage: string | undefined = '';
@@ -59,6 +55,12 @@ export class AdminHomeComponent {
   language = 0;
 
   homeModule!: Module;
+  isVisible = false;
+  indicatorImageList: TDSUploadFile[] = [
+  ];
+
+  newIndicator!: CreateIndicator;
+  listIndicator!: Indicator[];
   constructor(
     private _sharedService: SharedService,
     // private _httpCustomSharedService: HttpCustomSharedService,
@@ -70,6 +72,38 @@ export class AdminHomeComponent {
   ) {
     this.language = this._sharedService._language;
     this.appLabels = this._sharedService.language;
+  }
+
+  clickAddIndicator() {
+    this.indicatorImageList = [];
+    this.isVisible = true;
+    this.newIndicator = {
+      indicatorIcon: "",
+      indicatorTitle: "",
+      benchmark: "",
+      gradeIcon: "",
+      gradeContent: "",
+      keyFindings: "",
+      reference: "",
+      language: 0
+    }
+  }
+
+  handleOk(): void {
+    if(this.indicatorImageList && this.indicatorImageList.length > 0) {
+      this.newIndicator.indicatorIcon = `${environment.apiUrl}${JSON.parse(JSON.stringify(this.indicatorImageList[0])).response.imageUrl}`
+    }
+    this.newIndicator.language = this.language;
+    console.log(this.newIndicator);
+    this._homeService.createIndicator(this.newIndicator).subscribe(res => {
+      this._msg.success("Thành công");
+    })
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log("Button cancel clicked!");
+    this.isVisible = false;
   }
 
   initDatabaseModule() {
@@ -128,6 +162,10 @@ export class AdminHomeComponent {
   ngOnInit() {
     // this.pageData = this._sharedService.demo_getHomePage();
     // this.getListBanner(this.moduleId);
+    this._homeService.getlistIndicator(this.language).subscribe(res => {
+      this.listIndicator = res;
+      console.log(this.listIndicator)
+    })
     this.getModuleHome();
   }
   onAddNewAnnouncement() {
@@ -135,7 +173,6 @@ export class AdminHomeComponent {
   }
 
   removeSlideAnno(slide: any) {
-    debugger;
     return this._sliderService.removeSlide(slide.id).subscribe({
       next: () => {
         this.sliderList = this.sliderList.filter((e) => e.id != slide.id);
@@ -153,7 +190,6 @@ export class AdminHomeComponent {
         title: 'Xóa file ' + file.name,
         content: 'Bạn xác nhận xóa file ' + file.name,
         onOk: () => {
-          debugger;
           this._sliderService.removeSlide(file.uid).subscribe({
             next: () => {
               this._msg.success('Xóa ảnh thành công');
@@ -199,6 +235,28 @@ export class AdminHomeComponent {
               this._msg.success('Tải ảnh lên thành công');
             });
         }
+        item.onSuccess(res, item.file);
+      },
+      (err) => {
+        item.onError({ statusText: err.error?.error?.details }, item.file);
+      }
+    );
+  };
+  handleUploadIndicatorImage = (item: any) => {
+    const formData = new FormData();
+    formData.append('ufile', item.file as any, item.file.name);
+    const url = `${environment.apiUrl}/api/file/uploadimage`;
+    return this._homeService.uploadImage(url, formData).subscribe(
+      (res: any) => {
+        // if (res && res.imageUrl) {
+        //   item.file.url = res.imageUrl;
+        //   this.newSliderData.imageUrl = res.imageUrl;
+        //   this._sliderService
+        //     .createBanneder(this.newSliderData)
+        //     .subscribe((res) => {
+        //       this._msg.success('Tải ảnh lên thành công');
+        //     });
+        // }
         item.onSuccess(res, item.file);
       },
       (err) => {

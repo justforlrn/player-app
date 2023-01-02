@@ -44,7 +44,6 @@ export class ClientEventComponent {
     });
   }
   customUpload = (blobInfo: any, success: any, failure: any) => {
-    debugger
     const formData = new FormData();
     formData.append('ufile', blobInfo.blob(), blobInfo.filename());
     const url = `${environment.apiUrl}/api/file/uploadimage`;

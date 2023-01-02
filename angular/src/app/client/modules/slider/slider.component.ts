@@ -19,7 +19,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class AppSliderComponent {
   @Input() sliderContentStringList: string[] = [];
   @Input() type: string = 'bannner';
-  @Input() height!: number[];
+  @Input() height!: string[];
   currentSlide = 0;
   constructor(private _sanitizer: DomSanitizer) {}
 

@@ -39,3 +39,30 @@ export interface Module {
   creatorId: any;
   id: string;
 }
+
+export interface CreateIndicator {
+  indicatorIcon: string
+  indicatorTitle: string
+  benchmark: string
+  gradeIcon: string
+  gradeContent: string
+  keyFindings: string
+  reference: string
+  language: number
+}
+
+export interface Indicator {
+  id: string
+  creationTime: string
+  creatorId: string
+  lastModificationTime: string
+  lastModifierId: string
+  indicatorIcon: string
+  indicatorTitle: string
+  benchmark: string
+  gradeIcon: string
+  gradeContent: string
+  keyFindings: string
+  reference: string
+  language: number
+}
