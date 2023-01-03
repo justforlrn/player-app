@@ -17,6 +17,14 @@ export class SharedService {
     if (localLanguage == null) {
       localStorage.setItem('language', this._language.toString());
     } else {
+      if(localLanguage == 'en') {
+        localLanguage = '1';
+        localStorage.setItem('language', localLanguage);
+      }
+      else if (localLanguage == 'vi') {
+        localLanguage = '0';
+        localStorage.setItem('language', localLanguage);
+      }
       this._language = parseInt(localLanguage) as Language;
     }
     switch (this._language) {

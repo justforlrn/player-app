@@ -1,4 +1,4 @@
-<div class="w-full drop-shadow-2xlCustom bg-yellow-200 rounded-bl-lg rounded-br-lg md:overflow-hidden">
+<div class="w-full drop-shadow-2xlCustom bg-white rounded-bl-lg rounded-br-lg md:overflow-hidden">
   <div class="m-auto" *ngIf="!!bannerImageUrlList.length">
     <app-slider [sliderContentStringList]="bannerImageUrlList" [type]="'banner'">
     </app-slider>
@@ -29,15 +29,16 @@
         </div>
       </div>
         </div> -->
-      <div class="z-10 bg-yellow-400 flex flex-col w-full px-4 py-8 items-center italic relative"
+        <!-- /////////////////////////////////////// -->
+      <!-- <div class="z-10 bg-yellow-400 flex flex-col w-full px-4 py-8 items-center italic relative"
         *ngIf="listIndicator && !!listIndicator.length">        
         <div class="absolute z-0 top-0 bg-white drop-shadow-none w-full h-full"></div>
         <div class="font-semibold text-2xl pb-4 text drop-shadow-xl">{{appLabels.home.Indicators}}</div>
         <div class="flex flex-row z-10 flex-wrap justify-center">
           <div *ngFor="let indicator of listIndicator"
             class="flex flex-col w-40 h-40 m-4 rounded-xl border-dashed border-2 border-indigo-600 relative indicator">
-            <div class="z-50 on-hover bg-orange-400 absolute -top-1 -left-1 w-[10.25rem] h-[10.25rem] rounded-xl">
-              {{indicator.gradeContent}}
+            <div class="z-50 on-hover absolute bg-orange-400 hover:opacity-90 -top-1 -left-1 w-[10.25rem] h-[10.25rem] rounded-xl flex items-center justify-center">
+              <span class="text-2xl text-white">{{indicator.gradeContent}}</span>
             </div>
             <img class="h-28 object-cover rounded-t-xl" src="{{indicator.indicatorIcon}}">
             <div class="h-12 w-full bg-gray-200 flex items-center px-1 rounded-b-xl border-t border-gray-200">
@@ -45,7 +46,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

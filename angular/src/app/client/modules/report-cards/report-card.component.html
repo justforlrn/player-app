@@ -6,7 +6,7 @@
                 class="text-md font-semibold">{{appLabels.header.ReportCard}}</span></tds-breadcrumb-item>
     </tds-breadcrumb>
 </div>
-<div *ngIf="reportCardInformation" class="h-full lg:drop-shadow-2xlCustom p-4 bg-yellow-200 divide-y-2 divide-black">
+<div *ngIf="reportCardInformation" class="h-full lg:drop-shadow-2xlCustom p-4 bg-white divide-y-2 divide-black">
     <div class="py-2" [innerHTML]="bypassSecurityTrustHtml(reportCardInformation.title)">
     </div>
     <div class="py-2" [innerHTML]="bypassSecurityTrustHtml(reportCardInformation.content)">
