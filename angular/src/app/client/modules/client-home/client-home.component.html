@@ -4,49 +4,16 @@
     </app-slider>
   </div>
   <div class="flex flex-col m-auto h-full">
-    <div class="font-bold text-3xl py-16  text-center">{{appLabels.home.Welcome}}</div>
+    <div class="font-bold text-3xl py-12  text-center">{{appLabels.home.Welcome}}</div>
+    <div class="w-full flex justify-between flex-wrap space-y-4 pb-8" *ngIf="introduction">
+      <div class="px-2 pb-4" [innerHTML]="bypassSecurityTrustHtml(introduction.content)"></div>
+    </div>
     <div class="m-auto w-full" *ngIf="!!sliderContentList.length">
       <div class="font-bold text-2xl text-center py-4 bg-white">{{appLabels.home.LatestAnnouncement}}</div>
       <div class="bg-white">
         <app-slider [sliderContentStringList]="sliderContentList" [type]="'slider'">
         </app-slider>
       </div>
-    </div>
-    <div class="w-full flex justify-between flex-wrap space-y-4 pt-8" *ngIf="introduction">
-      <div class="px-2 pb-4" [innerHTML]="bypassSecurityTrustHtml(introduction.content)"></div>
-      <!-- <div class="z-10 bg-yellow-400 flex flex-col w-full px-4 py-8 items-center italic relative" *ngIf="listIndicator && !!listIndicator.length" >
-        <div class="absolute z-0 top-0 bg-white drop-shadow-none w-full h-full"></div>
-        <div class="font-semibold text-2xl pb-4 text drop-shadow-xl">{{appLabels.home.Indicators}}</div>
-        <div class="flex flex-row z-10 flex-wrap justify-center space-x-4">
-          <div
-        class="w-40 h-40 flex flex-col items-center justify-center  rounded-xl border-dashed border-2 border-orange-600 cursor-pointer"
-        *ngFor="let indicator of listIndicator">
-        <div class="w-20 h-20 overflow-hidden">
-          <img tds-image [tdsSrc]="indicator.indicatorIcon" />
-        </div>
-        <div class="p-4 bg-gray-200 flex items-center px-1 rounded-b-xl border-t border-gray-200">
-          {{indicator.indicatorTitle}}
-        </div>
-      </div>
-        </div> -->
-        <!-- /////////////////////////////////////// -->
-      <!-- <div class="z-10 bg-yellow-400 flex flex-col w-full px-4 py-8 items-center italic relative"
-        *ngIf="listIndicator && !!listIndicator.length">        
-        <div class="absolute z-0 top-0 bg-white drop-shadow-none w-full h-full"></div>
-        <div class="font-semibold text-2xl pb-4 text drop-shadow-xl">{{appLabels.home.Indicators}}</div>
-        <div class="flex flex-row z-10 flex-wrap justify-center">
-          <div *ngFor="let indicator of listIndicator"
-            class="flex flex-col w-40 h-40 m-4 rounded-xl border-dashed border-2 border-indigo-600 relative indicator">
-            <div class="z-50 on-hover absolute bg-orange-400 hover:opacity-90 -top-1 -left-1 w-[10.25rem] h-[10.25rem] rounded-xl flex items-center justify-center">
-              <span class="text-2xl text-white">{{indicator.gradeContent}}</span>
-            </div>
-            <img class="h-28 object-cover rounded-t-xl" src="{{indicator.indicatorIcon}}">
-            <div class="h-12 w-full bg-gray-200 flex items-center px-1 rounded-b-xl border-t border-gray-200">
-              {{indicator.indicatorTitle}}
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </div>
